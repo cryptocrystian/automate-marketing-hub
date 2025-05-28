@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -25,12 +29,37 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: '#1E40AF',
+					50: '#EFF6FF',
+					500: '#3B82F6',
+					600: '#2563EB',
+					700: '#1D4ED8',
+					800: '#1E3A8A',
+					foreground: '#FFFFFF'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+					DEFAULT: '#3B82F6',
+					foreground: '#FFFFFF'
+				},
+				success: {
+					DEFAULT: '#10B981',
+					foreground: '#FFFFFF'
+				},
+				warning: {
+					DEFAULT: '#F59E0B',
+					foreground: '#FFFFFF'
+				},
+				danger: {
+					DEFAULT: '#EF4444',
+					foreground: '#FFFFFF'
+				},
+				slate: {
+					50: '#F8FAFC',
+					200: '#E2E8F0',
+					500: '#64748B',
+					600: '#475569',
+					700: '#334155',
+					800: '#1E293B'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
