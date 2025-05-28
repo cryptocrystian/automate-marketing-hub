@@ -1,4 +1,3 @@
-
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -51,25 +50,25 @@ const AdminPanel = () => {
       title: "Total Revenue",
       value: "$127,500",
       icon: DollarSign,
-      color: "text-success"
+      color: "text-green-600"
     },
     {
       title: "Active Clients",
       value: "21",
       icon: Users,
-      color: "text-primary"
+      color: "text-blue-600"
     },
     {
       title: "Total Campaigns",
       value: "89",
       icon: Activity,
-      color: "text-secondary"
+      color: "text-blue-600"
     },
     {
       title: "System Load",
       value: "23%",
       icon: Settings,
-      color: "text-warning"
+      color: "text-orange-600"
     }
   ];
 
@@ -80,11 +79,11 @@ const AdminPanel = () => {
           <div className="flex items-center space-x-4">
             <SidebarTrigger />
             <div>
-              <h1 className="text-2xl font-bold text-slate-800">Admin Panel</h1>
-              <p className="text-slate-600">Manage clients and system operations</p>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
+              <p className="text-gray-600">Manage clients and system operations</p>
             </div>
           </div>
-          <Button className="bg-primary hover:bg-primary-800 text-white">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
             <Plus className="h-4 w-4 mr-2" />
             Add Client
           </Button>
@@ -93,25 +92,25 @@ const AdminPanel = () => {
         {/* System Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {systemStats.map((stat, index) => (
-            <Card key={index} className="border border-slate-200">
+            <Card key={index} className="bg-white shadow-sm border-gray-200">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-slate-700">
+                <CardTitle className="text-sm font-medium text-gray-700">
                   {stat.title}
                 </CardTitle>
                 <stat.icon className={`h-4 w-4 ${stat.color}`} />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-slate-800">{stat.value}</div>
+                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Client Management */}
-        <Card className="border border-slate-200">
+        <Card className="bg-white shadow-sm border-gray-200">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">Client Management</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-lg font-semibold text-gray-900">Client Management</CardTitle>
+            <CardDescription className="text-gray-600">
               Overview of all clients and their status
             </CardDescription>
           </CardHeader>
@@ -119,41 +118,41 @@ const AdminPanel = () => {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-slate-200">
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Company</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Contact</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Status</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Campaigns</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Revenue</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Actions</th>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Company</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Contact</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Status</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Campaigns</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Revenue</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {clients.map((client) => (
-                    <tr key={client.id} className="border-b border-slate-100 hover:bg-slate-50">
+                    <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="py-3 px-4">
                         <div>
-                          <p className="font-medium text-slate-800">{client.name}</p>
-                          <p className="text-sm text-slate-500">{client.email}</p>
+                          <p className="font-medium text-gray-900">{client.name}</p>
+                          <p className="text-sm text-gray-500">{client.email}</p>
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-slate-700">{client.contact}</td>
+                      <td className="py-3 px-4 text-gray-700">{client.contact}</td>
                       <td className="py-3 px-4">
                         <Badge 
                           variant={client.status === 'active' ? 'default' : 'secondary'}
-                          className={client.status === 'active' ? 'bg-success text-white' : 'bg-warning text-white'}
+                          className={client.status === 'active' ? 'bg-green-600 text-white' : 'bg-orange-500 text-white'}
                         >
                           {client.status}
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-slate-700">{client.campaigns}</td>
-                      <td className="py-3 px-4 font-medium text-slate-800">{client.revenue}</td>
+                      <td className="py-3 px-4 text-gray-700">{client.campaigns}</td>
+                      <td className="py-3 px-4 font-medium text-gray-900">{client.revenue}</td>
                       <td className="py-3 px-4">
                         <div className="flex space-x-2">
-                          <Button size="sm" variant="outline" className="text-xs">
+                          <Button size="sm" variant="outline" className="text-xs border-gray-200 text-gray-700 hover:bg-gray-50">
                             View
                           </Button>
-                          <Button size="sm" variant="outline" className="text-xs">
+                          <Button size="sm" variant="outline" className="text-xs border-gray-200 text-gray-700 hover:bg-gray-50">
                             Edit
                           </Button>
                         </div>

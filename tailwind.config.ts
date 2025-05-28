@@ -29,37 +29,43 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#1E40AF',
-					50: '#EFF6FF',
-					500: '#3B82F6',
-					600: '#2563EB',
-					700: '#1D4ED8',
-					800: '#1E3A8A',
-					foreground: '#FFFFFF'
+					DEFAULT: '#2563eb',
+					50: '#eff6ff',
+					100: '#dbeafe',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+					foreground: '#ffffff'
 				},
 				secondary: {
-					DEFAULT: '#3B82F6',
-					foreground: '#FFFFFF'
+					DEFAULT: '#f3f4f6',
+					foreground: '#4b5563'
 				},
 				success: {
-					DEFAULT: '#10B981',
-					foreground: '#FFFFFF'
+					DEFAULT: '#10b981',
+					foreground: '#ffffff'
 				},
 				warning: {
-					DEFAULT: '#F59E0B',
-					foreground: '#FFFFFF'
+					DEFAULT: '#f59e0b',
+					foreground: '#ffffff'
 				},
 				danger: {
-					DEFAULT: '#EF4444',
-					foreground: '#FFFFFF'
+					DEFAULT: '#ef4444',
+					foreground: '#ffffff'
 				},
-				slate: {
-					50: '#F8FAFC',
-					200: '#E2E8F0',
-					500: '#64748B',
-					600: '#475569',
-					700: '#334155',
-					800: '#1E293B'
+				gray: {
+					50: '#f9fafb',
+					100: '#f3f4f6',
+					200: '#e5e7eb',
+					300: '#d1d5db',
+					400: '#9ca3af',
+					500: '#6b7280',
+					600: '#4b5563',
+					700: '#374151',
+					800: '#1f2937',
+					900: '#111827'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
