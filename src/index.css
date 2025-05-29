@@ -111,27 +111,47 @@
     background-color: rgb(30 41 59) !important;
   }
 
+  /* COMPREHENSIVE YELLOW ELIMINATION */
+  
   /* Ensure no yellow backgrounds anywhere */
   .bg-yellow-50,
   .bg-yellow-100,
   .bg-yellow-200,
   .bg-yellow-300,
   .bg-yellow-400,
-  .bg-yellow-500 {
+  .bg-yellow-500,
+  .bg-yellow-600,
+  .bg-yellow-700,
+  .bg-yellow-800,
+  .bg-yellow-900 {
     @apply bg-slate-800 !important;
   }
 
   /* Ensure no yellow text anywhere */
+  .text-yellow-50,
+  .text-yellow-100,
+  .text-yellow-200,
+  .text-yellow-300,
+  .text-yellow-400,
   .text-yellow-500,
   .text-yellow-600,
-  .text-yellow-700 {
-    @apply text-blue-600 !important;
+  .text-yellow-700,
+  .text-yellow-800,
+  .text-yellow-900 {
+    @apply text-white !important;
   }
 
   /* Ensure no yellow borders anywhere */
+  .border-yellow-50,
+  .border-yellow-100,
   .border-yellow-200,
   .border-yellow-300,
-  .border-yellow-400 {
+  .border-yellow-400,
+  .border-yellow-500,
+  .border-yellow-600,
+  .border-yellow-700,
+  .border-yellow-800,
+  .border-yellow-900 {
     @apply border-slate-600 !important;
   }
 
@@ -141,19 +161,37 @@
   .hover\:bg-yellow-200:hover,
   .hover\:bg-yellow-300:hover,
   .hover\:bg-yellow-400:hover,
-  .hover\:bg-yellow-500:hover {
+  .hover\:bg-yellow-500:hover,
+  .hover\:bg-yellow-600:hover,
+  .hover\:bg-yellow-700:hover,
+  .hover\:bg-yellow-800:hover,
+  .hover\:bg-yellow-900:hover {
     @apply bg-gray-100 !important;
   }
 
+  .hover\:text-yellow-50:hover,
+  .hover\:text-yellow-100:hover,
+  .hover\:text-yellow-200:hover,
+  .hover\:text-yellow-300:hover,
+  .hover\:text-yellow-400:hover,
   .hover\:text-yellow-500:hover,
   .hover\:text-yellow-600:hover,
-  .hover\:text-yellow-700:hover {
+  .hover\:text-yellow-700:hover,
+  .hover\:text-yellow-800:hover,
+  .hover\:text-yellow-900:hover {
     @apply text-blue-600 !important;
   }
 
+  .hover\:border-yellow-50:hover,
+  .hover\:border-yellow-100:hover,
   .hover\:border-yellow-200:hover,
   .hover\:border-yellow-300:hover,
-  .hover\:border-yellow-400:hover {
+  .hover\:border-yellow-400:hover,
+  .hover\:border-yellow-500:hover,
+  .hover\:border-yellow-600:hover,
+  .hover\:border-yellow-700:hover,
+  .hover\:border-yellow-800:hover,
+  .hover\:border-yellow-900:hover {
     @apply border-gray-300 !important;
   }
 
@@ -177,5 +215,55 @@
   /* Override any potential yellow from component libraries */
   [data-state="open"]:not([data-type="success"]):not([data-type="error"]):not([data-type="warning"]) {
     background-color: rgb(249 250 251) !important;
+  }
+
+  /* Force all sidebar menu items to use white text and proper hover states */
+  [data-sidebar] a,
+  [data-sidebar] button,
+  [data-sidebar] [role="button"] {
+    color: white !important;
+  }
+
+  [data-sidebar] a:hover,
+  [data-sidebar] button:hover,
+  [data-sidebar] [role="button"]:hover {
+    color: white !important;
+    background-color: rgb(51 65 85) !important;
+  }
+
+  /* Override any accent colors that might be yellow */
+  .text-accent,
+  .text-accent-foreground {
+    @apply text-gray-900 !important;
+  }
+
+  .bg-accent {
+    @apply bg-gray-50 !important;
+  }
+
+  /* Force all navigation menu items to use proper colors */
+  nav a,
+  nav button,
+  [role="navigation"] a,
+  [role="navigation"] button {
+    color: inherit !important;
+  }
+
+  /* Override any potential yellow from Radix UI components */
+  [data-radix-collection-item]:hover,
+  [data-highlighted]:hover {
+    background-color: rgb(243 244 246) !important;
+    color: rgb(17 24 39) !important;
+  }
+
+  /* Global override for any remaining yellow */
+  * {
+    /* Remove any potential yellow colors at the element level */
+  }
+
+  *[style*="yellow"],
+  *[class*="yellow"] {
+    color: rgb(17 24 39) !important;
+    background-color: transparent !important;
   }
 }
