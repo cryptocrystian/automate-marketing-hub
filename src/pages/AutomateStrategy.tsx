@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -130,6 +131,9 @@ const AutomateStrategy = () => {
   };
 
   const overallProgress = Math.round(steps.reduce((acc, step) => acc + step.progress, 0) / steps.length);
+  
+  // Add the missing healthScore calculation
+  const healthScore = Math.round(steps.reduce((acc, step) => acc + (step.progress || 0), 0) / steps.length);
 
   const handleContinueStep = (step: any) => {
     if (step.route) {
