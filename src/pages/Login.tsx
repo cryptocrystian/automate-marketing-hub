@@ -63,7 +63,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="mt-1 border-gray-200"
+                className="mt-1 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div>
@@ -75,12 +75,12 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 required
-                className="mt-1 border-gray-200"
+                className="mt-1 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               disabled={isLoading}
             >
               {isLoading ? (

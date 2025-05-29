@@ -20,7 +20,7 @@ const Analytics = () => {
     { name: 'Email', value: 35, color: '#1E40AF' },
     { name: 'Social', value: 25, color: '#3B82F6' },
     { name: 'Direct', value: 20, color: '#10B981' },
-    { name: 'Organic', value: 15, color: '#F59E0B' },
+    { name: 'Organic', value: 15, color: '#6366F1' },
     { name: 'Paid', value: 5, color: '#EF4444' }
   ];
 
