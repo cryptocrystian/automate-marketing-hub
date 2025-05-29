@@ -113,7 +113,7 @@ const AdvancedMetrics = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-slate-800">3.2:1</div>
-                <p className="text-xs text-slate-500">Healthy ratio (>3:1)</p>
+                <p className="text-xs text-slate-500">Healthy ratio (&gt;3:1)</p>
               </CardContent>
             </Card>
           </div>
