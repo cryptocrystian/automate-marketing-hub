@@ -125,7 +125,7 @@ const ContentManagement = () => {
         {/* Content Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {contentStats.map((stat, index) => (
-            <Card key={index} className="border border-slate-200">
+            <Card key={index} className="border border-slate-200 bg-white">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-slate-700">
                   {stat.title}
@@ -141,7 +141,7 @@ const ContentManagement = () => {
 
         {/* Content Calendar View */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-          <Card className="border border-slate-200">
+          <Card className="border border-slate-200 bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-slate-800">This Week</CardTitle>
               <CardDescription>Scheduled content for this week</CardDescription>
@@ -160,7 +160,7 @@ const ContentManagement = () => {
             </CardContent>
           </Card>
 
-          <Card className="border border-slate-200">
+          <Card className="border border-slate-200 bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-slate-800">Next Week</CardTitle>
               <CardDescription>Upcoming content schedule</CardDescription>
@@ -178,7 +178,7 @@ const ContentManagement = () => {
             </CardContent>
           </Card>
 
-          <Card className="border border-slate-200">
+          <Card className="border border-slate-200 bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-slate-800">Performance</CardTitle>
               <CardDescription>Recent content performance</CardDescription>
@@ -187,15 +187,15 @@ const ContentManagement = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-slate-700">Holiday Email</span>
-                  <Badge className="bg-success text-white">High</Badge>
+                  <Badge className="bg-green-600 text-white">High</Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-slate-700">Newsletter</span>
-                  <Badge className="bg-success text-white">High</Badge>
+                  <Badge className="bg-green-600 text-white">High</Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-slate-700">Social Posts</span>
-                  <Badge className="bg-warning text-white">Medium</Badge>
+                  <Badge className="bg-blue-600 text-white">Medium</Badge>
                 </div>
               </div>
             </CardContent>
@@ -203,7 +203,7 @@ const ContentManagement = () => {
         </div>
 
         {/* Content List */}
-        <Card className="border border-slate-200">
+        <Card className="border border-slate-200 bg-white">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-slate-800">All Content</CardTitle>
             <CardDescription className="text-slate-600">

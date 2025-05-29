@@ -111,7 +111,7 @@ const Analytics = () => {
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {keyMetrics.map((metric, index) => (
-            <Card key={index} className="border border-slate-200">
+            <Card key={index} className="border border-slate-200 bg-white">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-slate-700">
                   {metric.title}
@@ -135,7 +135,7 @@ const Analytics = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Performance Chart */}
-          <Card className="border border-slate-200">
+          <Card className="border border-slate-200 bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-slate-800">Performance Overview</CardTitle>
               <CardDescription className="text-slate-600">
@@ -158,7 +158,7 @@ const Analytics = () => {
           </Card>
 
           {/* Traffic Sources */}
-          <Card className="border border-slate-200">
+          <Card className="border border-slate-200 bg-white">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-slate-800">Traffic Sources</CardTitle>
               <CardDescription className="text-slate-600">
@@ -188,7 +188,7 @@ const Analytics = () => {
         </div>
 
         {/* Campaign Performance Table */}
-        <Card className="border border-slate-200">
+        <Card className="border border-slate-200 bg-white">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-slate-800">Campaign Performance</CardTitle>
             <CardDescription className="text-slate-600">
