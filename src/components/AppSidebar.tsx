@@ -78,7 +78,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     isActive={location.pathname === item.url}
-                    className="text-white hover:bg-slate-700 data-[active=true]:bg-blue-600 data-[active=true]:text-white"
+                    className="text-white hover:bg-slate-700 hover:text-white data-[active=true]:bg-blue-600 data-[active=true]:text-white"
                     onClick={() => handleNavigation(item.url)}
                   >
                     <item.icon className="w-5 h-5" />

@@ -53,24 +53,86 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
-  /* Force blue focus rings on all interactive elements - override any potential yellow */
-  input:focus,
-  textarea:focus,
-  select:focus,
-  button:focus {
+  /* GLOBAL YELLOW ELIMINATION - COMPREHENSIVE OVERRIDE */
+  
+  /* Force ALL elements with yellow classes to use blue/gray alternatives */
+  .bg-yellow-50, .bg-yellow-100, .bg-yellow-200, .bg-yellow-300, 
+  .bg-yellow-400, .bg-yellow-500, .bg-yellow-600, .bg-yellow-700, 
+  .bg-yellow-800, .bg-yellow-900, .bg-yellow,
+  [class*="bg-yellow"] {
+    background-color: rgb(37 99 235) !important; /* Blue */
+  }
+
+  .text-yellow-50, .text-yellow-100, .text-yellow-200, .text-yellow-300,
+  .text-yellow-400, .text-yellow-500, .text-yellow-600, .text-yellow-700,
+  .text-yellow-800, .text-yellow-900, .text-yellow,
+  [class*="text-yellow"] {
+    color: rgb(255 255 255) !important; /* White */
+  }
+
+  .border-yellow-50, .border-yellow-100, .border-yellow-200, .border-yellow-300,
+  .border-yellow-400, .border-yellow-500, .border-yellow-600, .border-yellow-700,
+  .border-yellow-800, .border-yellow-900, .border-yellow,
+  [class*="border-yellow"] {
+    border-color: rgb(37 99 235) !important; /* Blue */
+  }
+
+  /* Force ALL hover states with yellow to use blue/gray */
+  .hover\:bg-yellow-50:hover, .hover\:bg-yellow-100:hover, .hover\:bg-yellow-200:hover,
+  .hover\:bg-yellow-300:hover, .hover\:bg-yellow-400:hover, .hover\:bg-yellow-500:hover,
+  .hover\:bg-yellow-600:hover, .hover\:bg-yellow-700:hover, .hover\:bg-yellow-800:hover,
+  .hover\:bg-yellow-900:hover, .hover\:bg-yellow:hover,
+  [class*="hover:bg-yellow"]:hover {
+    background-color: rgb(59 130 246) !important; /* Lighter blue for hover */
+  }
+
+  /* Override any inline styles or CSS variables that might contain yellow */
+  *[style*="yellow"], *[style*="#ffff"], *[style*="#fef"], *[style*="rgb(254"] {
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  /* Global override for any component that might be using yellow */
+  .card, .Card, [role="card"], .content-card, .stat-card, .metric-card {
+    background-color: rgb(255 255 255) !important;
+  }
+
+  /* Force buttons to never use yellow */
+  button, .button, [role="button"], .btn {
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  button:hover, .button:hover, [role="button"]:hover, .btn:hover {
+    background-color: rgb(29 78 216) !important;
+  }
+
+  /* Sidebar specific fixes */
+  [data-sidebar="sidebar"] {
+    background-color: rgb(30 41 59) !important;
+  }
+
+  [data-sidebar="menu-button"] {
+    color: rgb(255 255 255) !important;
+  }
+
+  [data-sidebar="menu-button"]:hover {
+    background-color: rgb(51 65 85) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  [data-sidebar="menu-button"][data-active="true"] {
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  /* Force focus rings to be blue */
+  input:focus, textarea:focus, select:focus, button:focus {
     @apply ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
     box-shadow: 0 0 0 2px rgb(59 130 246) !important;
   }
-  
-  /* Remove any potential yellow from input focus states */
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
-    box-shadow: 0 0 0 2px rgb(59 130 246) !important;
-  }
 
-  /* Override any potential yellow in toast notifications */
+  /* Override any potential yellow from toast notifications */
   [data-sonner-toast] {
     background: white !important;
     border: 1px solid rgb(229 231 235) !important;
@@ -95,217 +157,23 @@
     border: 1px solid rgb(59 130 246) !important;
   }
 
-  /* Force all sonner toasts to never use yellow */
-  [data-sonner-toast] * {
-    color: inherit !important;
-  }
-
-  /* Force sidebar to use slate colors - override any yellow */
-  [data-sidebar="sidebar"] {
-    background-color: rgb(30 41 59) !important;
-  }
-
-  [data-sidebar="header"],
-  [data-sidebar="content"],
-  [data-sidebar="footer"] {
-    background-color: rgb(30 41 59) !important;
-  }
-
-  /* COMPREHENSIVE YELLOW ELIMINATION */
-  
-  /* Ensure no yellow backgrounds anywhere */
-  .bg-yellow-50,
-  .bg-yellow-100,
-  .bg-yellow-200,
-  .bg-yellow-300,
-  .bg-yellow-400,
-  .bg-yellow-500,
-  .bg-yellow-600,
-  .bg-yellow-700,
-  .bg-yellow-800,
-  .bg-yellow-900 {
-    @apply bg-slate-800 !important;
-  }
-
-  /* Ensure no yellow text anywhere */
-  .text-yellow-50,
-  .text-yellow-100,
-  .text-yellow-200,
-  .text-yellow-300,
-  .text-yellow-400,
-  .text-yellow-500,
-  .text-yellow-600,
-  .text-yellow-700,
-  .text-yellow-800,
-  .text-yellow-900 {
-    @apply text-white !important;
-  }
-
-  /* Ensure no yellow borders anywhere */
-  .border-yellow-50,
-  .border-yellow-100,
-  .border-yellow-200,
-  .border-yellow-300,
-  .border-yellow-400,
-  .border-yellow-500,
-  .border-yellow-600,
-  .border-yellow-700,
-  .border-yellow-800,
-  .border-yellow-900 {
-    @apply border-slate-600 !important;
-  }
-
-  /* Force no yellow hover states anywhere */
-  .hover\:bg-yellow-50:hover,
-  .hover\:bg-yellow-100:hover,
-  .hover\:bg-yellow-200:hover,
-  .hover\:bg-yellow-300:hover,
-  .hover\:bg-yellow-400:hover,
-  .hover\:bg-yellow-500:hover,
-  .hover\:bg-yellow-600:hover,
-  .hover\:bg-yellow-700:hover,
-  .hover\:bg-yellow-800:hover,
-  .hover\:bg-yellow-900:hover {
-    @apply bg-gray-100 !important;
-  }
-
-  .hover\:text-yellow-50:hover,
-  .hover\:text-yellow-100:hover,
-  .hover\:text-yellow-200:hover,
-  .hover\:text-yellow-300:hover,
-  .hover\:text-yellow-400:hover,
-  .hover\:text-yellow-500:hover,
-  .hover\:text-yellow-600:hover,
-  .hover\:text-yellow-700:hover,
-  .hover\:text-yellow-800:hover,
-  .hover\:text-yellow-900:hover {
-    @apply text-blue-600 !important;
-  }
-
-  .hover\:border-yellow-50:hover,
-  .hover\:border-yellow-100:hover,
-  .hover\:border-yellow-200:hover,
-  .hover\:border-yellow-300:hover,
-  .hover\:border-yellow-400:hover,
-  .hover\:border-yellow-500:hover,
-  .hover\:border-yellow-600:hover,
-  .hover\:border-yellow-700:hover,
-  .hover\:border-yellow-800:hover,
-  .hover\:border-yellow-900:hover {
-    @apply border-gray-300 !important;
-  }
-
-  /* Override any component hover states that might use yellow */
-  button:hover,
-  a:hover,
-  [role="button"]:hover {
-    color: inherit !important;
-  }
-
-  /* Ensure all buttons and interactive elements use proper hover states */
-  button:hover:not(.bg-blue-600):not(.bg-green-600):not(.bg-red-600) {
-    @apply bg-gray-100 !important;
-  }
-
-  /* Force all card hover states to use gray */
-  .hover\:bg-accent:hover {
-    @apply bg-gray-50 !important;
-  }
-
-  /* Override any potential yellow from component libraries */
-  [data-state="open"]:not([data-type="success"]):not([data-type="error"]):not([data-type="warning"]) {
-    background-color: rgb(249 250 251) !important;
-  }
-
-  /* SIDEBAR SPECIFIC OVERRIDES - CRITICAL FOR FIXING YELLOW TEXT */
-  [data-sidebar="menu-button"] {
-    color: white !important;
-  }
-
-  [data-sidebar="menu-button"]:hover {
-    color: white !important;
-    background-color: rgb(51 65 85) !important;
-  }
-
-  [data-sidebar="menu-button"][data-active="true"] {
-    color: white !important;
-    background-color: rgb(37 99 235) !important;
-  }
-
-  /* Force all sidebar menu items to use white text and proper hover states */
-  [data-sidebar] a,
-  [data-sidebar] button,
-  [data-sidebar] [role="button"] {
-    color: white !important;
-  }
-
-  [data-sidebar] a:hover,
-  [data-sidebar] button:hover,
-  [data-sidebar] [role="button"]:hover {
-    color: white !important;
-    background-color: rgb(51 65 85) !important;
-  }
-
-  /* Override any accent colors that might be yellow */
-  .text-accent,
-  .text-accent-foreground {
-    @apply text-gray-900 !important;
-  }
-
-  .bg-accent {
-    @apply bg-gray-50 !important;
-  }
-
-  /* Force all navigation menu items to use proper colors */
-  nav a,
-  nav button,
-  [role="navigation"] a,
-  [role="navigation"] button {
-    color: inherit !important;
-  }
-
-  /* Override any potential yellow from Radix UI components */
-  [data-radix-collection-item]:hover,
-  [data-highlighted]:hover {
-    background-color: rgb(243 244 246) !important;
-    color: rgb(17 24 39) !important;
-  }
-
-  /* Global override for any remaining yellow */
-  * {
-    /* Remove any potential yellow colors at the element level */
-  }
-
-  *[style*="yellow"],
+  /* NUCLEAR OPTION: Override any remaining yellow with CSS attribute selectors */
   *[class*="yellow"] {
-    color: rgb(17 24 39) !important;
-    background-color: transparent !important;
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
   }
 
-  /* FINAL OVERRIDE: Force sidebar accent variables to use correct colors */
-  :root {
-    --sidebar-accent: 51 65 85 !important;
-    --sidebar-accent-foreground: 255 255 255 !important;
-  }
-
-  /* Component-level override for sidebar menu buttons */
-  .peer\/menu-button {
-    color: white !important;
-  }
-
-  .peer\/menu-button:hover {
-    color: white !important;
-    background-color: rgb(51 65 85) !important;
-  }
-
-  /* Override any remaining CSS variable references */
-  [data-sidebar] * {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-  }
-
-  [data-sidebar] *:hover {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  /* Override CSS custom properties that might contain yellow */
+  * {
+    --yellow-50: 239 246 255 !important;
+    --yellow-100: 219 234 254 !important;
+    --yellow-200: 191 219 254 !important;
+    --yellow-300: 147 197 253 !important;
+    --yellow-400: 96 165 250 !important;
+    --yellow-500: 59 130 246 !important;
+    --yellow-600: 37 99 235 !important;
+    --yellow-700: 29 78 216 !important;
+    --yellow-800: 30 64 175 !important;
+    --yellow-900: 30 58 138 !important;
   }
 }
