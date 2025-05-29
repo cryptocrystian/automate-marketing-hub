@@ -132,7 +132,7 @@ const Dashboard = () => {
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {metrics.map((metric, index) => (
-            <Card key={index} className="bg-white shadow-sm border-gray-200">
+            <Card key={index} className="bg-white shadow-sm border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-gray-700">
                   {metric.title}
@@ -163,7 +163,7 @@ const Dashboard = () => {
             <CardContent>
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100">
+                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 hover:border-gray-200 transition-colors">
                     <div>
                       <p className="text-sm font-medium text-gray-900">{activity.action}</p>
                       <p className="text-xs text-gray-600">{activity.target}</p>
@@ -172,7 +172,7 @@ const Dashboard = () => {
                       <p className="text-xs text-gray-500">{activity.time}</p>
                       <Badge 
                         variant={activity.status === 'success' ? 'default' : 'secondary'}
-                        className={activity.status === 'success' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700'}
+                        className={activity.status === 'success' ? 'bg-green-600 text-white hover:bg-green-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}
                       >
                         {activity.status}
                       </Badge>
@@ -197,11 +197,11 @@ const Dashboard = () => {
                   <Target className="h-5 w-5 mb-1" />
                   <span className="text-sm">New Campaign</span>
                 </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-100 hover:bg-gray-200">
+                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300">
                   <Calendar className="h-5 w-5 mb-1" />
                   <span className="text-sm">Schedule Content</span>
                 </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-100 hover:bg-gray-200">
+                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300">
                   <Mail className="h-5 w-5 mb-1" />
                   <span className="text-sm">Email Builder</span>
                 </Button>

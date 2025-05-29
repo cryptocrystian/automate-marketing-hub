@@ -134,4 +134,48 @@
   .border-yellow-400 {
     @apply border-slate-600 !important;
   }
+
+  /* Force no yellow hover states anywhere */
+  .hover\:bg-yellow-50:hover,
+  .hover\:bg-yellow-100:hover,
+  .hover\:bg-yellow-200:hover,
+  .hover\:bg-yellow-300:hover,
+  .hover\:bg-yellow-400:hover,
+  .hover\:bg-yellow-500:hover {
+    @apply bg-gray-100 !important;
+  }
+
+  .hover\:text-yellow-500:hover,
+  .hover\:text-yellow-600:hover,
+  .hover\:text-yellow-700:hover {
+    @apply text-blue-600 !important;
+  }
+
+  .hover\:border-yellow-200:hover,
+  .hover\:border-yellow-300:hover,
+  .hover\:border-yellow-400:hover {
+    @apply border-gray-300 !important;
+  }
+
+  /* Override any component hover states that might use yellow */
+  button:hover,
+  a:hover,
+  [role="button"]:hover {
+    color: inherit !important;
+  }
+
+  /* Ensure all buttons and interactive elements use proper hover states */
+  button:hover:not(.bg-blue-600):not(.bg-green-600):not(.bg-red-600) {
+    @apply bg-gray-100 !important;
+  }
+
+  /* Force all card hover states to use gray */
+  .hover\:bg-accent:hover {
+    @apply bg-gray-50 !important;
+  }
+
+  /* Override any potential yellow from component libraries */
+  [data-state="open"]:not([data-type="success"]):not([data-type="error"]):not([data-type="warning"]) {
+    background-color: rgb(249 250 251) !important;
+  }
 }
