@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export interface User {
   id: string;
@@ -32,7 +32,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Mock users for demo
   const mockUsers: User[] = [
@@ -58,6 +58,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   ];
 
+  // Check for stored user on component mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem('authenticated_user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('Error parsing stored user:', error);
+        localStorage.removeItem('authenticated_user');
+      }
+    }
+    setIsLoading(false);
+  }, []);
+
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     
@@ -68,6 +83,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     if (foundUser && password === 'password') {
       setUser(foundUser);
+      // Store user in localStorage for persistence
+      localStorage.setItem('authenticated_user', JSON.stringify(foundUser));
       setIsLoading(false);
       return true;
     }
@@ -78,6 +95,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('authenticated_user');
   };
 
   return (

@@ -49,6 +49,10 @@ export function AppSidebar() {
     navigate('/login');
   };
 
+  const handleNavigation = (url: string) => {
+    navigate(url);
+  };
+
   return (
     <Sidebar className="bg-slate-800 border-r border-slate-700" style={{ backgroundColor: '#1e293b !important' }}>
       <SidebarHeader className="border-b border-slate-700 p-6 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
@@ -73,14 +77,12 @@ export function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
-                    asChild 
                     isActive={location.pathname === item.url}
                     className="text-white hover:bg-slate-700 data-[active=true]:bg-blue-600 data-[active=true]:text-white"
+                    onClick={() => handleNavigation(item.url)}
                   >
-                    <a href={item.url} className="flex items-center space-x-3 px-3 py-2 rounded-lg">
-                      <item.icon className="w-5 h-5" />
-                      <span className="font-medium">{item.title}</span>
-                    </a>
+                    <item.icon className="w-5 h-5" />
+                    <span className="font-medium">{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -106,7 +108,7 @@ export function AppSidebar() {
           onClick={handleLogout}
           variant="outline" 
           size="sm" 
-          className="w-full bg-transparent border-slate-600 text-white hover:bg-slate-700"
+          className="w-full bg-transparent border-slate-600 text-white hover:bg-slate-700 hover:text-white hover:border-slate-600"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout
