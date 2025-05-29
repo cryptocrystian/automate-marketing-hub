@@ -43,6 +43,14 @@
     --sidebar-accent-foreground: 255 255 255;
     --sidebar-border: 51 65 85;
     --sidebar-ring: 37 99 235;
+
+    /* Override semantic colors to prevent yellow */
+    --warning: 37 99 235;
+    --warning-foreground: 255 255 255;
+    --success: 34 197 94;
+    --success-foreground: 255 255 255;
+    --info: 37 99 235;
+    --info-foreground: 255 255 255;
   }
 
   * {
@@ -53,48 +61,88 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
-  /* GLOBAL YELLOW ELIMINATION - COMPREHENSIVE OVERRIDE */
+  /* COMPREHENSIVE YELLOW ELIMINATION - GLOBAL OVERRIDE */
   
-  /* Force ALL elements with yellow classes to use blue/gray alternatives */
+  /* Target ALL possible yellow-generating classes */
   .bg-yellow-50, .bg-yellow-100, .bg-yellow-200, .bg-yellow-300, 
   .bg-yellow-400, .bg-yellow-500, .bg-yellow-600, .bg-yellow-700, 
   .bg-yellow-800, .bg-yellow-900, .bg-yellow,
-  [class*="bg-yellow"] {
-    background-color: rgb(37 99 235) !important; /* Blue */
+  .bg-warning, .bg-warn, .bg-alert,
+  [class*="bg-yellow"], [class*="bg-warning"], [class*="bg-warn"] {
+    background-color: rgb(37 99 235) !important;
   }
 
   .text-yellow-50, .text-yellow-100, .text-yellow-200, .text-yellow-300,
   .text-yellow-400, .text-yellow-500, .text-yellow-600, .text-yellow-700,
   .text-yellow-800, .text-yellow-900, .text-yellow,
-  [class*="text-yellow"] {
-    color: rgb(255 255 255) !important; /* White */
+  .text-warning, .text-warn, .text-alert,
+  [class*="text-yellow"], [class*="text-warning"], [class*="text-warn"] {
+    color: rgb(255 255 255) !important;
   }
 
   .border-yellow-50, .border-yellow-100, .border-yellow-200, .border-yellow-300,
   .border-yellow-400, .border-yellow-500, .border-yellow-600, .border-yellow-700,
   .border-yellow-800, .border-yellow-900, .border-yellow,
-  [class*="border-yellow"] {
-    border-color: rgb(37 99 235) !important; /* Blue */
+  .border-warning, .border-warn, .border-alert,
+  [class*="border-yellow"], [class*="border-warning"], [class*="border-warn"] {
+    border-color: rgb(37 99 235) !important;
   }
 
-  /* Force ALL hover states with yellow to use blue/gray */
+  /* Override hover states */
   .hover\:bg-yellow-50:hover, .hover\:bg-yellow-100:hover, .hover\:bg-yellow-200:hover,
   .hover\:bg-yellow-300:hover, .hover\:bg-yellow-400:hover, .hover\:bg-yellow-500:hover,
   .hover\:bg-yellow-600:hover, .hover\:bg-yellow-700:hover, .hover\:bg-yellow-800:hover,
   .hover\:bg-yellow-900:hover, .hover\:bg-yellow:hover,
-  [class*="hover:bg-yellow"]:hover {
-    background-color: rgb(59 130 246) !important; /* Lighter blue for hover */
+  .hover\:bg-warning:hover, .hover\:bg-warn:hover,
+  [class*="hover:bg-yellow"]:hover, [class*="hover:bg-warning"]:hover {
+    background-color: rgb(59 130 246) !important;
   }
 
-  /* Override any inline styles or CSS variables that might contain yellow */
-  *[style*="yellow"], *[style*="#ffff"], *[style*="#fef"], *[style*="rgb(254"] {
+  /* Override any inline styles containing yellow */
+  *[style*="yellow"], *[style*="#ffff"], *[style*="#fef"], *[style*="rgb(254"],
+  *[style*="rgb(255, 255"], *[style*="hsl(60"], *[style*="hsl(45"] {
     background-color: rgb(37 99 235) !important;
     color: rgb(255 255 255) !important;
   }
 
-  /* Global override for any component that might be using yellow */
+  /* Override success colors to prevent yellow fallbacks */
+  .bg-success {
+    background-color: rgb(34 197 94) !important;
+  }
+
+  .text-success {
+    color: rgb(34 197 94) !important;
+  }
+
+  .border-success {
+    border-color: rgb(34 197 94) !important;
+  }
+
+  /* Global component overrides */
   .card, .Card, [role="card"], .content-card, .stat-card, .metric-card {
     background-color: rgb(255 255 255) !important;
+    color: rgb(17 24 39) !important;
+  }
+
+  /* Badge specific overrides */
+  .badge, .Badge, [data-badge], [class*="badge"] {
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  .badge.success, .Badge.success, [data-badge="success"] {
+    background-color: rgb(34 197 94) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  .badge.warning, .Badge.warning, [data-badge="warning"] {
+    background-color: rgb(37 99 235) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  .badge.error, .Badge.error, [data-badge="error"] {
+    background-color: rgb(239 68 68) !important;
+    color: rgb(255 255 255) !important;
   }
 
   /* Force buttons to never use yellow */
@@ -105,6 +153,15 @@
 
   button:hover, .button:hover, [role="button"]:hover, .btn:hover {
     background-color: rgb(29 78 216) !important;
+  }
+
+  button.secondary, .button.secondary, [role="button"].secondary, .btn.secondary {
+    background-color: rgb(243 244 246) !important;
+    color: rgb(75 85 99) !important;
+  }
+
+  button.secondary:hover, .button.secondary:hover {
+    background-color: rgb(229 231 235) !important;
   }
 
   /* Sidebar specific fixes */
@@ -126,13 +183,13 @@
     color: rgb(255 255 255) !important;
   }
 
-  /* Force focus rings to be blue */
+  /* Focus states */
   input:focus, textarea:focus, select:focus, button:focus {
     @apply ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
     box-shadow: 0 0 0 2px rgb(59 130 246) !important;
   }
 
-  /* Override any potential yellow from toast notifications */
+  /* Toast notifications */
   [data-sonner-toast] {
     background: white !important;
     border: 1px solid rgb(229 231 235) !important;
@@ -152,18 +209,33 @@
   }
 
   [data-sonner-toast][data-type="warning"] {
-    background: rgb(59 130 246) !important;
+    background: rgb(37 99 235) !important;
     color: white !important;
-    border: 1px solid rgb(59 130 246) !important;
+    border: 1px solid rgb(37 99 235) !important;
   }
 
-  /* NUCLEAR OPTION: Override any remaining yellow with CSS attribute selectors */
-  *[class*="yellow"] {
+  /* NUCLEAR OPTION: Override any remaining yellow sources */
+  *[class*="yellow"], *[class*="warning"] {
     background-color: rgb(37 99 235) !important;
     color: rgb(255 255 255) !important;
   }
 
-  /* Override CSS custom properties that might contain yellow */
+  /* Override recharts/chart library colors */
+  .recharts-default-tooltip,
+  .recharts-tooltip-wrapper,
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: rgb(229 231 235) !important;
+  }
+
+  .recharts-bar,
+  .recharts-area,
+  .recharts-line {
+    fill: rgb(37 99 235) !important;
+    stroke: rgb(37 99 235) !important;
+  }
+
+  /* Override any CSS custom properties that might contain yellow */
   * {
     --yellow-50: 239 246 255 !important;
     --yellow-100: 219 234 254 !important;
@@ -175,5 +247,9 @@
     --yellow-700: 29 78 216 !important;
     --yellow-800: 30 64 175 !important;
     --yellow-900: 30 58 138 !important;
+    --warning-50: 239 246 255 !important;
+    --warning-100: 219 234 254 !important;
+    --warning-500: 37 99 235 !important;
+    --warning-600: 29 78 216 !important;
   }
 }

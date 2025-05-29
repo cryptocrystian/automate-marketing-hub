@@ -45,14 +45,29 @@ export default {
 				},
 				success: {
 					DEFAULT: '#10b981',
+					50: '#ecfdf5',
+					100: '#d1fae5',
+					500: '#10b981',
+					600: '#059669',
+					700: '#047857',
 					foreground: '#ffffff'
 				},
 				warning: {
-					DEFAULT: '#3b82f6',
+					DEFAULT: '#2563eb', // Force warning to use blue instead of yellow
+					50: '#eff6ff',
+					100: '#dbeafe',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
 					foreground: '#ffffff'
 				},
 				danger: {
 					DEFAULT: '#ef4444',
+					50: '#fef2f2',
+					100: '#fee2e2',
+					500: '#ef4444',
+					600: '#dc2626',
+					700: '#b91c1c',
 					foreground: '#ffffff'
 				},
 				gray: {
