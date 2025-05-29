@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,7 +18,11 @@ import {
   TrendingUp,
   Users,
   Search,
-  Settings
+  Settings,
+  FileText,
+  Target,
+  Zap,
+  AlertTriangle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -32,13 +35,20 @@ interface AuditItem {
   score: number;
 }
 
+interface AuditSubCategory {
+  id: string;
+  title: string;
+  description: string;
+  items: AuditItem[];
+}
+
 interface AuditCategory {
   id: string;
   title: string;
   description: string;
   icon: React.ComponentType<any>;
   color: string;
-  items: AuditItem[];
+  subCategories: AuditSubCategory[];
   isExpanded: boolean;
 }
 
@@ -49,45 +59,178 @@ const AssessAudit = () => {
     {
       id: 'content',
       title: 'Content Marketing Audit',
-      description: 'Evaluate current content performance, identify gaps, and discover opportunities',
+      description: 'Comprehensive evaluation of current content performance, strategy, quality, and operations',
       icon: BarChart3,
       color: 'bg-blue-600',
       isExpanded: false,
-      items: [
+      subCategories: [
         {
-          id: 'content-1',
-          question: 'Document all existing content assets and their performance metrics',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'performance',
+          title: 'Current Content Performance Analysis',
+          description: 'Analyze existing content performance metrics and ROI',
+          items: [
+            {
+              id: 'perf-1',
+              question: 'Assess content volume and publishing frequency across all channels',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'perf-2',
+              question: 'Identify and analyze top-performing content pieces by engagement metrics',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'perf-3',
+              question: 'Review content engagement metrics (views, shares, comments, time on page)',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'perf-4',
+              question: 'Track content conversion rates and calculate content ROI',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'perf-5',
+              question: 'Evaluate performance by content format (blog, video, social, email, infographics)',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         },
         {
-          id: 'content-2',
-          question: 'Analyze content gaps across the customer journey',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'strategy',
+          title: 'Content Strategy Evaluation',
+          description: 'Review strategic alignment and planning processes',
+          items: [
+            {
+              id: 'strat-1',
+              question: 'Evaluate content goals alignment with overall business objectives',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'strat-2',
+              question: 'Review target audience definitions and persona documentation',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'strat-3',
+              question: 'Assess content pillars and topic strategy effectiveness',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'strat-4',
+              question: 'Evaluate editorial calendar and content planning processes',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'strat-5',
+              question: 'Analyze content distribution strategy across all channels',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         },
         {
-          id: 'content-3',
-          question: 'Evaluate content quality and relevance to target audience',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'quality',
+          title: 'Content Quality Assessment',
+          description: 'Evaluate content quality, consistency, and user experience',
+          items: [
+            {
+              id: 'qual-1',
+              question: 'Review brand voice and messaging consistency across all content',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'qual-2',
+              question: 'Assess content optimization for SEO and user engagement',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'qual-3',
+              question: 'Evaluate visual content quality and design consistency',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'qual-4',
+              question: 'Audit content accessibility and user experience factors',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'qual-5',
+              question: 'Review content accuracy, fact-checking, and quality control processes',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         },
         {
-          id: 'content-4',
-          question: 'Review content distribution channels and effectiveness',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'content-5',
-          question: 'Assess content ROI and conversion performance',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'operations',
+          title: 'Content Operations Review',
+          description: 'Analyze workflows, tools, and operational efficiency',
+          items: [
+            {
+              id: 'ops-1',
+              question: 'Document content creation workflows and approval processes',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'ops-2',
+              question: 'Assess team roles, responsibilities, and resource allocation',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'ops-3',
+              question: 'Evaluate content management systems and production tools',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'ops-4',
+              question: 'Review content promotion and amplification strategies',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'ops-5',
+              question: 'Analyze content repurposing and lifecycle management processes',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         }
       ]
     },
@@ -98,41 +241,34 @@ const AssessAudit = () => {
       icon: Users,
       color: 'bg-green-600',
       isExpanded: false,
-      items: [
+      subCategories: [
         {
-          id: 'pr-1',
-          question: 'Inventory current media relationships and contact database',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'pr-2',
-          question: 'Analyze recent media coverage and sentiment',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'pr-3',
-          question: 'Review crisis communication preparedness',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'pr-4',
-          question: 'Evaluate thought leadership positioning and opportunities',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'pr-5',
-          question: 'Assess PR measurement and ROI tracking capabilities',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'pr-basic',
+          title: 'Basic PR Assessment',
+          description: 'Fundamental PR evaluation',
+          items: [
+            {
+              id: 'pr-1',
+              question: 'Inventory current media relationships and contact database',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'pr-2',
+              question: 'Analyze recent media coverage and sentiment',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'pr-3',
+              question: 'Review crisis communication preparedness',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         }
       ]
     },
@@ -143,41 +279,27 @@ const AssessAudit = () => {
       icon: Search,
       color: 'bg-indigo-600',
       isExpanded: false,
-      items: [
+      subCategories: [
         {
-          id: 'seo-1',
-          question: 'Conduct technical SEO audit (site speed, mobile, crawlability)',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'seo-2',
-          question: 'Analyze current keyword rankings and search visibility',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'seo-3',
-          question: 'Review on-page optimization across key landing pages',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'seo-4',
-          question: 'Evaluate backlink profile and domain authority',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'seo-5',
-          question: 'Assess local SEO performance (if applicable)',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'seo-basic',
+          title: 'Basic SEO Assessment',
+          description: 'Fundamental SEO evaluation',
+          items: [
+            {
+              id: 'seo-1',
+              question: 'Conduct technical SEO audit (site speed, mobile, crawlability)',
+              completed: false,
+              notes: '',
+              score: 0
+            },
+            {
+              id: 'seo-2',
+              question: 'Analyze current keyword rankings and search visibility',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         }
       ]
     },
@@ -188,41 +310,20 @@ const AssessAudit = () => {
       icon: TrendingUp,
       color: 'bg-purple-600',
       isExpanded: false,
-      items: [
+      subCategories: [
         {
-          id: 'competitor-1',
-          question: 'Identify and profile top 5 direct competitors',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'competitor-2',
-          question: 'Analyze competitor content strategies and topics',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'competitor-3',
-          question: 'Review competitor SEO and keyword strategies',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'competitor-4',
-          question: 'Evaluate competitor social media presence and engagement',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'competitor-5',
-          question: 'Assess competitive pricing and positioning strategies',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'comp-basic',
+          title: 'Basic Competitor Assessment',
+          description: 'Fundamental competitor evaluation',
+          items: [
+            {
+              id: 'comp-1',
+              question: 'Identify and profile top 5 direct competitors',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         }
       ]
     },
@@ -233,41 +334,20 @@ const AssessAudit = () => {
       icon: Settings,
       color: 'bg-gray-600',
       isExpanded: false,
-      items: [
+      subCategories: [
         {
-          id: 'martech-1',
-          question: 'Inventory all marketing tools and platforms currently in use',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'martech-2',
-          question: 'Evaluate tool integrations and data flow efficiency',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'martech-3',
-          question: 'Assess user adoption and training needs across team',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'martech-4',
-          question: 'Review tool ROI and cost optimization opportunities',
-          completed: false,
-          notes: '',
-          score: 0
-        },
-        {
-          id: 'martech-5',
-          question: 'Identify gaps in current technology stack',
-          completed: false,
-          notes: '',
-          score: 0
+          id: 'tech-basic',
+          title: 'Basic MarTech Assessment',
+          description: 'Fundamental technology evaluation',
+          items: [
+            {
+              id: 'tech-1',
+              question: 'Inventory all marketing tools and platforms currently in use',
+              completed: false,
+              notes: '',
+              score: 0
+            }
+          ]
         }
       ]
     }
@@ -283,14 +363,21 @@ const AssessAudit = () => {
     );
   };
 
-  const updateItem = (categoryId: string, itemId: string, updates: Partial<AuditItem>) => {
+  const updateItem = (categoryId: string, subCategoryId: string, itemId: string, updates: Partial<AuditItem>) => {
     setAuditCategories(prev =>
       prev.map(cat =>
         cat.id === categoryId
           ? {
               ...cat,
-              items: cat.items.map(item =>
-                item.id === itemId ? { ...item, ...updates } : item
+              subCategories: cat.subCategories.map(subCat =>
+                subCat.id === subCategoryId
+                  ? {
+                      ...subCat,
+                      items: subCat.items.map(item =>
+                        item.id === itemId ? { ...item, ...updates } : item
+                      )
+                    }
+                  : subCat
               )
             }
           : cat
@@ -299,23 +386,49 @@ const AssessAudit = () => {
   };
 
   const calculateCategoryProgress = (category: AuditCategory) => {
-    const completedItems = category.items.filter(item => item.completed).length;
-    return Math.round((completedItems / category.items.length) * 100);
+    const totalItems = category.subCategories.reduce((acc, subCat) => acc + subCat.items.length, 0);
+    const completedItems = category.subCategories.reduce(
+      (acc, subCat) => acc + subCat.items.filter(item => item.completed).length,
+      0
+    );
+    return totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+  };
+
+  const calculateSubCategoryProgress = (subCategory: AuditSubCategory) => {
+    const completedItems = subCategory.items.filter(item => item.completed).length;
+    return Math.round((completedItems / subCategory.items.length) * 100);
   };
 
   const calculateOverallProgress = () => {
-    const totalItems = auditCategories.reduce((acc, cat) => acc + cat.items.length, 0);
-    const completedItems = auditCategories.reduce(
-      (acc, cat) => acc + cat.items.filter(item => item.completed).length,
+    const allItems = auditCategories.reduce(
+      (acc, cat) => acc + cat.subCategories.reduce((subAcc, subCat) => subAcc + subCat.items.length, 0),
       0
     );
-    return Math.round((completedItems / totalItems) * 100);
+    const completedItems = auditCategories.reduce(
+      (acc, cat) => acc + cat.subCategories.reduce(
+        (subAcc, subCat) => subAcc + subCat.items.filter(item => item.completed).length,
+        0
+      ),
+      0
+    );
+    return allItems > 0 ? Math.round((completedItems / allItems) * 100) : 0;
   };
 
   const calculateCategoryScore = (category: AuditCategory) => {
-    const scores = category.items.filter(item => item.score > 0).map(item => item.score);
-    if (scores.length === 0) return 0;
-    return Math.round(scores.reduce((acc, score) => acc + score, 0) / scores.length);
+    const allScores = category.subCategories.reduce(
+      (acc, subCat) => [...acc, ...subCat.items.filter(item => item.score > 0).map(item => item.score)],
+      [] as number[]
+    );
+    if (allScores.length === 0) return 0;
+    return Math.round(allScores.reduce((acc, score) => acc + score, 0) / allScores.length);
+  };
+
+  const generateActionItems = (category: AuditCategory) => {
+    const lowScoreItems = category.subCategories.reduce(
+      (acc, subCat) => [...acc, ...subCat.items.filter(item => item.score > 0 && item.score <= 6)],
+      [] as AuditItem[]
+    );
+    return lowScoreItems.slice(0, 3); // Top 3 priority items
   };
 
   const overallProgress = calculateOverallProgress();
@@ -373,6 +486,7 @@ const AssessAudit = () => {
           {auditCategories.map((category) => {
             const categoryProgress = calculateCategoryProgress(category);
             const categoryScore = calculateCategoryScore(category);
+            const actionItems = generateActionItems(category);
             const IconComponent = category.icon;
 
             return (
@@ -418,69 +532,108 @@ const AssessAudit = () => {
                     <CardContent className="pt-0">
                       <Progress value={categoryProgress} className="mb-6" />
                       
-                      <div className="space-y-6">
-                        {category.items.map((item) => (
-                          <div key={item.id} className="border rounded-lg p-4 bg-gray-50">
-                            <div className="flex items-start space-x-3 mb-4">
-                              <Checkbox
-                                checked={item.completed}
-                                onCheckedChange={(checked) =>
-                                  updateItem(category.id, item.id, { completed: !!checked })
-                                }
-                                className="mt-1"
-                              />
-                              <div className="flex-1">
-                                <p className="font-medium text-gray-900 mb-2">{item.question}</p>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                  <div>
-                                    <label className="text-sm font-medium text-gray-700 mb-2 block">
-                                      Score (1-10)
-                                    </label>
-                                    <Input
-                                      type="number"
-                                      min="1"
-                                      max="10"
-                                      value={item.score || ''}
-                                      onChange={(e) =>
-                                        updateItem(category.id, item.id, {
-                                          score: parseInt(e.target.value) || 0
-                                        })
-                                      }
-                                      placeholder="Rate 1-10"
-                                      className="w-full"
-                                    />
+                      {/* Sub-categories */}
+                      <div className="space-y-8">
+                        {category.subCategories.map((subCategory) => {
+                          const subProgress = calculateSubCategoryProgress(subCategory);
+                          
+                          return (
+                            <div key={subCategory.id} className="border-l-4 border-l-blue-200 pl-6">
+                              <div className="mb-4">
+                                <h4 className="text-lg font-semibold text-gray-900 mb-2">{subCategory.title}</h4>
+                                <p className="text-sm text-gray-600 mb-3">{subCategory.description}</p>
+                                <div className="flex items-center gap-4 mb-4">
+                                  <div className="flex-1">
+                                    <Progress value={subProgress} className="h-2" />
                                   </div>
-                                  
-                                  <div>
-                                    <label className="text-sm font-medium text-gray-700 mb-2 block">
-                                      Upload Supporting Files
-                                    </label>
-                                    <Button variant="outline" size="sm" className="w-full">
-                                      <Upload className="h-4 w-4 mr-2" />
-                                      Upload Files
-                                    </Button>
-                                  </div>
-                                </div>
-                                
-                                <div className="mt-4">
-                                  <label className="text-sm font-medium text-gray-700 mb-2 block">
-                                    Notes & Findings
-                                  </label>
-                                  <Textarea
-                                    value={item.notes}
-                                    onChange={(e) =>
-                                      updateItem(category.id, item.id, { notes: e.target.value })
-                                    }
-                                    placeholder="Add your findings, observations, and recommendations..."
-                                    className="min-h-[80px]"
-                                  />
+                                  <span className="text-sm font-medium text-gray-600">{subProgress}%</span>
                                 </div>
                               </div>
+                              
+                              <div className="space-y-4">
+                                {subCategory.items.map((item) => (
+                                  <div key={item.id} className="border rounded-lg p-4 bg-white shadow-sm">
+                                    <div className="flex items-start space-x-3 mb-4">
+                                      <Checkbox
+                                        checked={item.completed}
+                                        onCheckedChange={(checked) =>
+                                          updateItem(category.id, subCategory.id, item.id, { completed: !!checked })
+                                        }
+                                        className="mt-1"
+                                      />
+                                      <div className="flex-1">
+                                        <p className="font-medium text-gray-900 mb-3">{item.question}</p>
+                                        
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                          <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">
+                                              Score (1-10)
+                                            </label>
+                                            <Input
+                                              type="number"
+                                              min="1"
+                                              max="10"
+                                              value={item.score || ''}
+                                              onChange={(e) =>
+                                                updateItem(category.id, subCategory.id, item.id, {
+                                                  score: parseInt(e.target.value) || 0
+                                                })
+                                              }
+                                              placeholder="Rate 1-10"
+                                              className="w-full"
+                                            />
+                                          </div>
+                                          
+                                          <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">
+                                              Upload Supporting Files
+                                            </label>
+                                            <Button variant="outline" size="sm" className="w-full">
+                                              <Upload className="h-4 w-4 mr-2" />
+                                              Upload Files
+                                            </Button>
+                                          </div>
+                                        </div>
+                                        
+                                        <div className="mt-4">
+                                          <label className="text-sm font-medium text-gray-700 mb-2 block">
+                                            Notes & Findings
+                                          </label>
+                                          <Textarea
+                                            value={item.notes}
+                                            onChange={(e) =>
+                                              updateItem(category.id, subCategory.id, item.id, { notes: e.target.value })
+                                            }
+                                            placeholder="Add your findings, observations, and recommendations..."
+                                            className="min-h-[80px]"
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
+
+                      {/* Action Items for this category */}
+                      {category.isExpanded && actionItems.length > 0 && (
+                        <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+                          <h5 className="font-semibold text-red-900 mb-3 flex items-center gap-2">
+                            <AlertTriangle className="h-4 w-4" />
+                            Priority Action Items for {category.title}
+                          </h5>
+                          <div className="space-y-2">
+                            {actionItems.map((item) => (
+                              <div key={item.id} className="text-sm text-red-800">
+                                • {item.question} (Score: {item.score}/10)
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
                   </CollapsibleContent>
                 </Collapsible>
@@ -489,37 +642,53 @@ const AssessAudit = () => {
           })}
         </div>
 
-        {/* Action Items Section */}
+        {/* Overall Action Items Section */}
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              Generated Action Items
+              <Target className="h-5 w-5 text-blue-600" />
+              Generated Action Items & Recommendations
             </CardTitle>
             <CardDescription>
-              Based on your audit findings, here are the priority action items
+              Based on your audit findings, here are the priority action items across all categories
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-red-900">High Priority</span>
-                  <Badge variant="destructive">Critical</Badge>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <h4 className="font-semibold text-gray-900">High Priority</h4>
+                <div className="space-y-2">
+                  {auditCategories.map(category => {
+                    const criticalItems = generateActionItems(category).filter(item => item.score > 0 && item.score <= 4);
+                    return criticalItems.slice(0, 2).map(item => (
+                      <div key={item.id} className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <Badge variant="destructive" className="text-xs">Critical</Badge>
+                          <span className="text-xs text-red-700">Score: {item.score}/10</span>
+                        </div>
+                        <p className="text-sm text-red-900 font-medium">{item.question}</p>
+                      </div>
+                    ));
+                  })}
                 </div>
-                <p className="text-sm text-red-800 mt-1">
-                  Complete audit items to generate specific action items
-                </p>
               </div>
               
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-blue-900">Medium Priority</span>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800">Important</Badge>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-gray-900">Medium Priority</h4>
+                <div className="space-y-2">
+                  {auditCategories.map(category => {
+                    const mediumItems = generateActionItems(category).filter(item => item.score > 4 && item.score <= 6);
+                    return mediumItems.slice(0, 2).map(item => (
+                      <div key={item.id} className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-800">Important</Badge>
+                          <span className="text-xs text-blue-700">Score: {item.score}/10</span>
+                        </div>
+                        <p className="text-sm text-blue-900 font-medium">{item.question}</p>
+                      </div>
+                    ));
+                  })}
                 </div>
-                <p className="text-sm text-blue-800 mt-1">
-                  Action items will appear as you complete audit categories
-                </p>
               </div>
             </div>
           </CardContent>
@@ -533,6 +702,7 @@ const AssessAudit = () => {
           
           <div className="flex gap-3">
             <Button variant="outline">
+              <FileText className="h-4 w-4 mr-2" />
               Export Audit Report
             </Button>
             <Button 
@@ -540,6 +710,7 @@ const AssessAudit = () => {
               className="bg-blue-600 hover:bg-blue-700"
             >
               Continue to Next Step
+              <ArrowLeft className="h-4 w-4 ml-2 rotate-180" />
             </Button>
           </div>
         </div>
