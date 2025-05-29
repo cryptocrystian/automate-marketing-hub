@@ -217,6 +217,21 @@
     background-color: rgb(249 250 251) !important;
   }
 
+  /* SIDEBAR SPECIFIC OVERRIDES - CRITICAL FOR FIXING YELLOW TEXT */
+  [data-sidebar="menu-button"] {
+    color: white !important;
+  }
+
+  [data-sidebar="menu-button"]:hover {
+    color: white !important;
+    background-color: rgb(51 65 85) !important;
+  }
+
+  [data-sidebar="menu-button"][data-active="true"] {
+    color: white !important;
+    background-color: rgb(37 99 235) !important;
+  }
+
   /* Force all sidebar menu items to use white text and proper hover states */
   [data-sidebar] a,
   [data-sidebar] button,
@@ -265,5 +280,32 @@
   *[class*="yellow"] {
     color: rgb(17 24 39) !important;
     background-color: transparent !important;
+  }
+
+  /* FINAL OVERRIDE: Force sidebar accent variables to use correct colors */
+  :root {
+    --sidebar-accent: 51 65 85 !important;
+    --sidebar-accent-foreground: 255 255 255 !important;
+  }
+
+  /* Component-level override for sidebar menu buttons */
+  .peer\/menu-button {
+    color: white !important;
+  }
+
+  .peer\/menu-button:hover {
+    color: white !important;
+    background-color: rgb(51 65 85) !important;
+  }
+
+  /* Override any remaining CSS variable references */
+  [data-sidebar] * {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  }
+
+  [data-sidebar] *:hover {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
   }
 }
