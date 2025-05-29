@@ -13,7 +13,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from '@/components/ui/button';
 
@@ -51,8 +50,8 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="bg-slate-800 border-r border-slate-700">
-      <SidebarHeader className="border-b border-slate-700 p-6">
+    <Sidebar className="bg-slate-800 border-r border-slate-700" style={{ backgroundColor: '#1e293b !important' }}>
+      <SidebarHeader className="border-b border-slate-700 p-6 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
             <div className="w-5 h-5 bg-blue-600 rounded"></div>
@@ -64,7 +63,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="px-4">
+      <SidebarContent className="px-4 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
         <SidebarGroup>
           <SidebarGroupLabel className="text-slate-400 font-medium mb-2">
             Navigation
@@ -76,7 +75,7 @@ export function AppSidebar() {
                   <SidebarMenuButton 
                     asChild 
                     isActive={location.pathname === item.url}
-                    className="text-white hover:bg-gray-700 data-[active=true]:bg-blue-600 data-[active=true]:text-white"
+                    className="text-white hover:bg-slate-700 data-[active=true]:bg-blue-600 data-[active=true]:text-white"
                   >
                     <a href={item.url} className="flex items-center space-x-3 px-3 py-2 rounded-lg">
                       <item.icon className="w-5 h-5" />
@@ -90,7 +89,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-slate-700 p-4">
+      <SidebarFooter className="border-t border-slate-700 p-4 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
             <User className="w-5 h-5 text-slate-800" />
@@ -107,7 +106,7 @@ export function AppSidebar() {
           onClick={handleLogout}
           variant="outline" 
           size="sm" 
-          className="w-full bg-transparent border-slate-600 text-white hover:bg-gray-700"
+          className="w-full bg-transparent border-slate-600 text-white hover:bg-slate-700"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout

@@ -35,13 +35,13 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 255 255 255;
-    --sidebar-foreground: 17 24 39;
+    --sidebar-background: 30 41 59;
+    --sidebar-foreground: 255 255 255;
     --sidebar-primary: 37 99 235;
     --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 243 244 246;
-    --sidebar-accent-foreground: 17 24 39;
-    --sidebar-border: 229 231 235;
+    --sidebar-accent: 51 65 85;
+    --sidebar-accent-foreground: 255 255 255;
+    --sidebar-border: 51 65 85;
     --sidebar-ring: 37 99 235;
   }
 
@@ -92,6 +92,17 @@
     color: white !important;
   }
 
+  /* Force sidebar to use slate colors - override any yellow */
+  [data-sidebar="sidebar"] {
+    background-color: rgb(30 41 59) !important;
+  }
+
+  [data-sidebar="header"],
+  [data-sidebar="content"],
+  [data-sidebar="footer"] {
+    background-color: rgb(30 41 59) !important;
+  }
+
   /* Ensure no yellow backgrounds anywhere */
   .bg-yellow-50,
   .bg-yellow-100,
@@ -99,7 +110,7 @@
   .bg-yellow-300,
   .bg-yellow-400,
   .bg-yellow-500 {
-    @apply bg-blue-50 !important;
+    @apply bg-slate-800 !important;
   }
 
   /* Ensure no yellow text anywhere */
@@ -113,6 +124,6 @@
   .border-yellow-200,
   .border-yellow-300,
   .border-yellow-400 {
-    @apply border-blue-200 !important;
+    @apply border-slate-600 !important;
   }
 }
