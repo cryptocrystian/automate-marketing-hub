@@ -80,16 +80,24 @@
   [data-sonner-toast][data-type="success"] {
     background: rgb(34 197 94) !important;
     color: white !important;
+    border: 1px solid rgb(34 197 94) !important;
   }
 
   [data-sonner-toast][data-type="error"] {
     background: rgb(239 68 68) !important;
     color: white !important;
+    border: 1px solid rgb(239 68 68) !important;
   }
 
   [data-sonner-toast][data-type="warning"] {
     background: rgb(59 130 246) !important;
     color: white !important;
+    border: 1px solid rgb(59 130 246) !important;
+  }
+
+  /* Force all sonner toasts to never use yellow */
+  [data-sonner-toast] * {
+    color: inherit !important;
   }
 
   /* Force sidebar to use slate colors - override any yellow */

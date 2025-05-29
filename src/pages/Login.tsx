@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 
 const Login = () => {
@@ -14,7 +13,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,16 +20,23 @@ const Login = () => {
     const success = await login(email, password);
     
     if (success) {
-      toast({
-        title: "Login successful",
-        description: "Welcome to AUTOMATED!",
+      toast.success("Login successful - Welcome to AUTOMATED!", {
+        duration: 3000,
+        style: {
+          background: 'rgb(34 197 94)',
+          color: 'white',
+          border: '1px solid rgb(34 197 94)'
+        }
       });
       navigate('/dashboard');
     } else {
-      toast({
-        title: "Login failed",
-        description: "Invalid email or password",
-        variant: "destructive",
+      toast.error("Login failed - Invalid email or password", {
+        duration: 4000,
+        style: {
+          background: 'rgb(239 68 68)',
+          color: 'white',
+          border: '1px solid rgb(239 68 68)'
+        }
       });
     }
   };
