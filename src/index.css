@@ -44,29 +44,13 @@
     --sidebar-border: 51 65 85;
     --sidebar-ring: 37 99 235;
 
-    /* GLOBAL YELLOW ELIMINATION - Override all warning/yellow variables */
+    /* Override yellow/warning variables to blue */
     --warning: 37 99 235 !important;
     --warning-foreground: 255 255 255 !important;
     --success: 34 197 94;
     --success-foreground: 255 255 255;
     --info: 37 99 235;
     --info-foreground: 255 255 255;
-    
-    /* Force all yellow CSS custom properties to blue */
-    --yellow-50: 239 246 255 !important;
-    --yellow-100: 219 234 254 !important;
-    --yellow-200: 191 219 254 !important;
-    --yellow-300: 147 197 253 !important;
-    --yellow-400: 96 165 250 !important;
-    --yellow-500: 59 130 246 !important;
-    --yellow-600: 37 99 235 !important;
-    --yellow-700: 29 78 216 !important;
-    --yellow-800: 30 64 175 !important;
-    --yellow-900: 30 58 138 !important;
-    --warning-50: 239 246 255 !important;
-    --warning-100: 219 234 254 !important;
-    --warning-500: 37 99 235 !important;
-    --warning-600: 29 78 216 !important;
   }
 
   * {
@@ -77,193 +61,78 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
-  /* NUCLEAR YELLOW ELIMINATION - HIGHEST SPECIFICITY OVERRIDES */
+  /* TARGETED YELLOW ELIMINATION - Only target yellow/warning classes */
   
-  /* Target ALL possible yellow/warning classes with maximum specificity */
-  * {
-    /* Override any inline styles that might contain yellow */
-    background-color: var(--background) !important;
-  }
-  
-  /* Specific yellow class overrides with extreme specificity */
-  html * .bg-yellow-50, html * .bg-yellow-100, html * .bg-yellow-200, html * .bg-yellow-300, 
-  html * .bg-yellow-400, html * .bg-yellow-500, html * .bg-yellow-600, html * .bg-yellow-700, 
-  html * .bg-yellow-800, html * .bg-yellow-900, html * .bg-yellow,
-  html * .bg-warning, html * .bg-warn, html * .bg-alert,
-  html * [class*="bg-yellow"], html * [class*="bg-warning"], html * [class*="bg-warn"],
-  html * div[class*="bg-yellow"], html * div[class*="bg-warning"],
-  html * .card[class*="bg-yellow"], html * .Card[class*="bg-yellow"],
-  html body * [style*="background-color: yellow"], html body * [style*="background: yellow"],
-  html body * [style*="background-color: #ffff"], html body * [style*="background: #ffff"],
-  html body * [style*="background-color: rgb(254"], html body * [style*="background: rgb(254"] {
-    background-color: rgb(239 246 255) !important; /* blue-50 */
-    color: rgb(30 64 175) !important; /* blue-800 */
-  }
+  /* Yellow background classes to blue */
+  .bg-yellow-50 { @apply bg-blue-50 !important; }
+  .bg-yellow-100 { @apply bg-blue-100 !important; }
+  .bg-yellow-200 { @apply bg-blue-200 !important; }
+  .bg-yellow-300 { @apply bg-blue-300 !important; }
+  .bg-yellow-400 { @apply bg-blue-400 !important; }
+  .bg-yellow-500 { @apply bg-blue-500 !important; }
+  .bg-yellow-600 { @apply bg-blue-600 !important; }
+  .bg-yellow-700 { @apply bg-blue-700 !important; }
+  .bg-yellow-800 { @apply bg-blue-800 !important; }
+  .bg-yellow-900 { @apply bg-blue-900 !important; }
 
-  /* Text color overrides */
-  html * .text-yellow-50, html * .text-yellow-100, html * .text-yellow-200, html * .text-yellow-300,
-  html * .text-yellow-400, html * .text-yellow-500, html * .text-yellow-600, html * .text-yellow-700,
-  html * .text-yellow-800, html * .text-yellow-900, html * .text-yellow,
-  html * .text-warning, html * .text-warn, html * .text-alert,
-  html * [class*="text-yellow"], html * [class*="text-warning"], html * [class*="text-warn"],
-  html body * [style*="color: yellow"], html body * [style*="color: #ffff"],
-  html body * [style*="color: rgb(254"], html body * [style*="color: rgb(255, 255"] {
-    color: rgb(30 64 175) !important; /* blue-800 */
-  }
+  /* Yellow text classes to blue */
+  .text-yellow-50 { @apply text-blue-50 !important; }
+  .text-yellow-100 { @apply text-blue-100 !important; }
+  .text-yellow-200 { @apply text-blue-200 !important; }
+  .text-yellow-300 { @apply text-blue-300 !important; }
+  .text-yellow-400 { @apply text-blue-400 !important; }
+  .text-yellow-500 { @apply text-blue-500 !important; }
+  .text-yellow-600 { @apply text-blue-600 !important; }
+  .text-yellow-700 { @apply text-blue-700 !important; }
+  .text-yellow-800 { @apply text-blue-800 !important; }
+  .text-yellow-900 { @apply text-blue-900 !important; }
 
-  /* Border color overrides */
-  html * .border-yellow-50, html * .border-yellow-100, html * .border-yellow-200, html * .border-yellow-300,
-  html * .border-yellow-400, html * .border-yellow-500, html * .border-yellow-600, html * .border-yellow-700,
-  html * .border-yellow-800, html * .border-yellow-900, html * .border-yellow,
-  html * .border-warning, html * .border-warn, html * .border-alert,
-  html * [class*="border-yellow"], html * [class*="border-warning"], html * [class*="border-warn"],
-  html body * [style*="border-color: yellow"], html body * [style*="border: yellow"],
-  html body * [style*="border-color: #ffff"], html body * [style*="border: #ffff"] {
-    border-color: rgb(191 219 254) !important; /* blue-200 */
-  }
+  /* Yellow border classes to blue */
+  .border-yellow-50 { @apply border-blue-50 !important; }
+  .border-yellow-100 { @apply border-blue-100 !important; }
+  .border-yellow-200 { @apply border-blue-200 !important; }
+  .border-yellow-300 { @apply border-blue-300 !important; }
+  .border-yellow-400 { @apply border-blue-400 !important; }
+  .border-yellow-500 { @apply border-blue-500 !important; }
+  .border-yellow-600 { @apply border-blue-600 !important; }
+  .border-yellow-700 { @apply border-blue-700 !important; }
+  .border-yellow-800 { @apply border-blue-800 !important; }
+  .border-yellow-900 { @apply border-blue-900 !important; }
 
-  /* Hover states - prevent any yellow on hover */
-  html * .hover\:bg-yellow-50:hover, html * .hover\:bg-yellow-100:hover, html * .hover\:bg-yellow-200:hover,
-  html * .hover\:bg-yellow-300:hover, html * .hover\:bg-yellow-400:hover, html * .hover\:bg-yellow-500:hover,
-  html * .hover\:bg-yellow-600:hover, html * .hover\:bg-yellow-700:hover, html * .hover\:bg-yellow-800:hover,
-  html * .hover\:bg-yellow-900:hover, html * .hover\:bg-yellow:hover,
-  html * .hover\:bg-warning:hover, html * .hover\:bg-warn:hover,
-  html * [class*="hover:bg-yellow"]:hover, html * [class*="hover:bg-warning"]:hover {
-    background-color: rgb(219 234 254) !important; /* blue-100 */
-  }
+  /* Warning classes to blue */
+  .bg-warning { @apply bg-blue-600 text-white !important; }
+  .text-warning { @apply text-blue-600 !important; }
+  .border-warning { @apply border-blue-600 !important; }
 
-  /* Force specific yellow background colors to blue */
-  html * .bg-yellow-600, html body * [style*="background-color: rgb(202, 138, 4)"],
-  html body * [style*="background: rgb(202, 138, 4)"] {
-    background-color: rgb(37 99 235) !important; /* blue-600 */
-    color: rgb(255 255 255) !important;
-  }
+  /* Hover states */
+  .hover\:bg-yellow-50:hover { @apply bg-blue-100 !important; }
+  .hover\:bg-yellow-100:hover { @apply bg-blue-200 !important; }
+  .hover\:bg-yellow-200:hover { @apply bg-blue-300 !important; }
+  .hover\:bg-yellow-300:hover { @apply bg-blue-400 !important; }
+  .hover\:bg-yellow-400:hover { @apply bg-blue-500 !important; }
+  .hover\:bg-yellow-500:hover { @apply bg-blue-600 !important; }
+  .hover\:bg-yellow-600:hover { @apply bg-blue-700 !important; }
 
-  html * .bg-yellow-500, html body * [style*="background-color: rgb(234, 179, 8)"],
-  html body * [style*="background: rgb(234, 179, 8)"] {
-    background-color: rgb(59 130 246) !important; /* blue-500 */
-    color: rgb(255 255 255) !important;
-  }
+  /* Inline style overrides for yellow colors only */
+  [style*="background-color: rgb(254"] { background-color: rgb(59 130 246) !important; }
+  [style*="background: rgb(254"] { background-color: rgb(59 130 246) !important; }
+  [style*="background-color: rgb(250, 204, 21)"] { background-color: rgb(96 165 250) !important; }
+  [style*="background-color: rgb(234, 179, 8)"] { background-color: rgb(59 130 246) !important; }
+  [style*="background-color: rgb(202, 138, 4)"] { background-color: rgb(37 99 235) !important; }
+  [style*="background-color: yellow"] { background-color: rgb(59 130 246) !important; }
+  [style*="background: yellow"] { background-color: rgb(59 130 246) !important; }
+  [style*="color: yellow"] { color: rgb(37 99 235) !important; }
 
-  html * .bg-yellow-400, html body * [style*="background-color: rgb(250, 204, 21)"],
-  html body * [style*="background: rgb(250, 204, 21)"] {
-    background-color: rgb(96 165 250) !important; /* blue-400 */
-    color: rgb(255 255 255) !important;
-  }
-
-  /* Component-specific overrides for cards */
-  html * .card, html * .Card, html * [role="card"], html * .content-card, 
-  html * .stat-card, html * .metric-card {
-    background-color: rgb(255 255 255) !important;
-    color: rgb(17 24 39) !important;
-  }
-
-  /* Badge specific overrides */
-  html * .badge, html * .Badge, html * [data-badge], html * [class*="badge"] {
+  /* Badge and component specific overrides for warning states */
+  .badge[data-variant="warning"], .Badge[data-variant="warning"] {
     background-color: rgb(37 99 235) !important;
     color: rgb(255 255 255) !important;
   }
 
-  html * .badge.success, html * .Badge.success, html * [data-badge="success"] {
-    background-color: rgb(34 197 94) !important;
-    color: rgb(255 255 255) !important;
-  }
-
-  html * .badge.warning, html * .Badge.warning, html * [data-badge="warning"] {
+  /* Toast/notification warning overrides */
+  [data-sonner-toast][data-type="warning"] {
     background-color: rgb(37 99 235) !important;
-    color: rgb(255 255 255) !important;
-  }
-
-  html * .badge.error, html * .Badge.error, html * [data-badge="error"] {
-    background-color: rgb(239 68 68) !important;
-    color: rgb(255 255 255) !important;
-  }
-
-  /* Force ALL buttons to never use yellow */
-  html * button, html * .button, html * [role="button"], html * .btn {
-    background-color: rgb(37 99 235) !important;
-    color: rgb(255 255 255) !important;
-  }
-
-  html * button:hover, html * .button:hover, html * [role="button"]:hover, html * .btn:hover {
-    background-color: rgb(29 78 216) !important;
-  }
-
-  html * button.secondary, html * .button.secondary, html * [role="button"].secondary, html * .btn.secondary {
-    background-color: rgb(243 244 246) !important;
-    color: rgb(75 85 99) !important;
-  }
-
-  /* AUTOMATE Strategy Page Specific - Target the problematic cards */
-  html * [data-testid*="automate"] *, 
-  html * div[class*="grid"] *,
-  html * .space-y-4 > *,
-  html * .grid > * {
-    background-color: rgb(255 255 255) !important;
-  }
-
-  /* Recharts/Chart library color overrides */
-  html * .recharts-default-tooltip,
-  html * .recharts-tooltip-wrapper,
-  html * .recharts-cartesian-grid-horizontal line,
-  html * .recharts-cartesian-grid-vertical line {
-    stroke: rgb(229 231 235) !important;
-  }
-
-  html * .recharts-bar,
-  html * .recharts-area,
-  html * .recharts-line {
-    fill: rgb(37 99 235) !important;
-    stroke: rgb(37 99 235) !important;
-  }
-
-  /* Alert/notification overrides */
-  html * [data-sonner-toast] {
-    background: white !important;
-    border: 1px solid rgb(229 231 235) !important;
-    color: rgb(17 24 39) !important;
-  }
-
-  html * [data-sonner-toast][data-type="warning"] {
-    background: rgb(37 99 235) !important;
     color: white !important;
-    border: 1px solid rgb(37 99 235) !important;
-  }
-
-  /* Focus states - prevent yellow focus rings */
-  html * input:focus, html * textarea:focus, html * select:focus, html * button:focus {
-    @apply ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
-    box-shadow: 0 0 0 2px rgb(59 130 246) !important;
-  }
-
-  /* DEVELOPMENT PREVENTION - Make any missed yellow visually obvious */
-  @media (prefers-color-scheme: dark) {
-    html * [class*="yellow"]:not(.bg-blue-50):not(.bg-blue-100):not(.bg-blue-200):not(.bg-blue-300):not(.bg-blue-400):not(.bg-blue-500):not(.bg-blue-600) {
-      outline: 3px solid red !important;
-      outline-offset: 2px !important;
-    }
-  }
-
-  /* FINAL NUCLEAR OPTION - Override ANY remaining yellow sources with highest specificity */
-  html body * [style*="yellow"]:not([style*="blue"]), 
-  html body * [style*="#ffff"]:not([style*="blue"]), 
-  html body * [style*="#fef"]:not([style*="blue"]), 
-  html body * [style*="#FEF"]:not([style*="blue"]), 
-  html body * [style*="#FFFF"]:not([style*="blue"]),
-  html body * [style*="rgb(254"]:not([style*="blue"]),
-  html body * [style*="rgb(255, 255, 0)"]:not([style*="blue"]),
-  html body * [style*="rgb(255, 255, 102)"]:not([style*="blue"]),
-  html body * [style*="hsl(60"]:not([style*="blue"]),
-  html body * [style*="hsl(45"]:not([style*="blue"]) {
-    background-color: rgb(239 246 255) !important;
-    color: rgb(30 64 175) !important;
-    border-color: rgb(191 219 254) !important;
-  }
-
-  /* Override any dynamically generated warning classes */
-  html * [class*="warning"]:not([class*="blue"]):not([class*="green"]):not([class*="red"]) {
-    background-color: rgb(37 99 235) !important;
-    color: rgb(255 255 255) !important;
     border-color: rgb(37 99 235) !important;
   }
 }
