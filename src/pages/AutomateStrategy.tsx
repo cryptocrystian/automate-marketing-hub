@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,8 +19,10 @@ import {
   Trophy,
   Clock
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AutomateStrategy = () => {
+  const navigate = useNavigate();
   const [healthScore] = useState(72);
 
   const automateSteps = [
@@ -33,7 +36,8 @@ const AutomateStrategy = () => {
       icon: BarChart3,
       color: 'bg-green-600',
       tasks: 5,
-      completedTasks: 5
+      completedTasks: 5,
+      route: '/automate/assess-audit'
     },
     {
       id: 'understand',
@@ -45,7 +49,8 @@ const AutomateStrategy = () => {
       icon: Users,
       color: 'bg-green-600',
       tasks: 4,
-      completedTasks: 4
+      completedTasks: 4,
+      route: '/automate/understand-audience'
     },
     {
       id: 'target',
@@ -57,7 +62,8 @@ const AutomateStrategy = () => {
       icon: Target,
       color: 'bg-blue-600',
       tasks: 6,
-      completedTasks: 4
+      completedTasks: 4,
+      route: '/automate/target-strategy'
     },
     {
       id: 'optimize',
@@ -69,7 +75,8 @@ const AutomateStrategy = () => {
       icon: Settings,
       color: 'bg-blue-600',
       tasks: 8,
-      completedTasks: 5
+      completedTasks: 5,
+      route: '/automate/optimize-systems'
     },
     {
       id: 'measure',
@@ -81,7 +88,8 @@ const AutomateStrategy = () => {
       icon: BarChart3,
       color: 'bg-blue-600',
       tasks: 7,
-      completedTasks: 3
+      completedTasks: 3,
+      route: '/automate/measure-monitor'
     },
     {
       id: 'accelerate',
@@ -93,7 +101,8 @@ const AutomateStrategy = () => {
       icon: Zap,
       color: 'bg-gray-400',
       tasks: 5,
-      completedTasks: 1
+      completedTasks: 1,
+      route: '/automate/accelerate-growth'
     },
     {
       id: 'transform',
@@ -105,7 +114,8 @@ const AutomateStrategy = () => {
       icon: Repeat,
       color: 'bg-gray-400',
       tasks: 6,
-      completedTasks: 1
+      completedTasks: 1,
+      route: '/automate/transform-evolve'
     },
     {
       id: 'execute',
@@ -117,7 +127,8 @@ const AutomateStrategy = () => {
       icon: CheckCircle,
       color: 'bg-blue-600',
       tasks: 4,
-      completedTasks: 2
+      completedTasks: 2,
+      route: '/automate/execute-excellence'
     }
   ];
 
@@ -131,6 +142,12 @@ const AutomateStrategy = () => {
   };
 
   const overallProgress = Math.round(automateSteps.reduce((acc, step) => acc + step.progress, 0) / automateSteps.length);
+
+  const handleContinueStep = (step: any) => {
+    if (step.route) {
+      navigate(step.route);
+    }
+  };
 
   return (
     <Layout>
@@ -236,6 +253,7 @@ const AutomateStrategy = () => {
                                 size="sm" 
                                 variant="outline"
                                 className="h-7 px-3 text-xs"
+                                onClick={() => handleContinueStep(step)}
                               >
                                 Continue <ArrowRight className="h-3 w-3 ml-1" />
                               </Button>
