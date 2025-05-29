@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -217,7 +218,7 @@ const Analytics = () => {
                       <td className="py-3 px-4 text-slate-700">{campaign.clicks}</td>
                       <td className="py-3 px-4 text-slate-700">{campaign.conversions}</td>
                       <td className="py-3 px-4">
-                        <span className="font-medium text-success">{campaign.roi}</span>
+                        <span className="font-medium text-green-600">{campaign.roi}</span>
                       </td>
                       <td className="py-3 px-4">
                         <Badge className="bg-green-600 text-white">Active</Badge>

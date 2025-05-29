@@ -60,20 +60,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for stored user on component mount
   useEffect(() => {
+    console.log('AuthProvider - Checking for stored user...');
     const storedUser = localStorage.getItem('authenticated_user');
+    
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        console.log('AuthProvider - Found stored user:', parsedUser);
         setUser(parsedUser);
       } catch (error) {
-        console.error('Error parsing stored user:', error);
+        console.error('AuthProvider - Error parsing stored user:', error);
         localStorage.removeItem('authenticated_user');
       }
+    } else {
+      console.log('AuthProvider - No stored user found');
     }
+    
     setIsLoading(false);
+    console.log('AuthProvider - Initialization complete');
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
+    console.log('AuthProvider - Login attempt for:', email);
     setIsLoading(true);
     
     // Simulate API call
@@ -82,6 +90,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const foundUser = mockUsers.find(u => u.email === email);
     
     if (foundUser && password === 'password') {
+      console.log('AuthProvider - Login successful for user:', foundUser);
       setUser(foundUser);
       // Store user in localStorage for persistence
       localStorage.setItem('authenticated_user', JSON.stringify(foundUser));
@@ -89,11 +98,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return true;
     }
     
+    console.log('AuthProvider - Login failed for:', email);
     setIsLoading(false);
     return false;
   };
 
   const logout = () => {
+    console.log('AuthProvider - Logging out user');
     setUser(null);
     localStorage.removeItem('authenticated_user');
   };
