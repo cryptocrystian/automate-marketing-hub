@@ -53,18 +53,66 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
-  /* Force blue focus rings on all interactive elements */
+  /* Force blue focus rings on all interactive elements - override any potential yellow */
   input:focus,
   textarea:focus,
   select:focus,
   button:focus {
-    @apply ring-2 ring-blue-500 ring-offset-2;
+    @apply ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
+    box-shadow: 0 0 0 2px rgb(59 130 246) !important;
   }
   
   /* Remove any potential yellow from input focus states */
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 border-blue-500 !important;
+    box-shadow: 0 0 0 2px rgb(59 130 246) !important;
+  }
+
+  /* Override any potential yellow in toast notifications */
+  [data-sonner-toast] {
+    background: white !important;
+    border: 1px solid rgb(229 231 235) !important;
+    color: rgb(17 24 39) !important;
+  }
+
+  [data-sonner-toast][data-type="success"] {
+    background: rgb(34 197 94) !important;
+    color: white !important;
+  }
+
+  [data-sonner-toast][data-type="error"] {
+    background: rgb(239 68 68) !important;
+    color: white !important;
+  }
+
+  [data-sonner-toast][data-type="warning"] {
+    background: rgb(59 130 246) !important;
+    color: white !important;
+  }
+
+  /* Ensure no yellow backgrounds anywhere */
+  .bg-yellow-50,
+  .bg-yellow-100,
+  .bg-yellow-200,
+  .bg-yellow-300,
+  .bg-yellow-400,
+  .bg-yellow-500 {
+    @apply bg-blue-50 !important;
+  }
+
+  /* Ensure no yellow text anywhere */
+  .text-yellow-500,
+  .text-yellow-600,
+  .text-yellow-700 {
+    @apply text-blue-600 !important;
+  }
+
+  /* Ensure no yellow borders anywhere */
+  .border-yellow-200,
+  .border-yellow-300,
+  .border-yellow-400 {
+    @apply border-blue-200 !important;
   }
 }
