@@ -4,7 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { FileText, Calendar, Clock, Plus, Edit } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { FileText, Calendar, Clock, Plus, Edit, Bot, GitBranch, Link } from 'lucide-react';
+import ContentCalendar from '@/components/content/ContentCalendar';
+import ContentAutomation from '@/components/content/ContentAutomation';
+import WorkflowSystem from '@/components/content/WorkflowSystem';
+import ContentIntegrations from '@/components/content/ContentIntegrations';
 
 const ContentManagement = () => {
   const contentItems = [
@@ -112,8 +117,8 @@ const ContentManagement = () => {
           <div className="flex items-center space-x-4">
             <SidebarTrigger />
             <div>
-              <h1 className="text-2xl font-bold text-slate-800">Content Management</h1>
-              <p className="text-slate-600">Create, schedule, and manage your marketing content</p>
+              <h1 className="text-2xl font-bold text-slate-800">Content Hub</h1>
+              <p className="text-slate-600">Powerful content management with automation and collaboration</p>
             </div>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -139,129 +144,173 @@ const ContentManagement = () => {
           ))}
         </div>
 
-        {/* Content Calendar View */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-          <Card className="border border-slate-200 bg-white">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-slate-800">This Week</CardTitle>
-              <CardDescription>Scheduled content for this week</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="font-medium text-slate-800">Q1 Social Media Posts</p>
-                  <p className="text-sm text-slate-600">Jan 20, 2024</p>
-                </div>
-                <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                  <p className="font-medium text-slate-800">Instagram Stories</p>
-                  <p className="text-sm text-slate-600">Jan 18, 2024</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Enhanced Content Management Tabs */}
+        <Tabs defaultValue="calendar" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-5 bg-white border border-slate-200">
+            <TabsTrigger value="calendar" className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              Calendar
+            </TabsTrigger>
+            <TabsTrigger value="automation" className="flex items-center gap-2">
+              <Bot className="h-4 w-4" />
+              Automation
+            </TabsTrigger>
+            <TabsTrigger value="workflow" className="flex items-center gap-2">
+              <GitBranch className="h-4 w-4" />
+              Workflow
+            </TabsTrigger>
+            <TabsTrigger value="integrations" className="flex items-center gap-2">
+              <Link className="h-4 w-4" />
+              Integrations
+            </TabsTrigger>
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              Overview
+            </TabsTrigger>
+          </TabsList>
 
-          <Card className="border border-slate-200 bg-white">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-slate-800">Next Week</CardTitle>
-              <CardDescription>Upcoming content schedule</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                  <p className="font-medium text-slate-800">Product Launch Blog</p>
-                  <p className="text-sm text-slate-600">Jan 25, 2024</p>
-                </div>
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
-                  <p className="text-sm text-slate-500">No other content scheduled</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <TabsContent value="calendar" className="space-y-6">
+            <ContentCalendar />
+          </TabsContent>
 
-          <Card className="border border-slate-200 bg-white">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-slate-800">Performance</CardTitle>
-              <CardDescription>Recent content performance</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-700">Holiday Email</span>
-                  <Badge className="bg-green-600 text-white">High</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-700">Newsletter</span>
-                  <Badge className="bg-green-600 text-white">High</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-700">Social Posts</span>
-                  <Badge className="bg-blue-600 text-white">Medium</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          <TabsContent value="automation" className="space-y-6">
+            <ContentAutomation />
+          </TabsContent>
 
-        {/* Content List */}
-        <Card className="border border-slate-200 bg-white">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">All Content</CardTitle>
-            <CardDescription className="text-slate-600">
-              Manage all your marketing content in one place
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-slate-200">
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Title</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Type</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Status</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Publish Date</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Performance</th>
-                    <th className="text-left py-3 px-4 font-medium text-slate-700">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contentItems.map((item) => (
-                    <tr key={item.id} className="border-b border-slate-100 hover:bg-slate-50">
-                      <td className="py-3 px-4">
-                        <p className="font-medium text-slate-800">{item.title}</p>
-                      </td>
-                      <td className="py-3 px-4">
-                        <Badge variant="outline" className="text-slate-600">
-                          {item.type}
-                        </Badge>
-                      </td>
-                      <td className="py-3 px-4">
-                        <Badge className={getStatusColor(item.status)}>
-                          {item.status}
-                        </Badge>
-                      </td>
-                      <td className="py-3 px-4 text-slate-700">{item.publishDate}</td>
-                      <td className="py-3 px-4">
-                        <span className={`font-medium ${getPerformanceColor(item.performance)}`}>
-                          {item.performance}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="flex space-x-2">
-                          <Button size="sm" variant="outline" className="text-xs">
-                            Edit
-                          </Button>
-                          <Button size="sm" variant="outline" className="text-xs">
-                            View
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <TabsContent value="workflow" className="space-y-6">
+            <WorkflowSystem />
+          </TabsContent>
+
+          <TabsContent value="integrations" className="space-y-6">
+            <ContentIntegrations />
+          </TabsContent>
+
+          <TabsContent value="overview" className="space-y-6">
+            {/* Content Calendar View */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              <Card className="border border-slate-200 bg-white">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-slate-800">This Week</CardTitle>
+                  <CardDescription>Scheduled content for this week</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <p className="font-medium text-slate-800">Q1 Social Media Posts</p>
+                      <p className="text-sm text-slate-600">Jan 20, 2024</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                      <p className="font-medium text-slate-800">Instagram Stories</p>
+                      <p className="text-sm text-slate-600">Jan 18, 2024</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border border-slate-200 bg-white">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-slate-800">Next Week</CardTitle>
+                  <CardDescription>Upcoming content schedule</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                      <p className="font-medium text-slate-800">Product Launch Blog</p>
+                      <p className="text-sm text-slate-600">Jan 25, 2024</p>
+                    </div>
+                    <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
+                      <p className="text-sm text-slate-500">No other content scheduled</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border border-slate-200 bg-white">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-slate-800">Performance</CardTitle>
+                  <CardDescription>Recent content performance</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-700">Holiday Email</span>
+                      <Badge className="bg-green-600 text-white">High</Badge>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-700">Newsletter</span>
+                      <Badge className="bg-green-600 text-white">High</Badge>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-700">Social Posts</span>
+                      <Badge className="bg-blue-600 text-white">Medium</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </CardContent>
-        </Card>
+
+            {/* Content List */}
+            <Card className="border border-slate-200 bg-white">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold text-slate-800">All Content</CardTitle>
+                <CardDescription className="text-slate-600">
+                  Manage all your marketing content in one place
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-slate-200">
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Title</th>
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Type</th>
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Status</th>
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Publish Date</th>
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Performance</th>
+                        <th className="text-left py-3 px-4 font-medium text-slate-700">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {contentItems.map((item) => (
+                        <tr key={item.id} className="border-b border-slate-100 hover:bg-slate-50">
+                          <td className="py-3 px-4">
+                            <p className="font-medium text-slate-800">{item.title}</p>
+                          </td>
+                          <td className="py-3 px-4">
+                            <Badge variant="outline" className="text-slate-600">
+                              {item.type}
+                            </Badge>
+                          </td>
+                          <td className="py-3 px-4">
+                            <Badge className={getStatusColor(item.status)}>
+                              {item.status}
+                            </Badge>
+                          </td>
+                          <td className="py-3 px-4 text-slate-700">{item.publishDate}</td>
+                          <td className="py-3 px-4">
+                            <span className={`font-medium ${getPerformanceColor(item.performance)}`}>
+                              {item.performance}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <div className="flex space-x-2">
+                              <Button size="sm" variant="outline" className="text-xs">
+                                Edit
+                              </Button>
+                              <Button size="sm" variant="outline" className="text-xs">
+                                View
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </Layout>
   );
