@@ -61,6 +61,61 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
+  /* SIDEBAR DARK THEME STYLING */
+  .sidebar-dark {
+    background-color: #1e293b !important;
+    border-right: 1px solid #334155 !important;
+  }
+
+  .sidebar-dark [data-sidebar="sidebar"] {
+    background-color: #1e293b !important;
+  }
+
+  .sidebar-header {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+    padding: 1.5rem !important;
+  }
+
+  .sidebar-content {
+    background-color: #1e293b !important;
+    padding: 0 1rem !important;
+  }
+
+  .sidebar-footer {
+    background-color: #1e293b !important;
+    border-top: 1px solid #334155 !important;
+    padding: 1rem !important;
+  }
+
+  .sidebar-menu-button {
+    color: white !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .sidebar-menu-button:hover {
+    background-color: #334155 !important;
+    color: white !important;
+  }
+
+  .sidebar-menu-button[data-active="true"] {
+    background-color: #2563eb !important;
+    color: white !important;
+    font-weight: 500 !important;
+  }
+
+  .sidebar-logout-button {
+    background-color: transparent !important;
+    border: 1px solid #475569 !important;
+    color: white !important;
+  }
+
+  .sidebar-logout-button:hover {
+    background-color: #334155 !important;
+    color: white !important;
+    border-color: #475569 !important;
+  }
+
   /* TARGETED YELLOW ELIMINATION - Only target yellow/warning classes */
   
   /* Yellow background classes to blue */

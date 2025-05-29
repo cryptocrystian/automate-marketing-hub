@@ -59,8 +59,8 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="bg-slate-800 border-r border-slate-700" style={{ backgroundColor: '#1e293b !important' }}>
-      <SidebarHeader className="border-b border-slate-700 p-6 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
+    <Sidebar className="sidebar-dark">
+      <SidebarHeader className="sidebar-header">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
             <div className="w-5 h-5 bg-blue-600 rounded"></div>
@@ -72,7 +72,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="px-4 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
+      <SidebarContent className="sidebar-content">
         <SidebarGroup>
           <SidebarGroupLabel className="text-slate-400 font-medium mb-2">
             Navigation
@@ -83,7 +83,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     isActive={location.pathname === item.url}
-                    className="text-white hover:bg-slate-700 hover:text-white data-[active=true]:bg-blue-600 data-[active=true]:text-white"
+                    className="sidebar-menu-button"
                     onClick={() => handleNavigation(item.url)}
                   >
                     <item.icon className="w-5 h-5" />
@@ -96,7 +96,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-slate-700 p-4 bg-slate-800" style={{ backgroundColor: '#1e293b !important' }}>
+      <SidebarFooter className="sidebar-footer">
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
             <User className="w-5 h-5 text-slate-800" />
@@ -113,7 +113,7 @@ export function AppSidebar() {
           onClick={handleLogout}
           variant="outline" 
           size="sm" 
-          className="w-full bg-transparent border-slate-600 text-white hover:bg-slate-700 hover:text-white hover:border-slate-600"
+          className="sidebar-logout-button w-full"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout
