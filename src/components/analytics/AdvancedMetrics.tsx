@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -346,14 +345,14 @@ const AdvancedMetrics = () => {
                         </td>
                         <td className="py-3 px-4 text-center">
                           <div className={`inline-flex items-center justify-center w-12 h-8 rounded text-sm font-medium ${
-                            cohort.month1 >= 75 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                            cohort.month1 >= 75 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
                           }`}>
                             {cohort.month1}%
                           </div>
                         </td>
                         <td className="py-3 px-4 text-center">
                           <div className={`inline-flex items-center justify-center w-12 h-8 rounded text-sm font-medium ${
-                            cohort.month2 >= 65 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                            cohort.month2 >= 65 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
                           }`}>
                             {cohort.month2}%
                           </div>

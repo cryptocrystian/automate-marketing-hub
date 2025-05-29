@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Activity, Wifi, WifiOff, Download, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -128,7 +127,7 @@ export const PerformanceMonitor: React.FC = () => {
       case 'offline':
         return <WifiOff className="h-4 w-4 text-red-500" />;
       case 'slow':
-        return <Wifi className="h-4 w-4 text-yellow-500" />;
+        return <Wifi className="h-4 w-4 text-blue-500" />;
       default:
         return <Wifi className="h-4 w-4 text-green-500" />;
     }
@@ -139,7 +138,7 @@ export const PerformanceMonitor: React.FC = () => {
       case 'offline':
         return <Badge variant="destructive">Offline</Badge>;
       case 'slow':
-        return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">Slow</Badge>;
+        return <Badge variant="secondary" className="bg-blue-100 text-blue-800">Slow</Badge>;
       default:
         return <Badge variant="secondary" className="bg-green-100 text-green-800">Online</Badge>;
     }
@@ -196,7 +195,7 @@ export const PerformanceMonitor: React.FC = () => {
 
             <div className="flex items-center justify-between text-sm">
               <span>API Response</span>
-              <span className={metrics.apiResponseTime > 500 ? 'text-yellow-500' : 'text-green-500'}>
+              <span className={metrics.apiResponseTime > 500 ? 'text-blue-500' : 'text-green-500'}>
                 {metrics.apiResponseTime}ms
               </span>
             </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -254,7 +253,7 @@ const AutomateStrategy = () => {
 
         {/* Next Steps and Recommendations */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
+          <Card className="bg-white border border-gray-200">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Clock className="h-5 w-5 text-blue-600" />
@@ -288,7 +287,7 @@ const AutomateStrategy = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border border-gray-200">
             <CardHeader>
               <CardTitle className="text-lg">Methodology Impact</CardTitle>
             </CardHeader>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -200,12 +199,12 @@ const PredictiveAnalytics = () => {
               {anomalies.map((anomaly, index) => (
                 <Alert key={index} className={`border-l-4 ${
                   anomaly.severity === 'High' ? 'border-l-red-500 bg-red-50' :
-                  anomaly.severity === 'Medium' ? 'border-l-yellow-500 bg-yellow-50' :
+                  anomaly.severity === 'Medium' ? 'border-l-blue-500 bg-blue-50' :
                   'border-l-blue-500 bg-blue-50'
                 }`}>
                   <AlertTriangle className={`h-4 w-4 ${
                     anomaly.severity === 'High' ? 'text-red-600' :
-                    anomaly.severity === 'Medium' ? 'text-yellow-600' :
+                    anomaly.severity === 'Medium' ? 'text-blue-600' :
                     'text-blue-600'
                   }`} />
                   <AlertDescription>
@@ -215,7 +214,7 @@ const PredictiveAnalytics = () => {
                         variant="outline"
                         className={
                           anomaly.severity === 'High' ? 'border-red-200 text-red-700' :
-                          anomaly.severity === 'Medium' ? 'border-yellow-200 text-yellow-700' :
+                          anomaly.severity === 'Medium' ? 'border-blue-200 text-blue-700' :
                           'border-blue-200 text-blue-700'
                         }
                       >
@@ -261,7 +260,7 @@ const PredictiveAnalytics = () => {
                       <span className="text-sm text-slate-600">Impact: {rec.impact}</span>
                     </div>
                     <div className="flex items-center">
-                      <Zap className="h-4 w-4 text-yellow-600 mr-1" />
+                      <Zap className="h-4 w-4 text-blue-600 mr-1" />
                       <span className="text-sm text-slate-600">Effort: {rec.effort}</span>
                     </div>
                   </div>
@@ -302,7 +301,7 @@ const PredictiveAnalytics = () => {
               <div key={alert.id} className="flex items-center justify-between p-3 rounded-lg border border-slate-200">
                 <div className="flex items-center space-x-3">
                   {alert.type === 'success' && <CheckCircle className="h-5 w-5 text-green-600" />}
-                  {alert.type === 'warning' && <AlertTriangle className="h-5 w-5 text-yellow-600" />}
+                  {alert.type === 'warning' && <AlertTriangle className="h-5 w-5 text-blue-600" />}
                   {alert.type === 'error' && <AlertTriangle className="h-5 w-5 text-red-600" />}
                   {alert.type === 'info' && <Bell className="h-5 w-5 text-blue-600" />}
                   <div>
@@ -338,7 +337,7 @@ const PredictiveAnalytics = () => {
         <Card className="border border-slate-200 bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-700">Anomalies Detected</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-yellow-600" />
+            <AlertTriangle className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-slate-800">12</div>
