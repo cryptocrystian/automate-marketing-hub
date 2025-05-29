@@ -55,19 +55,19 @@ const ContentManagement = () => {
       title: "Total Content",
       value: "42",
       icon: FileText,
-      color: "text-primary"
+      color: "text-blue-600"
     },
     {
       title: "Published",
       value: "28",
       icon: Calendar,
-      color: "text-success"
+      color: "text-green-600"
     },
     {
       title: "Scheduled",
       value: "8",
       icon: Clock,
-      color: "text-warning"
+      color: "text-blue-600"
     },
     {
       title: "Drafts",
@@ -80,13 +80,13 @@ const ContentManagement = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'published':
-        return 'bg-success text-white';
+        return 'bg-green-600 text-white';
       case 'scheduled':
-        return 'bg-warning text-white';
+        return 'bg-blue-600 text-white';
       case 'draft':
         return 'bg-slate-400 text-white';
       case 'review':
-        return 'bg-secondary text-white';
+        return 'bg-gray-600 text-white';
       default:
         return 'bg-slate-200 text-slate-800';
     }
@@ -95,11 +95,11 @@ const ContentManagement = () => {
   const getPerformanceColor = (performance: string) => {
     switch (performance) {
       case 'High':
-        return 'text-success';
+        return 'text-green-600';
       case 'Medium':
-        return 'text-warning';
+        return 'text-blue-600';
       case 'Low':
-        return 'text-danger';
+        return 'text-red-600';
       default:
         return 'text-slate-500';
     }
@@ -116,7 +116,7 @@ const ContentManagement = () => {
               <p className="text-slate-600">Create, schedule, and manage your marketing content</p>
             </div>
           </div>
-          <Button className="bg-primary hover:bg-primary-800 text-white">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
             <Plus className="h-4 w-4 mr-2" />
             Create Content
           </Button>
@@ -148,11 +148,11 @@ const ContentManagement = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="p-3 bg-warning/10 border border-warning/20 rounded-lg">
+                <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="font-medium text-slate-800">Q1 Social Media Posts</p>
                   <p className="text-sm text-slate-600">Jan 20, 2024</p>
                 </div>
-                <div className="p-3 bg-secondary/10 border border-secondary/20 rounded-lg">
+                <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
                   <p className="font-medium text-slate-800">Instagram Stories</p>
                   <p className="text-sm text-slate-600">Jan 18, 2024</p>
                 </div>

@@ -197,15 +197,15 @@ const Dashboard = () => {
                   <Target className="h-5 w-5 mb-1" />
                   <span className="text-sm">New Campaign</span>
                 </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-700 hover:bg-gray-50">
+                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-100 hover:bg-gray-200">
                   <Calendar className="h-5 w-5 mb-1" />
                   <span className="text-sm">Schedule Content</span>
                 </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-700 hover:bg-gray-50">
+                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-100 hover:bg-gray-200">
                   <Mail className="h-5 w-5 mb-1" />
                   <span className="text-sm">Email Builder</span>
                 </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-700 hover:bg-gray-50">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white h-20 flex flex-col items-center justify-center">
                   <TrendingUp className="h-5 w-5 mb-1" />
                   <span className="text-sm">View Analytics</span>
                 </Button>

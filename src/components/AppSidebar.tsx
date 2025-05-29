@@ -51,22 +51,22 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="bg-primary border-r border-primary-800">
-      <SidebarHeader className="border-b border-primary-800 p-6">
+    <Sidebar className="bg-slate-800 border-r border-slate-700">
+      <SidebarHeader className="border-b border-slate-700 p-6">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <div className="w-5 h-5 bg-primary rounded"></div>
+            <div className="w-5 h-5 bg-blue-600 rounded"></div>
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">AUTOMATED</h1>
-            <p className="text-xs text-blue-200">Marketing Operating System</p>
+            <p className="text-xs text-slate-400">Marketing Operating System</p>
           </div>
         </div>
       </SidebarHeader>
       
       <SidebarContent className="px-4">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-blue-200 font-medium mb-2">
+          <SidebarGroupLabel className="text-slate-400 font-medium mb-2">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -76,7 +76,7 @@ export function AppSidebar() {
                   <SidebarMenuButton 
                     asChild 
                     isActive={location.pathname === item.url}
-                    className="text-white hover:bg-primary-800 data-[active=true]:bg-secondary data-[active=true]:text-white"
+                    className="text-white hover:bg-gray-700 data-[active=true]:bg-blue-600 data-[active=true]:text-white"
                   >
                     <a href={item.url} className="flex items-center space-x-3 px-3 py-2 rounded-lg">
                       <item.icon className="w-5 h-5" />
@@ -90,16 +90,16 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-primary-800 p-4">
+      <SidebarFooter className="border-t border-slate-700 p-4">
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <User className="w-5 h-5 text-primary" />
+            <User className="w-5 h-5 text-slate-800" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-white truncate">{user?.name}</p>
-            <p className="text-xs text-blue-200 truncate">{user?.email}</p>
+            <p className="text-xs text-slate-400 truncate">{user?.email}</p>
             {user?.companyName && (
-              <p className="text-xs text-blue-200 truncate">{user.companyName}</p>
+              <p className="text-xs text-slate-400 truncate">{user.companyName}</p>
             )}
           </div>
         </div>
@@ -107,7 +107,7 @@ export function AppSidebar() {
           onClick={handleLogout}
           variant="outline" 
           size="sm" 
-          className="w-full bg-transparent border-blue-300 text-white hover:bg-primary-800"
+          className="w-full bg-transparent border-slate-600 text-white hover:bg-gray-700"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout

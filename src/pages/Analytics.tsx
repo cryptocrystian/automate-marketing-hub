@@ -1,4 +1,3 @@
-
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -32,7 +31,7 @@ const Analytics = () => {
       change: "+12.5%",
       trend: "up",
       icon: Eye,
-      color: "text-primary"
+      color: "text-blue-600"
     },
     {
       title: "Click Rate",
@@ -40,7 +39,7 @@ const Analytics = () => {
       change: "+0.3%",
       trend: "up",
       icon: MousePointer,
-      color: "text-success"
+      color: "text-green-600"
     },
     {
       title: "Email Opens",
@@ -48,7 +47,7 @@ const Analytics = () => {
       change: "+8.2%",
       trend: "up",
       icon: Mail,
-      color: "text-secondary"
+      color: "text-gray-600"
     },
     {
       title: "Conversions",
@@ -56,7 +55,7 @@ const Analytics = () => {
       change: "-2.1%",
       trend: "down",
       icon: Users,
-      color: "text-warning"
+      color: "text-blue-600"
     }
   ];
 
@@ -102,7 +101,7 @@ const Analytics = () => {
               <p className="text-slate-600">Track performance and insights across all campaigns</p>
             </div>
           </div>
-          <Button className="bg-primary hover:bg-primary-800 text-white">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
             <Download className="h-4 w-4 mr-2" />
             Export Report
           </Button>
@@ -122,9 +121,9 @@ const Analytics = () => {
                 <div className="text-2xl font-bold text-slate-800">{metric.value}</div>
                 <p className="text-xs text-slate-500 flex items-center mt-1">
                   {metric.trend === 'up' ? (
-                    <TrendingUp className="h-3 w-3 mr-1 text-success" />
+                    <TrendingUp className="h-3 w-3 mr-1 text-green-600" />
                   ) : (
-                    <TrendingDown className="h-3 w-3 mr-1 text-danger" />
+                    <TrendingDown className="h-3 w-3 mr-1 text-red-600" />
                   )}
                   {metric.change} from last month
                 </p>
@@ -221,7 +220,7 @@ const Analytics = () => {
                         <span className="font-medium text-success">{campaign.roi}</span>
                       </td>
                       <td className="py-3 px-4">
-                        <Badge className="bg-success text-white">Active</Badge>
+                        <Badge className="bg-green-600 text-white">Active</Badge>
                       </td>
                     </tr>
                   ))}

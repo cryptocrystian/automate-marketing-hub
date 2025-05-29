@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -68,7 +69,7 @@ const AdminPanel = () => {
       title: "System Load",
       value: "23%",
       icon: Settings,
-      color: "text-orange-600"
+      color: "text-slate-600"
     }
   ];
 
@@ -140,7 +141,7 @@ const AdminPanel = () => {
                       <td className="py-3 px-4">
                         <Badge 
                           variant={client.status === 'active' ? 'default' : 'secondary'}
-                          className={client.status === 'active' ? 'bg-green-600 text-white' : 'bg-orange-500 text-white'}
+                          className={client.status === 'active' ? 'bg-green-600 text-white' : 'bg-blue-500 text-white'}
                         >
                           {client.status}
                         </Badge>
