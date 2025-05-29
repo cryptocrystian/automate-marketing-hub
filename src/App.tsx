@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import AutomateStrategy from "./pages/AutomateStrategy";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
@@ -37,6 +38,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/automate"
+              element={
+                <ProtectedRoute>
+                  <AutomateStrategy />
                 </ProtectedRoute>
               }
             />

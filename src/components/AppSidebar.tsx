@@ -1,7 +1,7 @@
 
 import { useAuth } from '@/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, User, FileText, BarChart3, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, User, FileText, BarChart3, Settings, LogOut, Target } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -26,6 +26,11 @@ export function AppSidebar() {
       title: "Dashboard",
       url: "/dashboard",
       icon: LayoutDashboard,
+    },
+    {
+      title: "AUTOMATE Strategy",
+      url: "/automate",
+      icon: Target,
     },
     {
       title: "Content",
