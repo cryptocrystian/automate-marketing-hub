@@ -80,7 +80,7 @@ const AutomateStrategy = () => {
       progress: 45,
       status: 'in-progress',
       icon: BarChart3,
-      color: 'bg-yellow-600',
+      color: 'bg-blue-600',
       tasks: 7,
       completedTasks: 3
     },
@@ -116,7 +116,7 @@ const AutomateStrategy = () => {
       progress: 40,
       status: 'in-progress',
       icon: CheckCircle,
-      color: 'bg-yellow-600',
+      color: 'bg-blue-600',
       tasks: 4,
       completedTasks: 2
     }
@@ -171,23 +171,23 @@ const AutomateStrategy = () => {
             </CardContent>
           </Card>
 
-          <Card className="lg:col-span-2">
+          <Card className="lg:col-span-2 bg-blue-50 border-blue-200">
             <CardHeader>
-              <CardTitle className="text-lg">Quick Stats</CardTitle>
+              <CardTitle className="text-lg text-blue-900">Quick Stats</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-600">2</div>
-                  <p className="text-sm text-gray-600">Steps Completed</p>
+                  <p className="text-sm text-blue-800">Steps Completed</p>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-600">4</div>
-                  <p className="text-sm text-gray-600">In Progress</p>
+                  <p className="text-sm text-blue-800">In Progress</p>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-600">2</div>
-                  <p className="text-sm text-gray-600">Pending</p>
+                  <p className="text-sm text-blue-800">Pending</p>
                 </div>
               </div>
             </CardContent>
@@ -195,10 +195,10 @@ const AutomateStrategy = () => {
         </div>
 
         {/* AUTOMATE Methodology Steps */}
-        <Card className="mb-6">
+        <Card className="mb-6 bg-blue-50 border-blue-200">
           <CardHeader>
-            <CardTitle className="text-xl">AUTOMATE Methodology Progress</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-xl text-blue-900">AUTOMATE Methodology Progress</CardTitle>
+            <CardDescription className="text-blue-700">
               Your journey through our proprietary 8-step marketing transformation framework
             </CardDescription>
           </CardHeader>
@@ -206,7 +206,7 @@ const AutomateStrategy = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {automateSteps.map((step, index) => (
                 <div key={step.id} className="relative">
-                  <Card className="hover:shadow-md transition-shadow border-l-4 border-l-blue-600">
+                  <Card className="hover:shadow-md transition-shadow border-l-4 border-l-blue-600 bg-white">
                     <CardContent className="p-4">
                       <div className="flex items-start space-x-4">
                         <div className={`w-12 h-12 ${step.color} rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0`}>
@@ -270,8 +270,8 @@ const AutomateStrategy = () => {
                     <p className="text-sm text-gray-600">2 remaining tasks in strategic planning</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                  <div className="w-6 h-6 bg-yellow-600 rounded text-white text-xs flex items-center justify-center font-bold">O</div>
+                <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="w-6 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">O</div>
                   <div>
                     <p className="font-medium text-gray-900">Optimize Systems Setup</p>
                     <p className="text-sm text-gray-600">3 remaining workflow optimizations</p>

@@ -61,15 +61,17 @@
     @apply bg-gray-50 text-gray-900 font-sans;
   }
 
-  /* COMPREHENSIVE YELLOW ELIMINATION - GLOBAL OVERRIDE */
+  /* ABSOLUTE YELLOW ELIMINATION - GLOBAL OVERRIDE */
   
-  /* Target ALL possible yellow-generating classes */
+  /* Target ALL possible yellow-generating classes with extreme specificity */
   .bg-yellow-50, .bg-yellow-100, .bg-yellow-200, .bg-yellow-300, 
   .bg-yellow-400, .bg-yellow-500, .bg-yellow-600, .bg-yellow-700, 
   .bg-yellow-800, .bg-yellow-900, .bg-yellow,
   .bg-warning, .bg-warn, .bg-alert,
-  [class*="bg-yellow"], [class*="bg-warning"], [class*="bg-warn"] {
-    background-color: rgb(37 99 235) !important;
+  [class*="bg-yellow"], [class*="bg-warning"], [class*="bg-warn"],
+  div[class*="bg-yellow"], div[class*="bg-warning"],
+  .card[class*="bg-yellow"], .Card[class*="bg-yellow"] {
+    background-color: rgb(239 246 255) !important; /* blue-50 */
   }
 
   .text-yellow-50, .text-yellow-100, .text-yellow-200, .text-yellow-300,
@@ -77,7 +79,7 @@
   .text-yellow-800, .text-yellow-900, .text-yellow,
   .text-warning, .text-warn, .text-alert,
   [class*="text-yellow"], [class*="text-warning"], [class*="text-warn"] {
-    color: rgb(255 255 255) !important;
+    color: rgb(30 64 175) !important; /* blue-800 */
   }
 
   .border-yellow-50, .border-yellow-100, .border-yellow-200, .border-yellow-300,
@@ -85,7 +87,7 @@
   .border-yellow-800, .border-yellow-900, .border-yellow,
   .border-warning, .border-warn, .border-alert,
   [class*="border-yellow"], [class*="border-warning"], [class*="border-warn"] {
-    border-color: rgb(37 99 235) !important;
+    border-color: rgb(191 219 254) !important; /* blue-200 */
   }
 
   /* Override hover states */
@@ -95,14 +97,37 @@
   .hover\:bg-yellow-900:hover, .hover\:bg-yellow:hover,
   .hover\:bg-warning:hover, .hover\:bg-warn:hover,
   [class*="hover:bg-yellow"]:hover, [class*="hover:bg-warning"]:hover {
-    background-color: rgb(59 130 246) !important;
+    background-color: rgb(219 234 254) !important; /* blue-100 */
+  }
+
+  /* AUTOMATE Strategy Page Specific Overrides */
+  [data-testid*="automate"] .bg-yellow-600,
+  [data-testid*="automate"] .bg-yellow-500,
+  [data-testid*="automate"] .bg-yellow-400,
+  div[class*="grid"] .bg-yellow-600,
+  div[class*="grid"] .bg-yellow-500,
+  div[class*="grid"] .bg-yellow-400 {
+    background-color: rgb(37 99 235) !important; /* blue-600 */
+  }
+
+  /* Force any component with yellow background to use blue */
+  .bg-yellow-600 {
+    background-color: rgb(37 99 235) !important; /* blue-600 */
+  }
+
+  .bg-yellow-500 {
+    background-color: rgb(59 130 246) !important; /* blue-500 */
+  }
+
+  .bg-yellow-400 {
+    background-color: rgb(96 165 250) !important; /* blue-400 */
   }
 
   /* Override any inline styles containing yellow */
   *[style*="yellow"], *[style*="#ffff"], *[style*="#fef"], *[style*="rgb(254"],
   *[style*="rgb(255, 255"], *[style*="hsl(60"], *[style*="hsl(45"] {
-    background-color: rgb(37 99 235) !important;
-    color: rgb(255 255 255) !important;
+    background-color: rgb(239 246 255) !important; /* blue-50 */
+    color: rgb(30 64 175) !important; /* blue-800 */
   }
 
   /* Override success colors to prevent yellow fallbacks */
@@ -216,8 +241,8 @@
 
   /* NUCLEAR OPTION: Override any remaining yellow sources */
   *[class*="yellow"], *[class*="warning"] {
-    background-color: rgb(37 99 235) !important;
-    color: rgb(255 255 255) !important;
+    background-color: rgb(239 246 255) !important; /* blue-50 */
+    color: rgb(30 64 175) !important; /* blue-800 */
   }
 
   /* Override recharts/chart library colors */
@@ -251,5 +276,12 @@
     --warning-100: 219 234 254 !important;
     --warning-500: 37 99 235 !important;
     --warning-600: 29 78 216 !important;
+  }
+
+  /* FINAL ABSOLUTE OVERRIDE - Force any remaining yellow to blue */
+  [style*="rgb(254"], [style*="rgb(255, 255, 0)"], [style*="rgb(255, 255, 102)"],
+  [style*="#ffff"], [style*="#fef"], [style*="#FEF"], [style*="#FFFF"] {
+    background-color: rgb(239 246 255) !important;
+    color: rgb(30 64 175) !important;
   }
 }
