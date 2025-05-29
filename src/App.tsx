@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AutomateStrategy from "./pages/AutomateStrategy";
 import AssessAudit from "./pages/AssessAudit";
+import UnderstandAudience from "./pages/UnderstandAudience";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
@@ -55,6 +56,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <AssessAudit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/automate/understand-audience"
+              element={
+                <ProtectedRoute>
+                  <UnderstandAudience />
                 </ProtectedRoute>
               }
             />

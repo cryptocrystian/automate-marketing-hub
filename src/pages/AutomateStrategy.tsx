@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,33 +22,22 @@ import { useNavigate } from 'react-router-dom';
 
 const AutomateStrategy = () => {
   const navigate = useNavigate();
-  const [healthScore] = useState(72);
 
-  const automateSteps = [
+  const steps = [
     {
-      id: 'assess',
       letter: 'A',
       title: 'Assess & Audit',
-      description: 'Comprehensive marketing audit across all channels',
-      progress: 85,
-      status: 'completed',
-      icon: BarChart3,
+      description: 'Comprehensive marketing audit across all channels and pillars',
+      status: 'in-progress' as const,
       color: 'bg-green-600',
-      tasks: 5,
-      completedTasks: 5,
       route: '/automate/assess-audit'
     },
     {
-      id: 'understand',
       letter: 'U',
       title: 'Understand Your Audience',
       description: 'Deep persona development and journey mapping',
-      progress: 90,
-      status: 'completed',
-      icon: Users,
-      color: 'bg-green-600',
-      tasks: 4,
-      completedTasks: 4,
+      status: 'pending' as const,
+      color: 'bg-blue-600',
       route: '/automate/understand-audience'
     },
     {
@@ -141,7 +129,7 @@ const AutomateStrategy = () => {
     }
   };
 
-  const overallProgress = Math.round(automateSteps.reduce((acc, step) => acc + step.progress, 0) / automateSteps.length);
+  const overallProgress = Math.round(steps.reduce((acc, step) => acc + step.progress, 0) / steps.length);
 
   const handleContinueStep = (step: any) => {
     if (step.route) {
@@ -220,7 +208,7 @@ const AutomateStrategy = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {automateSteps.map((step, index) => (
+              {steps.map((step, index) => (
                 <div key={step.id} className="relative">
                   <Card className="hover:shadow-md transition-shadow border-l-4 border-l-blue-600 bg-white">
                     <CardContent className="p-4">
