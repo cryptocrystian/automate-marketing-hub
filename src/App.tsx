@@ -113,6 +113,14 @@ const App = () => (
               }
             />
             <Route
+              path="/automate/execute-excellence"
+              element={
+                <ProtectedRoute>
+                  <ExecuteExcellence />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin"
               element={
                 <ProtectedRoute requireAdmin>
