@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,29 +28,35 @@ const AutomateStrategy = () => {
       letter: 'A',
       title: 'Assess & Audit',
       description: 'Comprehensive marketing audit across all channels and pillars',
-      status: 'in-progress' as const,
+      status: 'completed' as const,
       color: 'bg-green-600',
-      route: '/automate/assess-audit'
+      route: '/automate/assess-audit',
+      progress: 100,
+      tasks: 20,
+      completedTasks: 20
     },
     {
       letter: 'U',
       title: 'Understand Your Audience',
       description: 'Deep persona development and journey mapping',
-      status: 'pending' as const,
-      color: 'bg-blue-600',
-      route: '/automate/understand-audience'
+      status: 'completed' as const,
+      color: 'bg-green-600',
+      route: '/automate/understand-audience',
+      progress: 100,
+      tasks: 15,
+      completedTasks: 15
     },
     {
       id: 'target',
       letter: 'T',
       title: 'Target & Strategy',
       description: 'Strategic goal setting and KPI definition',
-      progress: 75,
+      progress: 25,
       status: 'in-progress',
       icon: Target,
       color: 'bg-blue-600',
-      tasks: 6,
-      completedTasks: 4,
+      tasks: 25,
+      completedTasks: 6,
       route: '/automate/target-strategy'
     },
     {
