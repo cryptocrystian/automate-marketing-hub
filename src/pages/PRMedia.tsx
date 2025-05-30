@@ -224,7 +224,7 @@ const PRMedia = () => {
                         <div className="text-xs text-muted-foreground">
                           {contact.outlet} • {contact.lastContact}
                         </div>
-                        <Badge variant="outline" size="sm">
+                        <Badge variant="outline">
                           {contact.relationship}
                         </Badge>
                       </div>
