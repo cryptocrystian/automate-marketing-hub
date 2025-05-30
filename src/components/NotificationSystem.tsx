@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Bell, Mail, MessageSquare, AlertTriangle, CheckCircle, X, Settings, Filter } from 'lucide-react';
 import {
@@ -89,7 +88,7 @@ const typeIcons = {
 const typeColors = {
   info: 'text-blue-500',
   success: 'text-green-500',
-  warning: 'text-yellow-500',
+  warning: 'text-blue-500',
   error: 'text-red-500'
 };
 

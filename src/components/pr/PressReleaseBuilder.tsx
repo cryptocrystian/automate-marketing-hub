@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -213,7 +212,7 @@ const PressReleaseBuilder: React.FC<PressReleaseBuilderProps> = ({ preSelectedCo
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="flex items-center space-x-1">
-                            <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                            <Star className="w-3 h-3 text-blue-500 fill-current" />
                             <span className="text-xs">{journalist.score}</span>
                           </div>
                           <Button variant="outline" size="sm">
