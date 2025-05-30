@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +21,7 @@ import ContentManagement from "./pages/ContentManagement";
 import PRMedia from "./pages/PRMedia";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
+import SEODashboard from "./pages/SEODashboard";
 
 const queryClient = new QueryClient();
 
@@ -143,6 +143,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <PRMedia />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/seo"
+              element={
+                <ProtectedRoute>
+                  <SEODashboard />
                 </ProtectedRoute>
               }
             />
