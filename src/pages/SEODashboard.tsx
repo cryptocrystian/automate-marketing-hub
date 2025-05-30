@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import KeywordResearch from '@/components/seo/KeywordResearch';
+import ContentOptimization from '@/components/seo/ContentOptimization';
+import GEOCenter from '@/components/seo/GEOCenter';
 import { 
   TrendingUp, 
   Brain, 
@@ -188,12 +190,15 @@ const SEODashboard = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="overview">Unified Overview</TabsTrigger>
+            <TabsTrigger value="keyword-research">Keyword Research</TabsTrigger>
+            <TabsTrigger value="content-optimization">Content Optimization</TabsTrigger>
             <TabsTrigger value="geo">GEO Center</TabsTrigger>
             <TabsTrigger value="content-matrix">Content Matrix</TabsTrigger>
             <TabsTrigger value="authority">Authority Building</TabsTrigger>
             <TabsTrigger value="analytics">Integrated Analytics</TabsTrigger>
+            <TabsTrigger value="workflow">Workflow</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -354,53 +359,16 @@ const SEODashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="geo" className="space-y-6">
-            {/* GEO Center */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="border-2 border-purple-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">ChatGPT Citations</CardTitle>
-                  <Brain className="h-4 w-4 text-purple-600" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-purple-600">{geoMetrics.chatgptCitations}</div>
-                  <p className="text-xs text-muted-foreground">This month</p>
-                </CardContent>
-              </Card>
+          <TabsContent value="keyword-research">
+            <KeywordResearch />
+          </TabsContent>
 
-              <Card className="border-2 border-blue-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Perplexity Mentions</CardTitle>
-                  <Search className="h-4 w-4 text-blue-600" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-blue-600">{geoMetrics.perplexityMentions}</div>
-                  <p className="text-xs text-muted-foreground">This month</p>
-                </CardContent>
-              </Card>
+          <TabsContent value="content-optimization">
+            <ContentOptimization />
+          </TabsContent>
 
-              <Card className="border-2 border-green-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">SGE Appearances</CardTitle>
-                  <Globe className="h-4 w-4 text-green-600" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-green-600">{geoMetrics.sgeAppearances}</div>
-                  <p className="text-xs text-muted-foreground">This month</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 border-orange-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">GEO Score</CardTitle>
-                  <TrendingUp className="h-4 w-4 text-orange-600" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-orange-600">{geoMetrics.geoScore}/100</div>
-                  <p className="text-xs text-muted-foreground">Optimization score</p>
-                </CardContent>
-              </Card>
-            </div>
+          <TabsContent value="geo">
+            <GEOCenter />
           </TabsContent>
 
           <TabsContent value="content-matrix" className="space-y-6">
@@ -472,6 +440,7 @@ const SEODashboard = () => {
           </TabsContent>
 
           <TabsContent value="authority" className="space-y-6">
+            {/* Authority Building Dashboard */}
             <Card>
               <CardHeader>
                 <CardTitle>Authority Building Dashboard</CardTitle>
@@ -499,6 +468,7 @@ const SEODashboard = () => {
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
+            {/* Integrated Analytics & Attribution */}
             <Card>
               <CardHeader>
                 <CardTitle>Integrated Analytics & Attribution</CardTitle>
@@ -511,6 +481,26 @@ const SEODashboard = () => {
                     <div className="text-lg text-muted-foreground">Total Integrated ROI</div>
                     <div className="text-sm text-muted-foreground mt-2">
                       SEO: 45% • PR: 35% • Content: 20%
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="workflow" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Integrated SEO Workflow</CardTitle>
+                <CardDescription>Cross-pillar workflow management and automation</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="text-center p-8 border rounded-lg">
+                    <div className="text-2xl font-bold text-blue-600 mb-2">8 Active Workflows</div>
+                    <div className="text-lg text-muted-foreground">Content → PR → SEO Integration</div>
+                    <div className="text-sm text-muted-foreground mt-2">
+                      Average completion time: 12 days
                     </div>
                   </div>
                 </div>
