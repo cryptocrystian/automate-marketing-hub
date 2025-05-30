@@ -14,6 +14,7 @@ import UnderstandAudience from "./pages/UnderstandAudience";
 import TargetStrategy from "./pages/TargetStrategy";
 import OptimizeSystems from "./pages/OptimizeSystems";
 import MeasureMonitor from "./pages/MeasureMonitor";
+import AccelerateGrowth from "./pages/AccelerateGrowth";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
@@ -91,6 +92,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <MeasureMonitor />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/automate/accelerate-growth"
+              element={
+                <ProtectedRoute>
+                  <AccelerateGrowth />
                 </ProtectedRoute>
               }
             />

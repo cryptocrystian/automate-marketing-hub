@@ -91,9 +91,9 @@ const AutomateStrategy = () => {
       title: 'Accelerate Growth',
       description: 'Scaling successful strategies',
       progress: 30,
-      status: 'pending',
+      status: 'in-progress',
       icon: Zap,
-      color: 'bg-gray-400',
+      color: 'bg-blue-600',
       tasks: 5,
       completedTasks: 1,
       route: '/automate/accelerate-growth'
