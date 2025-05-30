@@ -1,7 +1,7 @@
 
 import { useAuth } from '@/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, User, FileText, BarChart3, Settings, LogOut, Target } from 'lucide-react';
+import { LayoutDashboard, User, FileText, BarChart3, Settings, LogOut, Target, Megaphone } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -36,6 +36,11 @@ export function AppSidebar() {
       title: "Content",
       url: "/content",
       icon: FileText,
+    },
+    {
+      title: "PR & Media",
+      url: "/pr-media",
+      icon: Megaphone,
     },
     {
       title: "Analytics",

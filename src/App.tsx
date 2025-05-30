@@ -19,6 +19,7 @@ import TransformEvolve from "./pages/TransformEvolve";
 import ExecuteExcellence from "./pages/ExecuteExcellence";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
+import PRMedia from "./pages/PRMedia";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
@@ -134,6 +135,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <ContentManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/pr-media"
+              element={
+                <ProtectedRoute>
+                  <PRMedia />
                 </ProtectedRoute>
               }
             />
