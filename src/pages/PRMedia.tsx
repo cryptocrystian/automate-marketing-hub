@@ -3,6 +3,9 @@ import Layout from '@/components/Layout';
 import MediaDatabase from '@/components/pr/MediaDatabase';
 import CampaignManagement from '@/components/pr/CampaignManagement';
 import PressReleaseBuilder from '@/components/pr/PressReleaseBuilder';
+import MediaMonitoring from '@/components/pr/MediaMonitoring';
+import DistributionHub from '@/components/pr/DistributionHub';
+import AnalyticsReporting from '@/components/pr/AnalyticsReporting';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -88,14 +91,16 @@ const PRMedia = () => {
 
         {/* Sub-navigation */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-9">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
             <TabsTrigger value="media-database">Media Database</TabsTrigger>
             <TabsTrigger value="press-releases">Press Releases</TabsTrigger>
             <TabsTrigger value="press-builder">Press Builder</TabsTrigger>
+            <TabsTrigger value="monitoring">Media Monitoring</TabsTrigger>
             <TabsTrigger value="distribution">Distribution</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -386,26 +391,26 @@ const PRMedia = () => {
             <PressReleaseBuilder />
           </TabsContent>
 
+          <TabsContent value="monitoring">
+            <MediaMonitoring />
+          </TabsContent>
+
           <TabsContent value="distribution">
-            <Card>
-              <CardHeader>
-                <CardTitle>Distribution Network</CardTitle>
-                <CardDescription>Multi-channel distribution management</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Distribution network interface coming soon...</p>
-              </CardContent>
-            </Card>
+            <DistributionHub />
           </TabsContent>
 
           <TabsContent value="analytics">
+            <AnalyticsReporting />
+          </TabsContent>
+
+          <TabsContent value="reports">
             <Card>
               <CardHeader>
-                <CardTitle>PR Analytics</CardTitle>
-                <CardDescription>Comprehensive PR performance analytics</CardDescription>
+                <CardTitle>Custom Reports</CardTitle>
+                <CardDescription>Advanced reporting and data export</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">PR analytics interface coming soon...</p>
+                <p className="text-muted-foreground">Custom reporting interface coming soon...</p>
               </CardContent>
             </Card>
           </TabsContent>
