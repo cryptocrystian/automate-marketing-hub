@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
+import MediaDatabase from '@/components/pr/MediaDatabase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -372,15 +373,7 @@ const PRMedia = () => {
           </TabsContent>
 
           <TabsContent value="media-database">
-            <Card>
-              <CardHeader>
-                <CardTitle>Media Database</CardTitle>
-                <CardDescription>Comprehensive media contact management</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Media database interface coming soon...</p>
-              </CardContent>
-            </Card>
+            <MediaDatabase />
           </TabsContent>
 
           <TabsContent value="press-releases">
