@@ -195,8 +195,28 @@
     border-color: rgb(37 99 235) !important;
   }
 
-  /* Tabs component overrides */
-  [data-state="active"][data-orientation="horizontal"] {
+  /* ENHANCED TABS COMPONENT OVERRIDES - STRONGEST PRIORITY */
+  [data-state="active"][data-orientation="horizontal"],
+  [data-state="active"],
+  .TabsTrigger[data-state="active"],
+  [role="tab"][data-state="active"],
+  [role="tab"][aria-selected="true"] {
+    background-color: rgb(37 99 235) !important;
+    color: white !important;
+    border-color: rgb(37 99 235) !important;
+  }
+
+  /* Target Radix Tabs component specifically */
+  [data-radix-collection-item][data-state="active"] {
+    background-color: rgb(37 99 235) !important;
+    color: white !important;
+  }
+
+  /* Target any tab-related components */
+  .tab-active,
+  .tab[aria-selected="true"],
+  button[role="tab"][data-state="active"],
+  button[role="tab"][aria-selected="true"] {
     background-color: rgb(37 99 235) !important;
     color: white !important;
   }
@@ -219,7 +239,7 @@
     color: white !important;
   }
 
-  /* Comprehensive catch-all for any remaining yellow */
+  /* STRONGEST OVERRIDE - Target any remaining yellow with maximum specificity */
   * {
     --tw-bg-yellow-50: 239 246 255 !important;
     --tw-bg-yellow-100: 219 234 254 !important;
@@ -231,5 +251,16 @@
     --tw-bg-yellow-700: 29 78 216 !important;
     --tw-bg-yellow-800: 30 64 175 !important;
     --tw-bg-yellow-900: 30 58 138 !important;
+  }
+
+  /* ULTIMATE FALLBACK - Force override any computed yellow styles */
+  *[style*="background-color"][style*="yellow"],
+  *[style*="color"][style*="yellow"],
+  *[class*="bg-yellow"],
+  *[class*="text-yellow"],
+  *[class*="border-yellow"] {
+    background-color: rgb(37 99 235) !important;
+    color: white !important;
+    border-color: rgb(37 99 235) !important;
   }
 }
