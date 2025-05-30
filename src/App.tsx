@@ -13,6 +13,7 @@ import AssessAudit from "./pages/AssessAudit";
 import UnderstandAudience from "./pages/UnderstandAudience";
 import TargetStrategy from "./pages/TargetStrategy";
 import OptimizeSystems from "./pages/OptimizeSystems";
+import MeasureMonitor from "./pages/MeasureMonitor";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
@@ -74,6 +75,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <TargetStrategy />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/automate/optimize-systems"
+              element={
+                <ProtectedRoute>
+                  <OptimizeSystems />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/automate/measure-monitor"
+              element={
+                <ProtectedRoute>
+                  <MeasureMonitor />
                 </ProtectedRoute>
               }
             />
