@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import MediaDatabase from '@/components/pr/MediaDatabase';
 import CampaignManagement from '@/components/pr/CampaignManagement';
+import PressReleaseBuilder from '@/components/pr/PressReleaseBuilder';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -88,11 +88,12 @@ const PRMedia = () => {
 
         {/* Sub-navigation */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
             <TabsTrigger value="media-database">Media Database</TabsTrigger>
             <TabsTrigger value="press-releases">Press Releases</TabsTrigger>
+            <TabsTrigger value="press-builder">Press Builder</TabsTrigger>
             <TabsTrigger value="distribution">Distribution</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
@@ -379,6 +380,10 @@ const PRMedia = () => {
                 <p className="text-muted-foreground">Press release management interface coming soon...</p>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="press-builder">
+            <PressReleaseBuilder />
           </TabsContent>
 
           <TabsContent value="distribution">

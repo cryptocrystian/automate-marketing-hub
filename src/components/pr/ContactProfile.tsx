@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import PressReleaseBuilder from './PressReleaseBuilder';
 import { 
   MapPin, 
   Mail, 
@@ -37,6 +37,7 @@ interface ContactProfileProps {
 
 const ContactProfile: React.FC<ContactProfileProps> = ({ contactId, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [showPressReleaseBuilder, setShowPressReleaseBuilder] = useState(false);
 
   // Mock contact data - in real app this would come from props or API
   const contact = {
@@ -131,6 +132,27 @@ const ContactProfile: React.FC<ContactProfileProps> = ({ contactId, onClose }) =
     return 'bg-red-100 text-red-800';
   };
 
+  const handleComposePitch = () => {
+    setShowPressReleaseBuilder(true);
+  };
+
+  if (showPressReleaseBuilder) {
+    return (
+      <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+        <div className="p-6">
+          <PressReleaseBuilder 
+            preSelectedContact={{
+              id: contact.id.toString(),
+              name: contact.name,
+              outlet: contact.outlet
+            }}
+            onClose={() => setShowPressReleaseBuilder(false)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
@@ -176,9 +198,12 @@ const ContactProfile: React.FC<ContactProfileProps> = ({ contactId, onClose }) =
 
           {/* Primary Actions */}
           <div className="flex items-center space-x-3">
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700"
+              onClick={handleComposePitch}
+            >
               <MessageSquare className="w-4 h-4 mr-2" />
-              Send Message
+              Compose Pitch
             </Button>
             <Button variant="outline">
               <Edit3 className="w-4 h-4 mr-2" />
@@ -302,15 +327,15 @@ const ContactProfile: React.FC<ContactProfileProps> = ({ contactId, onClose }) =
                 </Card>
 
                 {/* AI Insights */}
-                <Card className="lg:col-span-2">
+                <Card className="lg:col-span-2 border-purple-200 bg-purple-50">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center text-purple-800">
                       <Brain className="w-5 h-5 text-purple-600 mr-2" />
                       AI Insights & Intelligence
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 space-y-3">
+                    <div className="bg-white border border-purple-200 rounded-lg p-4 space-y-3">
                       <div>
                         <span className="font-medium text-purple-900">Pitch Style:</span>
                         <p className="text-purple-800 mt-1">{contact.aiInsights.pitchStyle}</p>
@@ -436,7 +461,10 @@ const ContactProfile: React.FC<ContactProfileProps> = ({ contactId, onClose }) =
                     <CardTitle>Quick Actions</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <Button className="w-full">
+                    <Button 
+                      className="w-full"
+                      onClick={handleComposePitch}
+                    >
                       <MessageSquare className="w-4 h-4 mr-2" />
                       Compose Pitch Email
                     </Button>
