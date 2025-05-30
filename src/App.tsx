@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import AutomateStrategy from "./pages/AutomateStrategy";
 import AssessAudit from "./pages/AssessAudit";
 import UnderstandAudience from "./pages/UnderstandAudience";
 import TargetStrategy from "./pages/TargetStrategy";
+import OptimizeSystems from "./pages/OptimizeSystems";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
