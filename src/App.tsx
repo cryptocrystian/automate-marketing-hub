@@ -16,6 +16,7 @@ import OptimizeSystems from "./pages/OptimizeSystems";
 import MeasureMonitor from "./pages/MeasureMonitor";
 import AccelerateGrowth from "./pages/AccelerateGrowth";
 import TransformEvolve from "./pages/TransformEvolve";
+import ExecuteExcellence from "./pages/ExecuteExcellence";
 import AdminPanel from "./pages/AdminPanel";
 import ContentManagement from "./pages/ContentManagement";
 import Analytics from "./pages/Analytics";
