@@ -370,8 +370,8 @@ const AnalyticsReporting = () => {
                         </div>
                         <div className="text-xs text-muted-foreground">Podcasts</div>
                       </div>
-                      <div className="text-center p-3 bg-yellow-50 rounded-lg">
-                        <div className="text-xl font-bold text-yellow-600">A+</div>
+                      <div className="text-center p-3 bg-blue-50 rounded-lg">
+                        <div className="text-xl font-bold text-blue-600">A+</div>
                         <div className="text-xs text-muted-foreground">Grade</div>
                       </div>
                     </div>

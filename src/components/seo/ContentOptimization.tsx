@@ -72,14 +72,14 @@ The integration of artificial intelligence in marketing workflows enables predic
       case 'structure': return <BarChart3 className="w-4 h-4 text-green-600" />;
       case 'geo': return <Brain className="w-4 h-4 text-purple-600" />;
       case 'pr': return <Megaphone className="w-4 h-4 text-orange-600" />;
-      default: return <Lightbulb className="w-4 h-4 text-yellow-600" />;
+      default: return <Lightbulb className="w-4 h-4 text-blue-600" />;
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'high': return 'bg-red-100 text-red-800 border-red-300';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+      case 'medium': return 'bg-blue-100 text-blue-800 border-blue-300';
       case 'low': return 'bg-green-100 text-green-800 border-green-300';
       default: return 'bg-gray-100 text-gray-800 border-gray-300';
     }
@@ -217,7 +217,7 @@ The integration of artificial intelligence in marketing workflows enables predic
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Award className="w-5 h-5 mr-2 text-yellow-600" />
+                <Award className="w-5 h-5 mr-2 text-blue-600" />
                 E-E-A-T Analysis
               </CardTitle>
               <CardDescription>Experience, Expertise, Authoritativeness, Trust</CardDescription>
@@ -260,7 +260,7 @@ The integration of artificial intelligence in marketing workflows enables predic
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Lightbulb className="w-5 h-5 mr-2 text-yellow-600" />
+                <Lightbulb className="w-5 h-5 mr-2 text-blue-600" />
                 AI Suggestions
               </CardTitle>
               <CardDescription>Real-time optimization recommendations</CardDescription>
