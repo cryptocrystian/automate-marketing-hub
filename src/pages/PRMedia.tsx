@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import MediaDatabase from '@/components/pr/MediaDatabase';
+import CampaignManagement from '@/components/pr/CampaignManagement';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -359,17 +361,8 @@ const PRMedia = () => {
             </Card>
           </TabsContent>
 
-          {/* Other tab contents would be implemented here */}
           <TabsContent value="campaigns">
-            <Card>
-              <CardHeader>
-                <CardTitle>Campaign Management</CardTitle>
-                <CardDescription>Detailed campaign overview and management</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Campaign management interface coming soon...</p>
-              </CardContent>
-            </Card>
+            <CampaignManagement />
           </TabsContent>
 
           <TabsContent value="media-database">
