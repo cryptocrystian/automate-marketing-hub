@@ -52,8 +52,35 @@ export default {
 					700: '#047857',
 					foreground: '#ffffff'
 				},
+				// OVERRIDE ALL YELLOW WITH BLUE
+				yellow: {
+					50: '#eff6ff',
+					100: '#dbeafe',
+					200: '#bfdbfe',
+					300: '#93c5fd',
+					400: '#60a5fa',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+					950: '#172554'
+				},
+				amber: {
+					50: '#eff6ff',
+					100: '#dbeafe',
+					200: '#bfdbfe',
+					300: '#93c5fd',
+					400: '#60a5fa',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+					950: '#172554'
+				},
 				warning: {
-					DEFAULT: '#2563eb', // Force warning to use blue instead of yellow
+					DEFAULT: '#2563eb',
 					50: '#eff6ff',
 					100: '#dbeafe',
 					500: '#3b82f6',

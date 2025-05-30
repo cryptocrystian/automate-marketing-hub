@@ -255,7 +255,7 @@ const ReportingEngine = () => {
                         <td className="py-3 px-4">
                           <Badge 
                             variant={report.status === 'Delivered' ? 'default' : 'secondary'}
-                            className={report.status === 'Delivered' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}
+                            className={report.status === 'Delivered' ? 'bg-green-600 text-white' : 'bg-blue-600 text-white'}
                           >
                             {report.status}
                           </Badge>
