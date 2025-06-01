@@ -9,13 +9,204 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      automate_frameworks: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          steps: Json
+          tenant_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          steps?: Json
+          tenant_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          steps?: Json
+          tenant_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automate_frameworks_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automate_progress: {
+        Row: {
+          completed_at: string | null
+          completed_by: string | null
+          completion_percentage: number | null
+          created_at: string | null
+          framework_id: string
+          id: string
+          notes: string | null
+          status: string | null
+          step_code: string
+          step_index: number
+          tenant_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          completed_by?: string | null
+          completion_percentage?: number | null
+          created_at?: string | null
+          framework_id: string
+          id?: string
+          notes?: string | null
+          status?: string | null
+          step_code: string
+          step_index: number
+          tenant_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          completed_by?: string | null
+          completion_percentage?: number | null
+          created_at?: string | null
+          framework_id?: string
+          id?: string
+          notes?: string | null
+          status?: string | null
+          step_code?: string
+          step_index?: number
+          tenant_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automate_progress_framework_id_fkey"
+            columns: ["framework_id"]
+            isOneToOne: false
+            referencedRelation: "automate_frameworks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automate_progress_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tenants: {
+        Row: {
+          branding: Json | null
+          created_at: string | null
+          id: string
+          name: string
+          parent_agency_id: string | null
+          settings: Json | null
+          slug: string
+          subscription_tier: string | null
+          tenant_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          branding?: Json | null
+          created_at?: string | null
+          id?: string
+          name: string
+          parent_agency_id?: string | null
+          settings?: Json | null
+          slug: string
+          subscription_tier?: string | null
+          tenant_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          branding?: Json | null
+          created_at?: string | null
+          id?: string
+          name?: string
+          parent_agency_id?: string | null
+          settings?: Json | null
+          slug?: string
+          subscription_tier?: string | null
+          tenant_type?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenants_parent_agency_id_fkey"
+            columns: ["parent_agency_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_profiles: {
+        Row: {
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          permissions: Json | null
+          role: string
+          tenant_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          full_name: string
+          id: string
+          permissions?: Json | null
+          role: string
+          tenant_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          permissions?: Json | null
+          role?: string
+          tenant_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_default_automate_framework: {
+        Args: { tenant_id: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
