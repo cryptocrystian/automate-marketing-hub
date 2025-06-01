@@ -76,7 +76,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (profile) {
         console.log('AuthProvider - User profile loaded:', profile);
-        setUserProfile(profile);
+        // Type assertion to ensure proper typing
+        setUserProfile({
+          id: profile.id,
+          tenant_id: profile.tenant_id,
+          full_name: profile.full_name,
+          email: profile.email,
+          role: profile.role as UserProfile['role'],
+          permissions: profile.permissions as Record<string, any>,
+          created_at: profile.created_at,
+          updated_at: profile.updated_at
+        });
 
         // Fetch tenant data
         const { data: tenantData, error: tenantError } = await supabase
@@ -92,7 +102,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (tenantData) {
           console.log('AuthProvider - Tenant data loaded:', tenantData);
-          setTenant(tenantData);
+          // Type assertion to ensure proper typing
+          setTenant({
+            id: tenantData.id,
+            name: tenantData.name,
+            slug: tenantData.slug,
+            tenant_type: tenantData.tenant_type as Tenant['tenant_type'],
+            parent_agency_id: tenantData.parent_agency_id,
+            subscription_tier: tenantData.subscription_tier,
+            branding: tenantData.branding as Record<string, any>,
+            settings: tenantData.settings as Record<string, any>
+          });
         }
       }
     } catch (error) {

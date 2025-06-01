@@ -1,215 +1,198 @@
 
-import { useAuth } from '@/context/AuthContext';
 import Layout from '@/components/Layout';
+import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { TrendingUp, TrendingDown, Users, Mail, Calendar, Target } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { 
+  BarChart3, 
+  Target, 
+  TrendingUp, 
+  Users,
+  Calendar,
+  FileText,
+  Megaphone,
+  Settings,
+  ChevronRight,
+  Activity
+} from 'lucide-react';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const { userProfile, tenant } = useAuth();
 
-  const clientMetrics = [
-    {
-      title: "Active Campaigns",
-      value: "12",
-      change: "+2 from last month",
-      trend: "up",
-      icon: Target,
-      color: "text-blue-600"
-    },
-    {
-      title: "Email Opens",
-      value: "2,847",
-      change: "+12% from last week",
-      trend: "up",
-      icon: Mail,
-      color: "text-green-600"
-    },
-    {
-      title: "Content Published",
-      value: "18",
-      change: "This month",
-      trend: "neutral",
-      icon: Calendar,
-      color: "text-blue-600"
-    },
-    {
-      title: "Lead Generation",
-      value: "156",
-      change: "+8% from last month",
-      trend: "up",
-      icon: Users,
-      color: "text-green-600"
-    }
+  const automateSteps = [
+    { code: 'A', name: 'Assess & Audit', progress: 75, status: 'completed' },
+    { code: 'U', name: 'Understand Audience', progress: 60, status: 'in_progress' },
+    { code: 'T', name: 'Target Strategy', progress: 30, status: 'in_progress' },
+    { code: 'O', name: 'Optimize Systems', progress: 0, status: 'not_started' },
+    { code: 'M', name: 'Measure & Monitor', progress: 0, status: 'not_started' },
+    { code: 'A', name: 'Accelerate Growth', progress: 0, status: 'not_started' },
+    { code: 'T', name: 'Transform & Evolve', progress: 0, status: 'not_started' },
+    { code: 'E', name: 'Execute Excellence', progress: 0, status: 'not_started' }
   ];
 
-  const adminMetrics = [
-    {
-      title: "Total Clients",
-      value: "24",
-      change: "+3 new this month",
-      trend: "up",
-      icon: Users,
-      color: "text-green-600"
-    },
-    {
-      title: "Active Campaigns",
-      value: "89",
-      change: "+15% growth",
-      trend: "up",
-      icon: Target,
-      color: "text-green-600"
-    },
-    {
-      title: "System Health",
-      value: "99.8%",
-      change: "Uptime this month",
-      trend: "up",
-      icon: TrendingUp,
-      color: "text-green-600"
-    },
-    {
-      title: "Revenue",
-      value: "$47,200",
-      change: "+23% from last month",
-      trend: "up",
-      icon: TrendingUp,
-      color: "text-green-600"
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'bg-green-500';
+      case 'in_progress': return 'bg-blue-500';
+      default: return 'bg-gray-300';
     }
-  ];
+  };
 
-  const metrics = user?.role === 'admin' ? adminMetrics : clientMetrics;
-
-  const recentActivity = [
-    {
-      action: "Campaign launched",
-      target: "Holiday Email Series",
-      time: "2 hours ago",
-      status: "success"
-    },
-    {
-      action: "Content published",
-      target: "Social Media Posts",
-      time: "5 hours ago",
-      status: "success"
-    },
-    {
-      action: "Analytics updated",
-      target: "Monthly Report",
-      time: "1 day ago",
-      status: "neutral"
-    },
-    {
-      action: "Client onboarded",
-      target: "TechStart Solutions",
-      time: "2 days ago",
-      status: "success"
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'completed': return <Badge className="bg-green-100 text-green-800">Completed</Badge>;
+      case 'in_progress': return <Badge className="bg-blue-100 text-blue-800">In Progress</Badge>;
+      default: return <Badge variant="secondary">Not Started</Badge>;
     }
-  ];
+  };
 
   return (
     <Layout>
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="space-y-6">
+        {/* Welcome Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
+          <h1 className="text-3xl font-bold mb-2">
+            Welcome back, {userProfile?.full_name || 'User'}!
+          </h1>
+          <p className="text-blue-100 mb-4">
+            {tenant?.name} • {userProfile?.role?.replace('_', ' ').toUpperCase()}
+          </p>
           <div className="flex items-center space-x-4">
-            <SidebarTrigger />
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Welcome back, {user?.name}
-              </h1>
-              <p className="text-gray-600">
-                {user?.role === 'admin' ? 'System Overview' : 'Your Marketing Dashboard'}
-              </p>
+            <div className="flex items-center">
+              <Activity className="w-5 h-5 mr-2" />
+              <span className="text-sm">Platform Status: Active</span>
+            </div>
+            <div className="flex items-center">
+              <Target className="w-5 h-5 mr-2" />
+              <span className="text-sm">AUTOMATE Progress: 41%</span>
             </div>
           </div>
-          <Badge variant="outline" className="text-blue-600 border-blue-200">
-            {user?.role === 'admin' ? 'Admin' : 'Client'}
-          </Badge>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {metrics.map((metric, index) => (
-            <Card key={index} className="bg-white shadow-sm border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-700">
-                  {metric.title}
-                </CardTitle>
-                <metric.icon className={`h-4 w-4 ${metric.color}`} />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                <p className="text-xs text-gray-500 flex items-center mt-1">
-                  {metric.trend === 'up' && <TrendingUp className="h-3 w-3 mr-1 text-green-600" />}
-                  {metric.trend === 'down' && <TrendingDown className="h-3 w-3 mr-1 text-red-600" />}
-                  {metric.change}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Active Campaigns</CardTitle>
+              <Megaphone className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">12</div>
+              <p className="text-xs text-muted-foreground">+2 from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Content Pieces</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">47</div>
+              <p className="text-xs text-muted-foreground">+8 this week</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">4.2%</div>
+              <p className="text-xs text-muted-foreground">+0.8% from last week</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Team Members</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">6</div>
+              <p className="text-xs text-muted-foreground">Across all roles</p>
+            </CardContent>
+          </Card>
         </div>
 
+        {/* AUTOMATE Framework Progress */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <Card className="bg-white shadow-sm border-gray-200">
+          <Card className="lg:col-span-2">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Recent Activity</CardTitle>
-              <CardDescription className="text-gray-600">
-                Latest updates from your marketing operations
+              <CardTitle className="flex items-center">
+                <Target className="w-5 h-5 mr-2" />
+                AUTOMATE Framework Progress
+              </CardTitle>
+              <CardDescription>
+                Track your progress through the 8-step AUTOMATE methodology
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 hover:border-gray-200 transition-colors">
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{activity.action}</p>
-                      <p className="text-xs text-gray-600">{activity.target}</p>
+                {automateSteps.map((step, index) => (
+                  <div key={index} className="flex items-center space-x-4 p-3 rounded-lg border">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${getStatusColor(step.status)}`}>
+                      {step.code}
                     </div>
-                    <div className="text-right">
-                      <p className="text-xs text-gray-500">{activity.time}</p>
-                      <Badge 
-                        variant={activity.status === 'success' ? 'default' : 'secondary'}
-                        className={activity.status === 'success' ? 'bg-green-600 text-white hover:bg-green-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}
-                      >
-                        {activity.status}
-                      </Badge>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="font-medium">{step.name}</h4>
+                        {getStatusBadge(step.status)}
+                      </div>
+                      <Progress value={step.progress} className="h-2" />
+                      <p className="text-xs text-muted-foreground mt-1">{step.progress}% complete</p>
                     </div>
+                    <Button variant="ghost" size="sm">
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
                   </div>
                 ))}
               </div>
             </CardContent>
           </Card>
+        </div>
 
-          {/* Quick Actions */}
-          <Card className="bg-white shadow-sm border-gray-200">
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Quick Actions</CardTitle>
-              <CardDescription className="text-gray-600">
-                Common tasks and shortcuts
-              </CardDescription>
+              <CardTitle className="text-lg">Content Calendar</CardTitle>
+              <CardDescription>Plan and schedule your content</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-3">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white h-20 flex flex-col items-center justify-center">
-                  <Target className="h-5 w-5 mb-1" />
-                  <span className="text-sm">New Campaign</span>
-                </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300">
-                  <Calendar className="h-5 w-5 mb-1" />
-                  <span className="text-sm">Schedule Content</span>
-                </Button>
-                <Button variant="outline" className="h-20 flex flex-col items-center justify-center border-gray-200 text-gray-900 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300">
-                  <Mail className="h-5 w-5 mb-1" />
-                  <span className="text-sm">Email Builder</span>
-                </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white h-20 flex flex-col items-center justify-center">
-                  <TrendingUp className="h-5 w-5 mb-1" />
-                  <span className="text-sm">View Analytics</span>
-                </Button>
-              </div>
+              <Button className="w-full">
+                <Calendar className="w-4 h-4 mr-2" />
+                View Calendar
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Analytics Dashboard</CardTitle>
+              <CardDescription>Monitor performance metrics</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button className="w-full">
+                <BarChart3 className="w-4 h-4 mr-2" />
+                View Analytics
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Team Settings</CardTitle>
+              <CardDescription>Manage your workspace</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button className="w-full">
+                <Settings className="w-4 h-4 mr-2" />
+                Manage Team
+              </Button>
             </CardContent>
           </Card>
         </div>

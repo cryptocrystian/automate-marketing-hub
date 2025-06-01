@@ -17,7 +17,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 export function AppSidebar() {
-  const { user, logout } = useAuth();
+  const { userProfile, tenant, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export function AppSidebar() {
       url: "/analytics",
       icon: BarChart3,
     },
-    ...(user?.role === 'admin' ? [{
+    ...(userProfile?.role === 'agency_admin' || userProfile?.role === 'agency_owner' ? [{
       title: "Admin Panel",
       url: "/admin",
       icon: Settings,
@@ -60,7 +60,7 @@ export function AppSidebar() {
   ];
 
   const handleLogout = () => {
-    logout();
+    signOut();
     navigate('/login');
   };
 
@@ -112,10 +112,10 @@ export function AppSidebar() {
             <User className="w-5 h-5 text-slate-800" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user?.name}</p>
-            <p className="text-xs text-slate-400 truncate">{user?.email}</p>
-            {user?.companyName && (
-              <p className="text-xs text-slate-400 truncate">{user.companyName}</p>
+            <p className="text-sm font-medium text-white truncate">{userProfile?.full_name || 'User'}</p>
+            <p className="text-xs text-slate-400 truncate">{userProfile?.email}</p>
+            {tenant?.name && (
+              <p className="text-xs text-slate-400 truncate">{tenant.name}</p>
             )}
           </div>
         </div>
