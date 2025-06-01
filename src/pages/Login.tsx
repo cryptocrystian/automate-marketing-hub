@@ -119,9 +119,19 @@ const Login = () => {
           
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
+                <TabsTrigger 
+                  value="signin" 
+                  className="data-[state=active]:bg-blue-600 data-[state=active]:text-white font-medium"
+                >
+                  Sign In
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="signup" 
+                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white font-medium"
+                >
+                  Sign Up
+                </TabsTrigger>
               </TabsList>
               
               {/* Display errors */}
