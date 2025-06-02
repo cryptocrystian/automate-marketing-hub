@@ -1,6 +1,6 @@
 
 // Shared authentication types for consistent role management
-export type UserRole = 'workspace_admin' | 'workspace_member';
+export type UserRole = 'workspace_admin' | 'workspace_member' | 'client_admin';
 
 export interface AuthUser {
   id: string;

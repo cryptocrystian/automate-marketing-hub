@@ -21,6 +21,9 @@ export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Check if user has admin privileges (client_admin or workspace_admin)
+  const isAdmin = userProfile?.role === 'client_admin' || userProfile?.role === 'workspace_admin';
+
   const menuItems = [
     {
       title: "Dashboard",
@@ -52,7 +55,7 @@ export function AppSidebar() {
       url: "/analytics",
       icon: BarChart3,
     },
-    ...(userProfile?.role === 'workspace_admin' ? [{
+    ...(isAdmin ? [{
       title: "Admin Panel",
       url: "/admin",
       icon: Settings,

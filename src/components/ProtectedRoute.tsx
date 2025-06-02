@@ -84,7 +84,14 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }
 
   // Check role-based access if required
   if (requireRole) {
-    const hasRequiredRole = userProfile.role === requireRole;
+    let hasRequiredRole = false;
+    
+    // Handle role compatibility: client_admin should be treated as workspace_admin
+    if (requireRole === 'workspace_admin') {
+      hasRequiredRole = userProfile.role === 'workspace_admin' || userProfile.role === 'client_admin';
+    } else {
+      hasRequiredRole = userProfile.role === requireRole;
+    }
     
     if (!hasRequiredRole) {
       console.log(`ProtectedRoute - User role ${userProfile.role} insufficient for required role ${requireRole}`);

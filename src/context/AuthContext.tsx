@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -82,10 +83,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('AuthProvider - User profile fetched:', profileData);
       
-      // Validate that the role is one of our expected types
-      if (profileData.role !== 'workspace_admin' && profileData.role !== 'workspace_member') {
+      // Accept client_admin, workspace_admin, and workspace_member roles
+      const validRoles = ['client_admin', 'workspace_admin', 'workspace_member'];
+      if (!validRoles.includes(profileData.role)) {
         console.error('AuthProvider - Invalid role detected:', profileData.role);
-        console.log('AuthProvider - Expected roles: workspace_admin or workspace_member');
+        console.log('AuthProvider - Expected roles:', validRoles);
         setAuthError('Invalid user role. Please contact support.');
         setIsLoading(false);
         return;
