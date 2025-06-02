@@ -55,7 +55,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('AuthProvider - User profile fetched:', profileData);
       
-      // Type assertion for simplified SaaS roles
+      // Validate that the role is one of our expected types
+      if (profileData.role !== 'workspace_admin' && profileData.role !== 'workspace_member') {
+        console.error('AuthProvider - Invalid role detected:', profileData.role);
+        console.log('AuthProvider - Expected roles: workspace_admin or workspace_member');
+        setIsLoading(false);
+        return;
+      }
+      
       const typedProfile: UserProfile = {
         ...profileData,
         role: profileData.role as UserProfile['role'],
