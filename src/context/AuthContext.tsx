@@ -56,25 +56,55 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
 
-  // Function to fetch user profile and tenant data
+  // Function to fetch user profile and tenant data with better error handling
   const fetchUserData = async (userId: string) => {
     try {
       console.log('AuthProvider - Starting fetchUserData for userId:', userId);
       
+      // Check if we've exceeded retry limit to prevent infinite loops
+      if (retryCount >= 3) {
+        console.log('AuthProvider - Max retries reached, skipping data fetch');
+        setIsLoading(false);
+        return;
+      }
+
       // Add delay to prevent potential race conditions
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise(resolve => setTimeout(resolve, 200));
       
-      // Fetch user profile with detailed logging
+      // Try to fetch user profile with timeout and better error handling
       console.log('AuthProvider - Attempting to fetch user profile...');
-      const { data: profile, error: profileError } = await supabase
+      
+      const profilePromise = supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
         .maybeSingle();
 
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Query timeout')), 10000)
+      );
+
+      const { data: profile, error: profileError } = await Promise.race([
+        profilePromise,
+        timeoutPromise
+      ]) as any;
+
       if (profileError) {
         console.error('AuthProvider - Error fetching user profile:', profileError);
+        
+        // If this is an RLS recursion error, increment retry count and try again
+        if (profileError.code === '42P17' && retryCount < 3) {
+          console.log('AuthProvider - RLS recursion detected, retrying...');
+          setRetryCount(prev => prev + 1);
+          setTimeout(() => {
+            fetchUserData(userId);
+          }, 1000 * (retryCount + 1)); // Exponential backoff
+          return;
+        }
+        
         setIsLoading(false);
         return;
       }
@@ -97,13 +127,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         updated_at: profile.updated_at
       });
 
-      // Fetch tenant data with detailed logging
+      // Reset retry count on successful profile fetch
+      setRetryCount(0);
+
+      // Fetch tenant data with similar error handling
       console.log('AuthProvider - Attempting to fetch tenant for tenant_id:', profile.tenant_id);
-      const { data: tenantData, error: tenantError } = await supabase
+      
+      const tenantPromise = supabase
         .from('tenants')
         .select('*')
         .eq('id', profile.tenant_id)
         .maybeSingle();
+
+      const { data: tenantData, error: tenantError } = await Promise.race([
+        tenantPromise,
+        timeoutPromise
+      ]) as any;
 
       if (tenantError) {
         console.error('AuthProvider - Error fetching tenant:', tenantError);
@@ -133,7 +172,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(false);
     } catch (error) {
       console.error('AuthProvider - Unexpected error in fetchUserData:', error);
-      setIsLoading(false);
+      
+      // If we get a timeout or other error, increment retry count
+      if (retryCount < 3) {
+        console.log('AuthProvider - Retrying due to error...');
+        setRetryCount(prev => prev + 1);
+        setTimeout(() => {
+          fetchUserData(userId);
+        }, 2000 * (retryCount + 1));
+      } else {
+        console.log('AuthProvider - Max retries reached, giving up');
+        setIsLoading(false);
+      }
     }
   };
 
@@ -151,6 +201,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (session?.user && event !== 'TOKEN_REFRESHED') {
           console.log('AuthProvider - User authenticated, fetching data...');
+          // Reset retry count for new session
+          setRetryCount(0);
           // Use setTimeout to prevent potential deadlocks
           setTimeout(() => {
             fetchUserData(session.user.id);
@@ -160,6 +212,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           // Clear user data when logged out
           setUserProfile(null);
           setTenant(null);
+          setRetryCount(0);
           setIsLoading(false);
         } else if (event === 'TOKEN_REFRESHED') {
           console.log('AuthProvider - Token refreshed, checking if data exists...');
