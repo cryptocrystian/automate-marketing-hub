@@ -46,32 +46,10 @@ export const useDashboardData = () => {
     try {
       console.log('Fetching dashboard metrics for tenant:', tenant.id);
 
-      // For now, we'll use fallback data since the tables might not exist yet
-      // In a real implementation, you would query the actual tables
-      
-      // Simulate fetching campaigns (fallback since table doesn't exist in types)
-      let campaignsCount = 0;
-      try {
-        const { data: campaignsData } = await supabase
-          .rpc('get_campaigns_count', { tenant_uuid: tenant.id })
-          .single();
-        campaignsCount = campaignsData || 0;
-      } catch (error) {
-        console.log('Campaigns table not accessible, using fallback');
-        campaignsCount = 3; // Fallback value
-      }
-
-      // Simulate fetching content pieces (fallback since table doesn't exist in types)
-      let contentCount = 0;
-      try {
-        const { data: contentData } = await supabase
-          .rpc('get_content_count', { tenant_uuid: tenant.id })
-          .single();
-        contentCount = contentData || 0;
-      } catch (error) {
-        console.log('Content table not accessible, using fallback');
-        contentCount = 12; // Fallback value
-      }
+      // Since the pr_campaigns and content_pieces tables don't exist yet,
+      // we'll use fallback data for now
+      const campaignsCount = 3; // Fallback value
+      const contentCount = 12; // Fallback value
 
       // Fetch team members count from existing user_profiles table
       const { count: teamCount } = await supabase
