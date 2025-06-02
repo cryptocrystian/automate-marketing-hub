@@ -3,6 +3,8 @@ import { useAuth } from '@/context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 import { UserRole } from '@/types/auth';
+import { Button } from '@/components/ui/button';
+import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -10,12 +12,45 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }) => {
-  const { user, userProfile, isLoading } = useAuth();
+  const { user, userProfile, isLoading, authError, clearError } = useAuth();
 
   console.log('ProtectedRoute - user:', user?.id);
   console.log('ProtectedRoute - userProfile:', userProfile?.role);
   console.log('ProtectedRoute - isLoading:', isLoading);
+  console.log('ProtectedRoute - authError:', authError);
   console.log('ProtectedRoute - requireRole:', requireRole);
+
+  // Show error state if there's an authentication error
+  if (authError) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto p-6">
+          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Authentication Error</h2>
+          <p className="text-gray-600 mb-6">{authError}</p>
+          <div className="space-y-3">
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="w-full"
+            >
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Refresh Page
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                clearError();
+                window.location.href = '/login';
+              }}
+              className="w-full"
+            >
+              Back to Login
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Show loading state while authentication is being checked
   if (isLoading) {
@@ -23,7 +58,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-gray-600">Setting up your workspace...</p>
+          <p className="text-sm text-gray-500 mt-2">This should only take a moment</p>
         </div>
       </div>
     );
@@ -40,7 +76,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Setting up your workspace...</p>
+          <p className="text-gray-600">Loading your profile...</p>
         </div>
       </div>
     );

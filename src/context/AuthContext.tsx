@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -10,9 +9,11 @@ interface AuthContextType {
   tenant: Tenant | null;
   session: Session | null;
   isLoading: boolean;
+  authError: string | null;
   signIn: (email: string, password: string) => Promise<{ error?: string }>;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,20 +36,46 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [authError, setAuthError] = useState<string | null>(null);
 
-  const fetchUserData = async (userId: string) => {
+  const clearError = () => setAuthError(null);
+
+  const fetchUserData = async (userId: string, retryCount = 0) => {
+    const maxRetries = 3;
+    const retryDelay = 1000 * (retryCount + 1); // Progressive delay
+    
     try {
-      console.log('AuthProvider - Fetching user data for userId:', userId);
+      console.log(`AuthProvider - Fetching user data for userId: ${userId} (attempt ${retryCount + 1})`);
       
-      // Fetch user profile
-      const { data: profileData, error: profileError } = await supabase
+      // Add timeout to prevent infinite hanging
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), 10000);
+      });
+
+      // Fetch user profile with timeout
+      const profilePromise = supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
         .single();
 
+      const { data: profileData, error: profileError } = await Promise.race([
+        profilePromise,
+        timeoutPromise
+      ]) as any;
+
       if (profileError) {
         console.error('AuthProvider - Error fetching user profile:', profileError);
+        
+        if (retryCount < maxRetries) {
+          console.log(`AuthProvider - Retrying in ${retryDelay}ms...`);
+          setTimeout(() => {
+            fetchUserData(userId, retryCount + 1);
+          }, retryDelay);
+          return;
+        }
+        
+        setAuthError('Failed to load user profile. Please try logging in again.');
         setIsLoading(false);
         return;
       }
@@ -59,6 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (profileData.role !== 'workspace_admin' && profileData.role !== 'workspace_member') {
         console.error('AuthProvider - Invalid role detected:', profileData.role);
         console.log('AuthProvider - Expected roles: workspace_admin or workspace_member');
+        setAuthError('Invalid user role. Please contact support.');
         setIsLoading(false);
         return;
       }
@@ -71,15 +99,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       setUserProfile(typedProfile);
 
-      // Fetch tenant data
-      const { data: tenantData, error: tenantError } = await supabase
+      // Fetch tenant data with timeout
+      const tenantPromise = supabase
         .from('tenants')
         .select('*')
         .eq('id', profileData.tenant_id)
         .single();
 
+      const { data: tenantData, error: tenantError } = await Promise.race([
+        tenantPromise,
+        timeoutPromise
+      ]) as any;
+
       if (tenantError) {
         console.error('AuthProvider - Error fetching tenant:', tenantError);
+        
+        if (retryCount < maxRetries) {
+          console.log(`AuthProvider - Retrying tenant fetch in ${retryDelay}ms...`);
+          setTimeout(() => {
+            fetchUserData(userId, retryCount + 1);
+          }, retryDelay);
+          return;
+        }
+        
+        setAuthError('Failed to load workspace data. Please try logging in again.');
         setIsLoading(false);
         return;
       }
@@ -95,10 +138,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       
       setTenant(typedTenant);
+      setAuthError(null); // Clear any previous errors
       setIsLoading(false);
 
     } catch (error) {
       console.error('AuthProvider - Unexpected error in fetchUserData:', error);
+      
+      if (retryCount < maxRetries) {
+        console.log(`AuthProvider - Retrying due to error in ${retryDelay}ms...`);
+        setTimeout(() => {
+          fetchUserData(userId, retryCount + 1);
+        }, retryDelay);
+        return;
+      }
+      
+      setAuthError('An unexpected error occurred. Please try logging in again.');
       setIsLoading(false);
     }
   };
@@ -107,11 +161,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     console.log('AuthProvider - Initializing simplified SaaS auth state...');
 
+    // Set loading timeout as a fallback
+    const loadingTimeout = setTimeout(() => {
+      if (isLoading) {
+        console.warn('AuthProvider - Loading timeout reached');
+        setAuthError('Authentication is taking longer than expected. Please refresh the page.');
+        setIsLoading(false);
+      }
+    }, 30000); // 30 second timeout
+
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('AuthProvider - Auth state changed:', event, session?.user?.id);
         
+        clearTimeout(loadingTimeout);
         setSession(session);
         setUser(session?.user ?? null);
 
@@ -124,6 +188,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           console.log('AuthProvider - No user session, clearing data...');
           setUserProfile(null);
           setTenant(null);
+          setAuthError(null);
           setIsLoading(false);
         } else if (event === 'TOKEN_REFRESHED') {
           console.log('AuthProvider - Token refreshed, checking if data exists...');
@@ -149,12 +214,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           fetchUserData(session.user.id);
         }, 100);
       } else {
+        clearTimeout(loadingTimeout);
         setIsLoading(false);
       }
     });
 
     return () => {
       console.log('AuthProvider - Cleaning up auth subscription');
+      clearTimeout(loadingTimeout);
       subscription.unsubscribe();
     };
   }, []);
@@ -162,6 +229,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signIn = async (email: string, password: string): Promise<{ error?: string }> => {
     console.log('AuthProvider - Sign in attempt for:', email);
     setIsLoading(true);
+    setAuthError(null);
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -171,6 +239,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (error) {
         console.error('AuthProvider - Sign in error:', error.message);
+        setAuthError(error.message);
         setIsLoading(false);
         return { error: error.message };
       }
@@ -179,14 +248,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return {};
     } catch (error) {
       console.error('AuthProvider - Unexpected sign in error:', error);
+      const errorMessage = 'An unexpected error occurred during sign in';
+      setAuthError(errorMessage);
       setIsLoading(false);
-      return { error: 'An unexpected error occurred' };
+      return { error: errorMessage };
     }
   };
 
   const signUp = async (email: string, password: string, fullName: string): Promise<{ error?: string }> => {
     console.log('AuthProvider - Sign up attempt for:', email);
     setIsLoading(true);
+    setAuthError(null);
 
     try {
       const redirectUrl = `${window.location.origin}/`;
@@ -204,6 +276,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (error) {
         console.error('AuthProvider - Sign up error:', error.message);
+        setAuthError(error.message);
         setIsLoading(false);
         return { error: error.message };
       }
@@ -218,8 +291,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return {};
     } catch (error) {
       console.error('AuthProvider - Unexpected sign up error:', error);
+      const errorMessage = 'An unexpected error occurred during sign up';
+      setAuthError(errorMessage);
       setIsLoading(false);
-      return { error: 'An unexpected error occurred' };
+      return { error: errorMessage };
     }
   };
 
@@ -230,15 +305,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error('AuthProvider - Sign out error:', error.message);
+        setAuthError(error.message);
       } else {
         console.log('AuthProvider - Sign out successful');
         setUser(null);
         setUserProfile(null);
         setTenant(null);
         setSession(null);
+        setAuthError(null);
       }
     } catch (error) {
       console.error('AuthProvider - Unexpected sign out error:', error);
+      setAuthError('An error occurred during sign out');
     }
   };
 
@@ -249,9 +327,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       tenant, 
       session, 
       isLoading, 
+      authError,
       signIn, 
       signUp, 
-      signOut 
+      signOut,
+      clearError
     }}>
       {children}
     </AuthContext.Provider>
