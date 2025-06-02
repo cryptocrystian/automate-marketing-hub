@@ -16,6 +16,10 @@ interface AutomateStep {
 interface DashboardMetrics {
   activeCampaigns: number;
   contentPieces: number;
+  seoKeywords: number;
+  aiCitations: number;
+  podcastSyndications: number;
+  pressReleases: number;
   engagementRate: number;
   teamMembers: number;
 }
@@ -34,6 +38,10 @@ export const useDashboardData = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics>({
     activeCampaigns: 0,
     contentPieces: 0,
+    seoKeywords: 0,
+    aiCitations: 0,
+    podcastSyndications: 0,
+    pressReleases: 0,
     engagementRate: 0,
     teamMembers: 0
   });
@@ -47,38 +55,108 @@ export const useDashboardData = () => {
     }
 
     try {
-      console.log('Fetching real dashboard metrics for tenant:', tenant.id);
+      console.log('Fetching comprehensive dashboard metrics for tenant:', tenant.id);
 
-      // Fetch real team members count
-      const { count: teamCount, error: teamError } = await supabase
-        .from('user_profiles')
-        .select('*', { count: 'exact', head: true })
-        .eq('tenant_id', tenant.id);
+      // Fetch all metrics in parallel for better performance
+      const [
+        activeCampaignsResult,
+        contentPiecesResult,
+        seoKeywordsResult,
+        aiCitationsResult,
+        podcastSyndicationsResult,
+        pressReleasesResult,
+        teamMembersResult,
+        engagementDataResult
+      ] = await Promise.all([
+        // Active PR campaigns
+        supabase
+          .from('pr_campaigns')
+          .select('*', { count: 'exact', head: true })
+          .eq('status', 'active')
+          .eq('tenant_id', tenant.id),
 
-      if (teamError) {
-        console.error('Error fetching team count:', teamError);
-        throw teamError;
+        // Total content pieces (not archived)
+        supabase
+          .from('content_pieces')
+          .select('*', { count: 'exact', head: true })
+          .neq('status', 'archived')
+          .eq('tenant_id', tenant.id),
+
+        // SEO keywords
+        supabase
+          .from('seo_keywords')
+          .select('*', { count: 'exact', head: true })
+          .eq('tenant_id', tenant.id),
+
+        // AI platform citations
+        supabase
+          .from('ai_platform_citations')
+          .select('*', { count: 'exact', head: true })
+          .eq('tenant_id', tenant.id),
+
+        // Podcast syndications
+        supabase
+          .from('podcast_syndications')
+          .select('*', { count: 'exact', head: true })
+          .eq('tenant_id', tenant.id),
+
+        // Press releases
+        supabase
+          .from('press_releases')
+          .select('*', { count: 'exact', head: true })
+          .eq('tenant_id', tenant.id),
+
+        // Team members
+        supabase
+          .from('user_profiles')
+          .select('*', { count: 'exact', head: true })
+          .eq('tenant_id', tenant.id),
+
+        // Engagement rate from content pieces
+        supabase
+          .from('content_pieces')
+          .select('engagement_rate')
+          .eq('tenant_id', tenant.id)
+          .not('engagement_rate', 'is', null)
+      ]);
+
+      // Handle any errors from the queries
+      const errors = [
+        activeCampaignsResult.error,
+        contentPiecesResult.error,
+        seoKeywordsResult.error,
+        aiCitationsResult.error,
+        podcastSyndicationsResult.error,
+        pressReleasesResult.error,
+        teamMembersResult.error,
+        engagementDataResult.error
+      ].filter(Boolean);
+
+      if (errors.length > 0) {
+        console.error('Errors fetching dashboard metrics:', errors);
+        throw new Error(`Failed to fetch some metrics: ${errors.map(e => e?.message).join(', ')}`);
       }
 
-      // For now, use computed values for metrics that don't have tables yet
-      // In the future, these will be replaced with real queries
-      const campaignsCount = 3; // Will be: COUNT from pr_campaigns WHERE status = 'active' AND tenant_id = tenant.id
-      const contentCount = 12; // Will be: COUNT from content_pieces WHERE status != 'archived' AND tenant_id = tenant.id
-      const engagementRate = 4.2; // Will be: AVG(engagement_rate) from content_pieces WHERE tenant_id = tenant.id
+      // Calculate average engagement rate
+      const engagementRates = engagementDataResult.data?.map(item => item.engagement_rate).filter(rate => rate > 0) || [];
+      const avgEngagementRate = engagementRates.length > 0 
+        ? engagementRates.reduce((sum, rate) => sum + rate, 0) / engagementRates.length 
+        : 0;
 
-      setMetrics({
-        activeCampaigns: campaignsCount,
-        contentPieces: contentCount,
-        engagementRate: engagementRate,
-        teamMembers: teamCount || 1
-      });
+      const newMetrics: DashboardMetrics = {
+        activeCampaigns: activeCampaignsResult.count || 0,
+        contentPieces: contentPiecesResult.count || 0,
+        seoKeywords: seoKeywordsResult.count || 0,
+        aiCitations: aiCitationsResult.count || 0,
+        podcastSyndications: podcastSyndicationsResult.count || 0,
+        pressReleases: pressReleasesResult.count || 0,
+        engagementRate: Number(avgEngagementRate.toFixed(1)),
+        teamMembers: teamMembersResult.count || 1
+      };
 
-      console.log('Real dashboard metrics fetched successfully:', {
-        activeCampaigns: campaignsCount,
-        contentPieces: contentCount,
-        engagementRate: engagementRate,
-        teamMembers: teamCount
-      });
+      setMetrics(newMetrics);
+
+      console.log('Real dashboard metrics fetched successfully:', newMetrics);
 
     } catch (error) {
       console.error('Error fetching dashboard metrics:', error);
@@ -92,6 +170,10 @@ export const useDashboardData = () => {
       setMetrics({
         activeCampaigns: 0,
         contentPieces: 0,
+        seoKeywords: 0,
+        aiCitations: 0,
+        podcastSyndications: 0,
+        pressReleases: 0,
         engagementRate: 0,
         teamMembers: 1
       });
@@ -283,7 +365,7 @@ export const useDashboardData = () => {
         return;
       }
       
-      console.log('Fetching real dashboard data for user:', userProfile.full_name, 'workspace:', tenant.name);
+      console.log('Fetching complete dashboard data for user:', userProfile.full_name, 'workspace:', tenant.name);
       setIsLoading(true);
       
       await Promise.all([
@@ -301,9 +383,10 @@ export const useDashboardData = () => {
   useEffect(() => {
     if (!tenant) return;
 
-    console.log('Setting up real-time subscriptions for tenant:', tenant.id);
+    console.log('Setting up comprehensive real-time subscriptions for tenant:', tenant.id);
 
     const channels = [
+      // Subscribe to user profiles changes
       supabase
         .channel('dashboard-user-profiles')
         .on('postgres_changes', {
@@ -317,6 +400,7 @@ export const useDashboardData = () => {
         })
         .subscribe(),
 
+      // Subscribe to AUTOMATE progress changes
       supabase
         .channel('dashboard-automate-progress')
         .on('postgres_changes', {
@@ -330,6 +414,7 @@ export const useDashboardData = () => {
         })
         .subscribe(),
 
+      // Subscribe to framework changes
       supabase
         .channel('dashboard-automate-frameworks')
         .on('postgres_changes', {
@@ -341,11 +426,67 @@ export const useDashboardData = () => {
           console.log('AUTOMATE frameworks updated, refreshing...');
           fetchAutomateProgress();
         })
+        .subscribe(),
+
+      // Subscribe to PR campaigns changes
+      supabase
+        .channel('dashboard-pr-campaigns')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'pr_campaigns',
+          filter: `tenant_id=eq.${tenant.id}`
+        }, () => {
+          console.log('PR campaigns updated, refreshing metrics...');
+          fetchDashboardMetrics();
+        })
+        .subscribe(),
+
+      // Subscribe to content pieces changes
+      supabase
+        .channel('dashboard-content-pieces')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'content_pieces',
+          filter: `tenant_id=eq.${tenant.id}`
+        }, () => {
+          console.log('Content pieces updated, refreshing metrics...');
+          fetchDashboardMetrics();
+        })
+        .subscribe(),
+
+      // Subscribe to SEO keywords changes
+      supabase
+        .channel('dashboard-seo-keywords')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'seo_keywords',
+          filter: `tenant_id=eq.${tenant.id}`
+        }, () => {
+          console.log('SEO keywords updated, refreshing metrics...');
+          fetchDashboardMetrics();
+        })
+        .subscribe(),
+
+      // Subscribe to AI citations changes
+      supabase
+        .channel('dashboard-ai-citations')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'ai_platform_citations',
+          filter: `tenant_id=eq.${tenant.id}`
+        }, () => {
+          console.log('AI citations updated, refreshing metrics...');
+          fetchDashboardMetrics();
+        })
         .subscribe()
     ];
 
     return () => {
-      console.log('Cleaning up real-time subscriptions');
+      console.log('Cleaning up comprehensive real-time subscriptions');
       channels.forEach(channel => supabase.removeChannel(channel));
     };
   }, [tenant]);

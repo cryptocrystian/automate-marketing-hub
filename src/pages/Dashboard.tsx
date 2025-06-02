@@ -21,7 +21,11 @@ import {
   RefreshCw,
   Zap,
   Building,
-  Crown
+  Crown,
+  Search,
+  Brain,
+  Mic,
+  FileImage
 } from 'lucide-react';
 
 const Dashboard = () => {
@@ -142,7 +146,7 @@ const Dashboard = () => {
                   <span>{tenant?.name || 'Your Workspace'}</span>
                 </div>
                 <div className="flex items-center">
-                  {userProfile?.role === 'workspace_admin' ? (
+                  {userProfile?.role === 'workspace_admin' || userProfile?.role === 'client_admin' ? (
                     <Crown className="w-5 h-5 mr-2" />
                   ) : (
                     <Users className="w-5 h-5 mr-2" />
@@ -180,8 +184,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Real Live Stats from Database */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Comprehensive Real-Time Metrics from Database */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Active Campaigns</CardTitle>
@@ -206,12 +210,12 @@ const Dashboard = () => {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">SEO Keywords</CardTitle>
+              <Search className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.engagementRate}%</div>
-              <p className="text-xs text-muted-foreground">Average across content</p>
+              <div className="text-2xl font-bold">{metrics.seoKeywords}</div>
+              <p className="text-xs text-muted-foreground">Keywords tracked</p>
             </CardContent>
           </Card>
 
@@ -223,6 +227,50 @@ const Dashboard = () => {
             <CardContent>
               <div className="text-2xl font-bold">{metrics.teamMembers}</div>
               <p className="text-xs text-muted-foreground">In your workspace</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">AI Citations</CardTitle>
+              <Brain className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{metrics.aiCitations}</div>
+              <p className="text-xs text-muted-foreground">Platform mentions</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Podcast Syndications</CardTitle>
+              <Mic className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{metrics.podcastSyndications}</div>
+              <p className="text-xs text-muted-foreground">Episodes syndicated</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Press Releases</CardTitle>
+              <FileImage className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{metrics.pressReleases}</div>
+              <p className="text-xs text-muted-foreground">Media distributed</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{metrics.engagementRate}%</div>
+              <p className="text-xs text-muted-foreground">Average across content</p>
             </CardContent>
           </Card>
         </div>
@@ -329,6 +377,39 @@ const Dashboard = () => {
           </Card>
         </div>
 
+        {/* Revolutionary AI Features Status */}
+        <Card className="border-purple-200 bg-purple-50">
+          <CardHeader>
+            <CardTitle className="text-purple-800 flex items-center">
+              <Brain className="w-5 h-5 mr-2" />
+              Revolutionary AI Capabilities - Live Status
+            </CardTitle>
+            <CardDescription className="text-purple-600">
+              Industry-first AI integrations showing real-time performance
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="text-center">
+                <div className="text-purple-600 font-bold">✓ {metrics.aiCitations}</div>
+                <div className="text-purple-700">AI Platform Citations</div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-600 font-bold">✓ {metrics.seoKeywords}</div>
+                <div className="text-purple-700">SEO Keywords Tracked</div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-600 font-bold">✓ {metrics.contentPieces}</div>
+                <div className="text-purple-700">AI-Optimized Content</div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-600 font-bold">✓ {overallProgress}%</div>
+                <div className="text-purple-700">AUTOMATE Completion</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Real-Time Connection Status */}
         <Card className="border-green-200 bg-green-50">
           <CardHeader>
@@ -349,7 +430,7 @@ const Dashboard = () => {
               </div>
               <div className="text-center">
                 <div className="text-green-600 font-bold">✓ Synced</div>
-                <div className="text-green-700">Live AUTOMATE Progress</div>
+                <div className="text-green-700">Live Metrics</div>
               </div>
               <div className="text-center">
                 <div className="text-green-600 font-bold">✓ Live</div>

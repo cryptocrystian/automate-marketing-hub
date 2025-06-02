@@ -9,6 +9,56 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      ai_platform_citations: {
+        Row: {
+          citation_context: string | null
+          citation_date: string
+          citation_url: string
+          click_through_rate: number | null
+          content_title: string
+          created_at: string
+          id: string
+          platform: string
+          tenant_id: string
+          updated_at: string
+          visibility_score: number | null
+        }
+        Insert: {
+          citation_context?: string | null
+          citation_date: string
+          citation_url: string
+          click_through_rate?: number | null
+          content_title: string
+          created_at?: string
+          id?: string
+          platform: string
+          tenant_id: string
+          updated_at?: string
+          visibility_score?: number | null
+        }
+        Update: {
+          citation_context?: string | null
+          citation_date?: string
+          citation_url?: string
+          click_through_rate?: number | null
+          content_title?: string
+          created_at?: string
+          id?: string
+          platform?: string
+          tenant_id?: string
+          updated_at?: string
+          visibility_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_platform_citations_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       automate_frameworks: {
         Row: {
           created_at: string | null
@@ -103,6 +153,304 @@ export type Database = {
           },
           {
             foreignKeyName: "automate_progress_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      content_pieces: {
+        Row: {
+          comment_count: number | null
+          content_body: string | null
+          content_type: string
+          created_at: string
+          created_by: string | null
+          engagement_rate: number | null
+          id: string
+          like_count: number | null
+          published_at: string | null
+          seo_score: number | null
+          share_count: number | null
+          status: string
+          tenant_id: string
+          title: string
+          updated_at: string
+          view_count: number | null
+        }
+        Insert: {
+          comment_count?: number | null
+          content_body?: string | null
+          content_type?: string
+          created_at?: string
+          created_by?: string | null
+          engagement_rate?: number | null
+          id?: string
+          like_count?: number | null
+          published_at?: string | null
+          seo_score?: number | null
+          share_count?: number | null
+          status?: string
+          tenant_id: string
+          title: string
+          updated_at?: string
+          view_count?: number | null
+        }
+        Update: {
+          comment_count?: number | null
+          content_body?: string | null
+          content_type?: string
+          created_at?: string
+          created_by?: string | null
+          engagement_rate?: number | null
+          id?: string
+          like_count?: number | null
+          published_at?: string | null
+          seo_score?: number | null
+          share_count?: number | null
+          status?: string
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+          view_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_pieces_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      podcast_syndications: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          download_count: number | null
+          engagement_score: number | null
+          episode_title: string
+          id: string
+          listen_count: number | null
+          platform: string
+          podcast_title: string
+          published_date: string | null
+          syndication_url: string | null
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          download_count?: number | null
+          engagement_score?: number | null
+          episode_title: string
+          id?: string
+          listen_count?: number | null
+          platform: string
+          podcast_title: string
+          published_date?: string | null
+          syndication_url?: string | null
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          download_count?: number | null
+          engagement_score?: number | null
+          episode_title?: string
+          id?: string
+          listen_count?: number | null
+          platform?: string
+          podcast_title?: string
+          published_date?: string | null
+          syndication_url?: string | null
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "podcast_syndications_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pr_campaigns: {
+        Row: {
+          budget: number | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          end_date: string | null
+          engagement_rate: number | null
+          id: string
+          impression_count: number | null
+          reach_count: number | null
+          start_date: string | null
+          status: string
+          target_audience: string | null
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          budget?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_date?: string | null
+          engagement_rate?: number | null
+          id?: string
+          impression_count?: number | null
+          reach_count?: number | null
+          start_date?: string | null
+          status?: string
+          target_audience?: string | null
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          budget?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_date?: string | null
+          engagement_rate?: number | null
+          id?: string
+          impression_count?: number | null
+          reach_count?: number | null
+          start_date?: string | null
+          status?: string
+          target_audience?: string | null
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pr_campaigns_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      press_releases: {
+        Row: {
+          content: string
+          created_at: string
+          created_by: string | null
+          distribution_channels: string[] | null
+          id: string
+          media_value: number | null
+          pickup_count: number | null
+          reach_estimate: number | null
+          release_date: string | null
+          sentiment_score: number | null
+          status: string
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          created_by?: string | null
+          distribution_channels?: string[] | null
+          id?: string
+          media_value?: number | null
+          pickup_count?: number | null
+          reach_estimate?: number | null
+          release_date?: string | null
+          sentiment_score?: number | null
+          status?: string
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          distribution_channels?: string[] | null
+          id?: string
+          media_value?: number | null
+          pickup_count?: number | null
+          reach_estimate?: number | null
+          release_date?: string | null
+          sentiment_score?: number | null
+          status?: string
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "press_releases_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seo_keywords: {
+        Row: {
+          competition_level: string | null
+          cpc: number | null
+          created_at: string
+          created_by: string | null
+          current_url: string | null
+          id: string
+          keyword: string
+          ranking_position: number | null
+          search_volume: number | null
+          target_url: string | null
+          tenant_id: string
+          traffic_potential: number | null
+          updated_at: string
+        }
+        Insert: {
+          competition_level?: string | null
+          cpc?: number | null
+          created_at?: string
+          created_by?: string | null
+          current_url?: string | null
+          id?: string
+          keyword: string
+          ranking_position?: number | null
+          search_volume?: number | null
+          target_url?: string | null
+          tenant_id: string
+          traffic_potential?: number | null
+          updated_at?: string
+        }
+        Update: {
+          competition_level?: string | null
+          cpc?: number | null
+          created_at?: string
+          created_by?: string | null
+          current_url?: string | null
+          id?: string
+          keyword?: string
+          ranking_position?: number | null
+          search_volume?: number | null
+          target_url?: string | null
+          tenant_id?: string
+          traffic_potential?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_keywords_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
