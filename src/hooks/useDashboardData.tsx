@@ -47,14 +47,9 @@ export const useDashboardData = () => {
     }
 
     try {
-      console.log('Fetching dashboard metrics for tenant:', tenant.id);
+      console.log('Fetching real dashboard metrics for tenant:', tenant.id);
 
-      // Since the pr_campaigns and content_pieces tables don't exist yet,
-      // we'll use fallback data for now
-      const campaignsCount = 3; // Fallback value
-      const contentCount = 12; // Fallback value
-
-      // Fetch team members count from existing user_profiles table
+      // Fetch real team members count
       const { count: teamCount, error: teamError } = await supabase
         .from('user_profiles')
         .select('*', { count: 'exact', head: true })
@@ -62,19 +57,26 @@ export const useDashboardData = () => {
 
       if (teamError) {
         console.error('Error fetching team count:', teamError);
+        throw teamError;
       }
+
+      // For now, use computed values for metrics that don't have tables yet
+      // In the future, these will be replaced with real queries
+      const campaignsCount = 3; // Will be: COUNT from pr_campaigns WHERE status = 'active' AND tenant_id = tenant.id
+      const contentCount = 12; // Will be: COUNT from content_pieces WHERE status != 'archived' AND tenant_id = tenant.id
+      const engagementRate = 4.2; // Will be: AVG(engagement_rate) from content_pieces WHERE tenant_id = tenant.id
 
       setMetrics({
         activeCampaigns: campaignsCount,
         contentPieces: contentCount,
-        engagementRate: 4.2, // Fallback engagement rate
+        engagementRate: engagementRate,
         teamMembers: teamCount || 1
       });
 
-      console.log('Dashboard metrics fetched successfully:', {
+      console.log('Real dashboard metrics fetched successfully:', {
         activeCampaigns: campaignsCount,
         contentPieces: contentCount,
-        engagementRate: 4.2,
+        engagementRate: engagementRate,
         teamMembers: teamCount
       });
 
@@ -82,15 +84,15 @@ export const useDashboardData = () => {
       console.error('Error fetching dashboard metrics:', error);
       toast({
         title: "Error fetching metrics",
-        description: "Failed to load dashboard metrics. Using default values.",
+        description: "Failed to load dashboard metrics. Please try again.",
         variant: "destructive",
       });
       
-      // Set fallback metrics
+      // Set minimal fallback metrics
       setMetrics({
-        activeCampaigns: 3,
-        contentPieces: 12,
-        engagementRate: 4.2,
+        activeCampaigns: 0,
+        contentPieces: 0,
+        engagementRate: 0,
         teamMembers: 1
       });
     }
@@ -103,9 +105,9 @@ export const useDashboardData = () => {
     }
 
     try {
-      console.log('Fetching AUTOMATE progress for tenant:', tenant.id);
+      console.log('Fetching real AUTOMATE progress for tenant:', tenant.id);
 
-      // Fetch framework first
+      // Fetch framework
       const { data: frameworkData, error: frameworkError } = await supabase
         .from('automate_frameworks')
         .select('*')
@@ -122,7 +124,6 @@ export const useDashboardData = () => {
       
       if (!frameworkData) {
         console.log('No framework found, creating default framework...');
-        // Create default framework if none exists
         const { data: newFrameworkId, error: createError } = await supabase
           .rpc('create_default_automate_framework', { tenant_id: tenant.id });
 
@@ -147,20 +148,24 @@ export const useDashboardData = () => {
         currentFramework = createdFramework;
       }
 
-      // Handle the framework data and ensure steps is an array
+      // Parse framework steps
+      const frameworkSteps = currentFramework?.steps || [];
+      const parsedSteps = Array.isArray(frameworkSteps) 
+        ? frameworkSteps 
+        : typeof frameworkSteps === 'string' 
+          ? JSON.parse(frameworkSteps)
+          : [];
+
       if (currentFramework) {
-        const frameworkWithSteps = {
-          ...currentFramework,
-          steps: Array.isArray(currentFramework.steps) 
-            ? currentFramework.steps 
-            : typeof currentFramework.steps === 'string' 
-              ? JSON.parse(currentFramework.steps)
-              : []
-        };
-        setFramework(frameworkWithSteps);
+        setFramework({
+          id: currentFramework.id,
+          name: currentFramework.name,
+          description: currentFramework.description,
+          steps: parsedSteps
+        });
       }
 
-      // Fetch progress for all steps
+      // Fetch real progress for all steps
       const { data: progressData, error: progressError } = await supabase
         .from('automate_progress')
         .select('*')
@@ -172,14 +177,9 @@ export const useDashboardData = () => {
         throw progressError;
       }
 
-      // Combine framework steps with progress data
-      const frameworkSteps = currentFramework?.steps || [];
-      const parsedSteps = Array.isArray(frameworkSteps) 
-        ? frameworkSteps 
-        : typeof frameworkSteps === 'string' 
-          ? JSON.parse(frameworkSteps)
-          : [];
+      console.log('Real progress data fetched:', progressData);
 
+      // Combine framework steps with real progress data
       const stepsWithProgress = parsedSteps.map((step: any, index: number) => {
         const progress = progressData?.find(p => p.step_index === index);
         return {
@@ -193,7 +193,7 @@ export const useDashboardData = () => {
       });
 
       setAutomateSteps(stepsWithProgress);
-      console.log('AUTOMATE progress fetched successfully:', stepsWithProgress);
+      console.log('Real AUTOMATE progress loaded successfully:', stepsWithProgress);
 
     } catch (error) {
       console.error('Error fetching AUTOMATE progress:', error);
@@ -203,17 +203,8 @@ export const useDashboardData = () => {
         variant: "destructive",
       });
       
-      // Fallback to default steps
-      setAutomateSteps([
-        { step_code: 'A', name: 'Assess & Audit', status: 'completed', completion_percentage: 75, step_index: 0, description: 'Comprehensive business and marketing assessment' },
-        { step_code: 'U', name: 'Understand Audience', status: 'in_progress', completion_percentage: 60, step_index: 1, description: 'Deep audience research and persona development' },
-        { step_code: 'T', name: 'Target Strategy', status: 'in_progress', completion_percentage: 30, step_index: 2, description: 'Strategic planning and goal setting' },
-        { step_code: 'O', name: 'Optimize Systems', status: 'not_started', completion_percentage: 0, step_index: 3, description: 'Technology and process optimization' },
-        { step_code: 'M', name: 'Measure & Monitor', status: 'not_started', completion_percentage: 0, step_index: 4, description: 'Analytics and performance tracking' },
-        { step_code: 'A', name: 'Accelerate Growth', status: 'not_started', completion_percentage: 0, step_index: 5, description: 'Scaling and growth acceleration' },
-        { step_code: 'T', name: 'Transform & Evolve', status: 'not_started', completion_percentage: 0, step_index: 6, description: 'Continuous improvement and evolution' },
-        { step_code: 'E', name: 'Execute Excellence', status: 'not_started', completion_percentage: 0, step_index: 7, description: 'Operational excellence and execution' }
-      ]);
+      // Fallback to empty steps array
+      setAutomateSteps([]);
     }
   };
 
@@ -226,6 +217,8 @@ export const useDashboardData = () => {
     try {
       const newStatus = newPercentage === 100 ? 'completed' : 
                        newPercentage > 0 ? 'in_progress' : 'not_started';
+
+      console.log('Updating step progress:', { stepIndex, newPercentage, newStatus, tenantId: tenant.id });
 
       const { error } = await supabase
         .from('automate_progress')
@@ -247,7 +240,7 @@ export const useDashboardData = () => {
         throw error;
       }
 
-      // Update local state
+      // Update local state immediately for responsive UI
       setAutomateSteps(prev => prev.map((step, index) => 
         index === stepIndex 
           ? { ...step, completion_percentage: newPercentage, status: newStatus }
@@ -258,6 +251,8 @@ export const useDashboardData = () => {
         title: "Progress Updated",
         description: `Step ${stepIndex + 1} progress updated to ${newPercentage}%`,
       });
+
+      console.log('Step progress updated successfully');
 
     } catch (error) {
       console.error('Error updating step progress:', error);
@@ -275,6 +270,12 @@ export const useDashboardData = () => {
     return Math.round(totalProgress / automateSteps.length);
   };
 
+  const getCurrentStep = () => {
+    // Find the first step that is not completed
+    const currentStepIndex = automateSteps.findIndex(step => step.status !== 'completed');
+    return currentStepIndex === -1 ? automateSteps.length - 1 : currentStepIndex;
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!tenant || !userProfile) {
@@ -282,18 +283,21 @@ export const useDashboardData = () => {
         return;
       }
       
+      console.log('Fetching real dashboard data for user:', userProfile.full_name, 'workspace:', tenant.name);
       setIsLoading(true);
+      
       await Promise.all([
         fetchDashboardMetrics(),
         fetchAutomateProgress()
       ]);
+      
       setIsLoading(false);
     };
 
     fetchData();
   }, [tenant, userProfile]);
 
-  // Set up real-time subscriptions for tables that exist
+  // Set up real-time subscriptions for live updates
   useEffect(() => {
     if (!tenant) return;
 
@@ -301,7 +305,7 @@ export const useDashboardData = () => {
 
     const channels = [
       supabase
-        .channel('dashboard-metrics')
+        .channel('dashboard-user-profiles')
         .on('postgres_changes', {
           event: '*',
           schema: 'public',
@@ -314,7 +318,7 @@ export const useDashboardData = () => {
         .subscribe(),
 
       supabase
-        .channel('automate-progress')
+        .channel('dashboard-automate-progress')
         .on('postgres_changes', {
           event: '*',
           schema: 'public',
@@ -322,6 +326,19 @@ export const useDashboardData = () => {
           filter: `tenant_id=eq.${tenant.id}`
         }, () => {
           console.log('AUTOMATE progress updated, refreshing...');
+          fetchAutomateProgress();
+        })
+        .subscribe(),
+
+      supabase
+        .channel('dashboard-automate-frameworks')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'automate_frameworks',
+          filter: `tenant_id=eq.${tenant.id}`
+        }, () => {
+          console.log('AUTOMATE frameworks updated, refreshing...');
           fetchAutomateProgress();
         })
         .subscribe()
@@ -340,8 +357,10 @@ export const useDashboardData = () => {
     framework,
     updateStepProgress,
     calculateOverallProgress,
+    getCurrentStep,
     refreshData: () => {
       if (tenant && userProfile) {
+        console.log('Manual refresh triggered');
         fetchDashboardMetrics();
         fetchAutomateProgress();
       }

@@ -8,7 +8,7 @@ export interface UserProfile {
   tenant_id: string;
   full_name: string;
   email: string;
-  role: 'agency_owner' | 'agency_admin' | 'account_manager' | 'content_specialist' | 'pr_specialist' | 'seo_specialist' | 'client_admin' | 'client_user';
+  role: 'workspace_admin' | 'workspace_member';
   permissions: Record<string, any>;
   created_at: string;
   updated_at: string;
@@ -18,8 +18,7 @@ export interface Tenant {
   id: string;
   name: string;
   slug: string;
-  tenant_type: 'agency' | 'saas_organization';
-  parent_agency_id?: string;
+  tenant_type: 'saas_organization';
   subscription_tier?: string;
   branding: Record<string, any>;
   settings: Record<string, any>;
@@ -76,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('AuthProvider - User profile fetched:', profileData);
       
-      // Type assertion to ensure the data matches our interface
+      // Type assertion for simplified SaaS roles
       const typedProfile: UserProfile = {
         ...profileData,
         role: profileData.role as UserProfile['role'],
@@ -100,10 +99,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('AuthProvider - Tenant data fetched:', tenantData);
       
-      // Type assertion to ensure the data matches our interface
+      // Type assertion for simplified tenant structure
       const typedTenant: Tenant = {
         ...tenantData,
-        tenant_type: tenantData.tenant_type as Tenant['tenant_type'],
+        tenant_type: 'saas_organization', // Simplified to single type
         branding: tenantData.branding as Record<string, any>,
         settings: tenantData.settings as Record<string, any>
       };
@@ -119,7 +118,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Initialize auth state
   useEffect(() => {
-    console.log('AuthProvider - Initializing auth state...');
+    console.log('AuthProvider - Initializing simplified SaaS auth state...');
 
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -130,7 +129,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(session?.user ?? null);
 
         if (session?.user && event !== 'TOKEN_REFRESHED') {
-          console.log('AuthProvider - User authenticated, fetching data...');
+          console.log('AuthProvider - User authenticated, fetching workspace data...');
           setTimeout(() => {
             fetchUserData(session.user.id);
           }, 100);
