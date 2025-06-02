@@ -2,27 +2,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
-
-export interface UserProfile {
-  id: string;
-  tenant_id: string;
-  full_name: string;
-  email: string;
-  role: 'workspace_admin' | 'workspace_member';
-  permissions: Record<string, any>;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface Tenant {
-  id: string;
-  name: string;
-  slug: string;
-  tenant_type: 'saas_organization';
-  subscription_tier?: string;
-  branding: Record<string, any>;
-  settings: Record<string, any>;
-}
+import { UserProfile, Tenant } from '@/types/auth';
 
 interface AuthContextType {
   user: SupabaseUser | null;

@@ -2,10 +2,11 @@
 import { useAuth } from '@/context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
+import { UserRole } from '@/types/auth';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requireRole?: 'workspace_admin';
+  requireRole?: UserRole;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }) => {
@@ -14,6 +15,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }
   console.log('ProtectedRoute - user:', user?.id);
   console.log('ProtectedRoute - userProfile:', userProfile?.role);
   console.log('ProtectedRoute - isLoading:', isLoading);
+  console.log('ProtectedRoute - requireRole:', requireRole);
 
   // Show loading state while authentication is being checked
   if (isLoading) {
