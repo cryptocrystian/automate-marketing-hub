@@ -60,63 +60,80 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Function to fetch user profile and tenant data
   const fetchUserData = async (userId: string) => {
     try {
-      console.log('AuthProvider - Fetching user profile for:', userId);
+      console.log('AuthProvider - Starting fetchUserData for userId:', userId);
       
-      // Fetch user profile
+      // Add delay to prevent potential race conditions
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Fetch user profile with detailed logging
+      console.log('AuthProvider - Attempting to fetch user profile...');
       const { data: profile, error: profileError } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         console.error('AuthProvider - Error fetching user profile:', profileError);
+        setIsLoading(false);
         return;
       }
 
-      if (profile) {
-        console.log('AuthProvider - User profile loaded:', profile);
-        // Type assertion to ensure proper typing
-        setUserProfile({
-          id: profile.id,
-          tenant_id: profile.tenant_id,
-          full_name: profile.full_name,
-          email: profile.email,
-          role: profile.role as UserProfile['role'],
-          permissions: profile.permissions as Record<string, any>,
-          created_at: profile.created_at,
-          updated_at: profile.updated_at
-        });
-
-        // Fetch tenant data
-        const { data: tenantData, error: tenantError } = await supabase
-          .from('tenants')
-          .select('*')
-          .eq('id', profile.tenant_id)
-          .single();
-
-        if (tenantError) {
-          console.error('AuthProvider - Error fetching tenant:', tenantError);
-          return;
-        }
-
-        if (tenantData) {
-          console.log('AuthProvider - Tenant data loaded:', tenantData);
-          // Type assertion to ensure proper typing
-          setTenant({
-            id: tenantData.id,
-            name: tenantData.name,
-            slug: tenantData.slug,
-            tenant_type: tenantData.tenant_type as Tenant['tenant_type'],
-            parent_agency_id: tenantData.parent_agency_id,
-            subscription_tier: tenantData.subscription_tier,
-            branding: tenantData.branding as Record<string, any>,
-            settings: tenantData.settings as Record<string, any>
-          });
-        }
+      if (!profile) {
+        console.log('AuthProvider - No profile found for user:', userId);
+        setIsLoading(false);
+        return;
       }
+
+      console.log('AuthProvider - User profile loaded successfully:', profile);
+      setUserProfile({
+        id: profile.id,
+        tenant_id: profile.tenant_id,
+        full_name: profile.full_name,
+        email: profile.email,
+        role: profile.role as UserProfile['role'],
+        permissions: profile.permissions as Record<string, any>,
+        created_at: profile.created_at,
+        updated_at: profile.updated_at
+      });
+
+      // Fetch tenant data with detailed logging
+      console.log('AuthProvider - Attempting to fetch tenant for tenant_id:', profile.tenant_id);
+      const { data: tenantData, error: tenantError } = await supabase
+        .from('tenants')
+        .select('*')
+        .eq('id', profile.tenant_id)
+        .maybeSingle();
+
+      if (tenantError) {
+        console.error('AuthProvider - Error fetching tenant:', tenantError);
+        setIsLoading(false);
+        return;
+      }
+
+      if (!tenantData) {
+        console.log('AuthProvider - No tenant found for tenant_id:', profile.tenant_id);
+        setIsLoading(false);
+        return;
+      }
+
+      console.log('AuthProvider - Tenant data loaded successfully:', tenantData);
+      setTenant({
+        id: tenantData.id,
+        name: tenantData.name,
+        slug: tenantData.slug,
+        tenant_type: tenantData.tenant_type as Tenant['tenant_type'],
+        parent_agency_id: tenantData.parent_agency_id,
+        subscription_tier: tenantData.subscription_tier,
+        branding: tenantData.branding as Record<string, any>,
+        settings: tenantData.settings as Record<string, any>
+      });
+
+      console.log('AuthProvider - Data fetching completed successfully');
+      setIsLoading(false);
     } catch (error) {
-      console.error('AuthProvider - Error in fetchUserData:', error);
+      console.error('AuthProvider - Unexpected error in fetchUserData:', error);
+      setIsLoading(false);
     }
   };
 
@@ -132,18 +149,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setSession(session);
         setUser(session?.user ?? null);
 
-        if (session?.user) {
-          // Defer data fetching to prevent potential deadlocks
+        if (session?.user && event !== 'TOKEN_REFRESHED') {
+          console.log('AuthProvider - User authenticated, fetching data...');
+          // Use setTimeout to prevent potential deadlocks
           setTimeout(() => {
             fetchUserData(session.user.id);
-          }, 0);
-        } else {
+          }, 100);
+        } else if (!session?.user) {
+          console.log('AuthProvider - No user session, clearing data...');
           // Clear user data when logged out
           setUserProfile(null);
           setTenant(null);
+          setIsLoading(false);
+        } else if (event === 'TOKEN_REFRESHED') {
+          console.log('AuthProvider - Token refreshed, checking if data exists...');
+          // Only fetch if we don't have profile data
+          if (!userProfile) {
+            setTimeout(() => {
+              fetchUserData(session.user.id);
+            }, 100);
+          } else {
+            setIsLoading(false);
+          }
         }
-        
-        setIsLoading(false);
       }
     );
 
@@ -156,10 +184,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (session?.user) {
         setTimeout(() => {
           fetchUserData(session.user.id);
-        }, 0);
+        }, 100);
+      } else {
+        setIsLoading(false);
       }
-      
-      setIsLoading(false);
     });
 
     return () => {

@@ -207,6 +207,12 @@ export type Database = {
         Args: { tenant_id: string }
         Returns: string
       }
+      get_user_tenant_ids: {
+        Args: { user_uuid: string }
+        Returns: {
+          tenant_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
