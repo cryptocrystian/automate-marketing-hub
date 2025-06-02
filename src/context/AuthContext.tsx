@@ -75,7 +75,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       console.log('AuthProvider - User profile fetched:', profileData);
-      setUserProfile(profileData);
+      
+      // Type assertion to ensure the data matches our interface
+      const typedProfile: UserProfile = {
+        ...profileData,
+        role: profileData.role as UserProfile['role'],
+        permissions: profileData.permissions as Record<string, any>
+      };
+      
+      setUserProfile(typedProfile);
 
       // Fetch tenant data
       const { data: tenantData, error: tenantError } = await supabase
@@ -91,7 +99,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       console.log('AuthProvider - Tenant data fetched:', tenantData);
-      setTenant(tenantData);
+      
+      // Type assertion to ensure the data matches our interface
+      const typedTenant: Tenant = {
+        ...tenantData,
+        tenant_type: tenantData.tenant_type as Tenant['tenant_type'],
+        branding: tenantData.branding as Record<string, any>,
+        settings: tenantData.settings as Record<string, any>
+      };
+      
+      setTenant(typedTenant);
       setIsLoading(false);
 
     } catch (error) {
