@@ -126,7 +126,7 @@ const App = () => (
             <Route
               path="/admin"
               element={
-                <ProtectedRoute requireRole="agency_admin">
+                <ProtectedRoute requireRole="workspace_admin">
                   <AdminPanel />
                 </ProtectedRoute>
               }
