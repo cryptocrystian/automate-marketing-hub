@@ -57,44 +57,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simplified function that bypasses the problematic RLS policies for now
   const fetchUserData = async (userId: string) => {
     try {
-      console.log('AuthProvider - Starting simplified fetchUserData for userId:', userId);
+      console.log('AuthProvider - Fetching user data for userId:', userId);
       
-      // For now, let's just create a minimal user state to get past the loading screen
-      // This is a temporary workaround until we can fix the RLS recursion issue
-      console.log('AuthProvider - Creating temporary user profile...');
-      
-      const tempProfile: UserProfile = {
-        id: userId,
-        tenant_id: 'temp-tenant-id',
-        full_name: 'User',
-        email: user?.email || 'user@example.com',
-        role: 'client_admin',
-        permissions: {},
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      };
+      // Fetch user profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-      const tempTenant: Tenant = {
-        id: 'temp-tenant-id',
-        name: 'Personal Workspace',
-        slug: 'personal-workspace',
-        tenant_type: 'saas_organization',
-        subscription_tier: 'content_only',
-        branding: {},
-        settings: {}
-      };
+      if (profileError) {
+        console.error('AuthProvider - Error fetching user profile:', profileError);
+        setIsLoading(false);
+        return;
+      }
 
-      console.log('AuthProvider - Setting temporary profile and tenant...');
-      setUserProfile(tempProfile);
-      setTenant(tempTenant);
+      console.log('AuthProvider - User profile fetched:', profileData);
+      setUserProfile(profileData);
+
+      // Fetch tenant data
+      const { data: tenantData, error: tenantError } = await supabase
+        .from('tenants')
+        .select('*')
+        .eq('id', profileData.tenant_id)
+        .single();
+
+      if (tenantError) {
+        console.error('AuthProvider - Error fetching tenant:', tenantError);
+        setIsLoading(false);
+        return;
+      }
+
+      console.log('AuthProvider - Tenant data fetched:', tenantData);
+      setTenant(tenantData);
       setIsLoading(false);
-      
-      console.log('AuthProvider - Temporary setup completed successfully');
+
     } catch (error) {
-      console.error('AuthProvider - Error in simplified fetchUserData:', error);
+      console.error('AuthProvider - Unexpected error in fetchUserData:', error);
       setIsLoading(false);
     }
   };
@@ -112,20 +113,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(session?.user ?? null);
 
         if (session?.user && event !== 'TOKEN_REFRESHED') {
-          console.log('AuthProvider - User authenticated, using simplified setup...');
-          // Use setTimeout to prevent potential deadlocks
+          console.log('AuthProvider - User authenticated, fetching data...');
           setTimeout(() => {
             fetchUserData(session.user.id);
           }, 100);
         } else if (!session?.user) {
           console.log('AuthProvider - No user session, clearing data...');
-          // Clear user data when logged out
           setUserProfile(null);
           setTenant(null);
           setIsLoading(false);
         } else if (event === 'TOKEN_REFRESHED') {
           console.log('AuthProvider - Token refreshed, checking if data exists...');
-          // Only fetch if we don't have profile data
           if (!userProfile) {
             setTimeout(() => {
               fetchUserData(session.user.id);
@@ -209,7 +207,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('AuthProvider - Sign up successful for:', data.user?.email);
       
-      // Check if email confirmation is required
       if (data.user && !data.session) {
         setIsLoading(false);
         return { error: 'Please check your email for a confirmation link.' };
@@ -232,7 +229,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.error('AuthProvider - Sign out error:', error.message);
       } else {
         console.log('AuthProvider - Sign out successful');
-        // Clear local state
         setUser(null);
         setUserProfile(null);
         setTenant(null);

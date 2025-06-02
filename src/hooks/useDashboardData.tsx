@@ -41,7 +41,10 @@ export const useDashboardData = () => {
   const [framework, setFramework] = useState<AutomateFramework | null>(null);
 
   const fetchDashboardMetrics = async () => {
-    if (!tenant) return;
+    if (!tenant) {
+      console.log('No tenant available for metrics');
+      return;
+    }
 
     try {
       console.log('Fetching dashboard metrics for tenant:', tenant.id);
@@ -52,10 +55,14 @@ export const useDashboardData = () => {
       const contentCount = 12; // Fallback value
 
       // Fetch team members count from existing user_profiles table
-      const { count: teamCount } = await supabase
+      const { count: teamCount, error: teamError } = await supabase
         .from('user_profiles')
         .select('*', { count: 'exact', head: true })
         .eq('tenant_id', tenant.id);
+
+      if (teamError) {
+        console.error('Error fetching team count:', teamError);
+      }
 
       setMetrics({
         activeCampaigns: campaignsCount,
@@ -90,7 +97,10 @@ export const useDashboardData = () => {
   };
 
   const fetchAutomateProgress = async () => {
-    if (!tenant) return;
+    if (!tenant) {
+      console.log('No tenant available for AUTOMATE progress');
+      return;
+    }
 
     try {
       console.log('Fetching AUTOMATE progress for tenant:', tenant.id);
@@ -104,6 +114,7 @@ export const useDashboardData = () => {
         .single();
 
       if (frameworkError && frameworkError.code !== 'PGRST116') {
+        console.error('Error fetching framework:', frameworkError);
         throw frameworkError;
       }
 
@@ -112,10 +123,11 @@ export const useDashboardData = () => {
       if (!frameworkData) {
         console.log('No framework found, creating default framework...');
         // Create default framework if none exists
-        const { data: newFramework, error: createError } = await supabase
+        const { data: newFrameworkId, error: createError } = await supabase
           .rpc('create_default_automate_framework', { tenant_id: tenant.id });
 
         if (createError) {
+          console.error('Error creating framework:', createError);
           throw createError;
         }
 
@@ -128,6 +140,7 @@ export const useDashboardData = () => {
           .single();
 
         if (fetchError) {
+          console.error('Error fetching created framework:', fetchError);
           throw fetchError;
         }
 
@@ -155,6 +168,7 @@ export const useDashboardData = () => {
         .order('step_index', { ascending: true });
 
       if (progressError) {
+        console.error('Error fetching progress:', progressError);
         throw progressError;
       }
 
@@ -204,7 +218,10 @@ export const useDashboardData = () => {
   };
 
   const updateStepProgress = async (stepIndex: number, newPercentage: number) => {
-    if (!tenant || !userProfile) return;
+    if (!tenant || !userProfile || !framework) {
+      console.log('Missing required data for progress update');
+      return;
+    }
 
     try {
       const newStatus = newPercentage === 100 ? 'completed' : 
@@ -214,7 +231,7 @@ export const useDashboardData = () => {
         .from('automate_progress')
         .upsert({
           tenant_id: tenant.id,
-          framework_id: framework?.id,
+          framework_id: framework.id,
           step_index: stepIndex,
           step_code: automateSteps[stepIndex]?.step_code,
           completion_percentage: newPercentage,
@@ -226,6 +243,7 @@ export const useDashboardData = () => {
         });
 
       if (error) {
+        console.error('Error updating step progress:', error);
         throw error;
       }
 
@@ -259,7 +277,10 @@ export const useDashboardData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!tenant || !userProfile) return;
+      if (!tenant || !userProfile) {
+        console.log('Waiting for authentication...');
+        return;
+      }
       
       setIsLoading(true);
       await Promise.all([
@@ -320,8 +341,10 @@ export const useDashboardData = () => {
     updateStepProgress,
     calculateOverallProgress,
     refreshData: () => {
-      fetchDashboardMetrics();
-      fetchAutomateProgress();
+      if (tenant && userProfile) {
+        fetchDashboardMetrics();
+        fetchAutomateProgress();
+      }
     }
   };
 };
