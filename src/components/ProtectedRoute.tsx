@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requireRole?: 'agency_owner' | 'agency_admin' | 'account_manager' | 'content_specialist' | 'pr_specialist' | 'seo_specialist' | 'client_admin' | 'client_user';
+  requireRole?: 'workspace_admin';
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }) => {
@@ -46,9 +46,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireRole }
 
   // Check role-based access if required
   if (requireRole) {
-    const hasRequiredRole = userProfile.role === requireRole || 
-                           userProfile.role === 'agency_owner' || 
-                           userProfile.role === 'agency_admin';
+    const hasRequiredRole = userProfile.role === requireRole;
     
     if (!hasRequiredRole) {
       console.log(`ProtectedRoute - User role ${userProfile.role} insufficient for required role ${requireRole}`);

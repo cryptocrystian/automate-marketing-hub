@@ -52,7 +52,7 @@ export function AppSidebar() {
       url: "/analytics",
       icon: BarChart3,
     },
-    ...(userProfile?.role === 'agency_admin' || userProfile?.role === 'agency_owner' ? [{
+    ...(userProfile?.role === 'workspace_admin' ? [{
       title: "Admin Panel",
       url: "/admin",
       icon: Settings,
