@@ -94,10 +94,10 @@ const PredictiveAnalytics = () => {
   return (
     <div className="space-y-6">
       {/* Model Overview */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-2 border-visionary">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-slate-800">Predictive Models Dashboard</CardTitle>
-          <CardDescription className="text-slate-600">
+          <CardTitle className="text-lg font-semibold text-executive">Predictive Models Dashboard</CardTitle>
+          <CardDescription className="text-gray-600">
             AI-powered forecasting and trend analysis
           </CardDescription>
         </CardHeader>
@@ -133,10 +133,10 @@ const PredictiveAnalytics = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Trend Predictions */}
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-disruptor">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">Trend Predictions</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-lg font-semibold text-executive">Trend Predictions</CardTitle>
+            <CardDescription className="text-gray-600">
               AI forecast vs actual performance
             </CardDescription>
           </CardHeader>
@@ -188,10 +188,10 @@ const PredictiveAnalytics = () => {
         </Card>
 
         {/* Anomaly Detection */}
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-authority">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">Anomaly Detection</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-lg font-semibold text-executive">Anomaly Detection</CardTitle>
+            <CardDescription className="text-gray-600">
               Real-time alerts for unusual patterns
             </CardDescription>
           </CardHeader>
@@ -238,10 +238,10 @@ const PredictiveAnalytics = () => {
       </div>
 
       {/* Optimization Recommendations */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-2 border-executive">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-slate-800">AI Optimization Recommendations</CardTitle>
-          <CardDescription className="text-slate-600">
+          <CardTitle className="text-lg font-semibold text-executive">AI Optimization Recommendations</CardTitle>
+          <CardDescription className="text-gray-600">
             Data-driven suggestions to improve performance
           </CardDescription>
         </CardHeader>
@@ -281,16 +281,16 @@ const PredictiveAnalytics = () => {
       </Card>
 
       {/* Alert System */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-l-4 border-l-visionary">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-lg font-semibold text-slate-800">Smart Alert System</CardTitle>
-              <CardDescription className="text-slate-600">
+              <CardTitle className="text-lg font-semibold text-executive">Smart Alert System</CardTitle>
+              <CardDescription className="text-gray-600">
                 Proactive notifications for critical events
               </CardDescription>
             </div>
-            <Button variant="outline">
+            <Button variant="outline" className="border-executive text-executive hover:bg-executive/10">
               <Bell className="h-4 w-4 mr-2" />
               Configure Alerts
             </Button>
@@ -321,50 +321,50 @@ const PredictiveAnalytics = () => {
 
       {/* Performance Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-visionary">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700">Forecast Accuracy</CardTitle>
-            <Brain className="h-4 w-4" style={{ color: '#6f2dbd' }} />
+            <CardTitle className="text-sm font-medium text-executive">Forecast Accuracy</CardTitle>
+            <Brain className="h-4 w-4 text-visionary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">87.3%</div>
-            <p className="text-xs text-slate-500 flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1" style={{ color: '#10b981' }} />
+            <div className="text-2xl font-bold text-gray-900">87.3%</div>
+            <p className="text-xs text-gray-600 flex items-center mt-1">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-600" />
               +2.1% this month
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-disruptor">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700">Anomalies Detected</CardTitle>
-            <AlertTriangle className="h-4 w-4" style={{ color: '#ff6b35' }} />
+            <CardTitle className="text-sm font-medium text-executive">Anomalies Detected</CardTitle>
+            <AlertTriangle className="h-4 w-4 text-disruptor" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">12</div>
-            <p className="text-xs text-slate-500">Last 7 days</p>
+            <div className="text-2xl font-bold text-gray-900">12</div>
+            <p className="text-xs text-gray-600">Last 7 days</p>
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-authority">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700">Recommendations</CardTitle>
-            <Target className="h-4 w-4" style={{ color: '#10b981' }} />
+            <CardTitle className="text-sm font-medium text-executive">Recommendations</CardTitle>
+            <Target className="h-4 w-4 text-authority" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">8</div>
-            <p className="text-xs text-slate-500">Actionable insights</p>
+            <div className="text-2xl font-bold text-gray-900">8</div>
+            <p className="text-xs text-gray-600">Actionable insights</p>
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-executive">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700">Model Training</CardTitle>
-            <Zap className="h-4 w-4" style={{ color: '#6f2dbd' }} />
+            <CardTitle className="text-sm font-medium text-executive">Model Training</CardTitle>
+            <Zap className="h-4 w-4 text-executive" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">94%</div>
-            <p className="text-xs text-slate-500">Complete</p>
+            <div className="text-2xl font-bold text-gray-900">94%</div>
+            <p className="text-xs text-gray-600">Complete</p>
           </CardContent>
         </Card>
       </div>

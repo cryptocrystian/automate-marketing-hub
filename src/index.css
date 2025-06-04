@@ -3,90 +3,120 @@
 @tailwind components;
 @tailwind utilities;
 
+/* PRAVADO BRAND COLORS - CSS VARIABLES */
+:root {
+  --disruptor-orange: #ff6b35;
+  --authority-crimson: #c3073f;
+  --executive-deep: #1e3d59;
+  --visionary-purple: #6f2dbd;
+  --neon-success: #00ff88;
+  --pristine-white: #f8f9fa;
+  
+  /* COMPLETE YELLOW ELIMINATION */
+  --yellow-50: #f9fafb;
+  --yellow-100: #f3f4f6;
+  --yellow-200: #e5e7eb;
+  --yellow-300: #d1d5db;
+  --yellow-400: #9ca3af;
+  --yellow-500: #6b7280;
+  --yellow-600: #4b5563;
+  --yellow-700: #374151;
+  --yellow-800: #1f2937;
+  --yellow-900: #111827;
+}
+
+/* NUCLEAR YELLOW ELIMINATION */
+.bg-yellow-50, .bg-yellow-100, .bg-yellow-200, .bg-yellow-300, .bg-yellow-400, .bg-yellow-500, .bg-yellow-600, .bg-yellow-700, .bg-yellow-800, .bg-yellow-900 {
+  background-color: var(--pristine-white) !important;
+}
+
+.bg-amber-50, .bg-amber-100, .bg-amber-200, .bg-amber-300, .bg-amber-400, .bg-amber-500, .bg-amber-600, .bg-amber-700, .bg-amber-800, .bg-amber-900 {
+  background-color: var(--pristine-white) !important;
+}
+
+.text-yellow-50, .text-yellow-100, .text-yellow-200, .text-yellow-300, .text-yellow-400, .text-yellow-500, .text-yellow-600, .text-yellow-700, .text-yellow-800, .text-yellow-900 {
+  color: #374151 !important;
+}
+
+.text-amber-50, .text-amber-100, .text-amber-200, .text-amber-300, .text-amber-400, .text-amber-500, .text-amber-600, .text-amber-700, .text-amber-800, .text-amber-900 {
+  color: #374151 !important;
+}
+
+/* PROFESSIONAL DASHBOARD CARDS */
+.dashboard-card {
+  background-color: var(--pristine-white);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.dashboard-card.campaigns {
+  border-left: 4px solid var(--authority-crimson);
+}
+
+.dashboard-card.content {
+  border-left: 4px solid var(--disruptor-orange);
+}
+
+.dashboard-card.performance {
+  border-left: 4px solid var(--visionary-purple);
+}
+
+/* MAIN HEADER */
+.main-header {
+  background: linear-gradient(135deg, var(--executive-deep) 0%, var(--visionary-purple) 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: var(--authority-crimson);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #a10631;
+  transform: translateY(-1px);
+}
+
 @layer base {
   :root {
     --background: 249 250 251;
     --foreground: 17 24 39;
-
     --card: 255 255 255;
     --card-foreground: 17 24 39;
-
     --popover: 255 255 255;
     --popover-foreground: 17 24 39;
-
     --primary: 195 7 63;
     --primary-foreground: 255 255 255;
-
     --secondary: 243 244 246;
     --secondary-foreground: 75 85 99;
-
     --muted: 249 250 251;
     --muted-foreground: 107 114 128;
-
     --accent: 249 250 251;
     --accent-foreground: 17 24 39;
-
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-
     --border: 229 231 235;
     --input: 229 231 235;
     --ring: 195 7 63;
-
     --radius: 0.5rem;
-
-    --sidebar-background: 30 61 89;
-    --sidebar-foreground: 255 255 255;
-    --sidebar-primary: 195 7 63;
-    --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 51 65 85;
-    --sidebar-accent-foreground: 255 255 255;
-    --sidebar-border: 51 65 85;
-    --sidebar-ring: 195 7 63;
-
-    /* PRAVADO BRAND COLOR VARIABLES */
-    --disruptor: 255 107 53;
-    --disruptor-foreground: 255 255 255;
-    --authority: 195 7 63;
-    --authority-foreground: 255 255 255;
-    --executive: 30 61 89;
-    --executive-foreground: 255 255 255;
-    --visionary: 111 45 189;
-    --visionary-foreground: 255 255 255;
-
-    /* OVERRIDE ALL YELLOW WITH DISRUPTOR ORANGE */
-    --warning: 255 107 53;
-    --warning-foreground: 255 255 255;
-    --success: 34 197 94;
-    --success-foreground: 255 255 255;
-    --info: 195 7 63;
-    --info-foreground: 255 255 255;
-
-    /* COMPLETE YELLOW ELIMINATION - OVERRIDE WITH DISRUPTOR ORANGE */
-    --yellow-50: 255 247 240;
-    --yellow-100: 255 238 224;
-    --yellow-200: 255 217 184;
-    --yellow-300: 255 189 133;
-    --yellow-400: 255 151 80;
-    --yellow-500: 255 107 53;
-    --yellow-600: 240 72 34;
-    --yellow-700: 199 52 24;
-    --yellow-800: 158 44 24;
-    --yellow-900: 127 40 24;
-    --yellow-950: 68 18 10;
-
-    /* AMBER OVERRIDE WITH DISRUPTOR ORANGE */
-    --amber-50: 255 247 240;
-    --amber-100: 255 238 224;
-    --amber-200: 255 217 184;
-    --amber-300: 255 189 133;
-    --amber-400: 255 151 80;
-    --amber-500: 255 107 53;
-    --amber-600: 240 72 34;
-    --amber-700: 199 52 24;
-    --amber-800: 158 44 24;
-    --amber-900: 127 40 24;
-    --amber-950: 68 18 10;
   }
 
   * {
@@ -95,201 +125,5 @@
 
   body {
     @apply bg-gray-50 text-gray-900 font-sans;
-  }
-
-  /* SIDEBAR STYLING WITH EXECUTIVE DEEP */
-  .sidebar-dark {
-    background-color: #1e3d59 !important;
-    border-right: 1px solid #334155 !important;
-  }
-
-  .sidebar-dark [data-sidebar="sidebar"] {
-    background-color: #1e3d59 !important;
-  }
-
-  .sidebar-header {
-    background-color: #1e3d59 !important;
-    border-bottom: 1px solid #334155 !important;
-    padding: 1.5rem !important;
-  }
-
-  .sidebar-content {
-    background-color: #1e3d59 !important;
-    padding: 0 1rem !important;
-  }
-
-  .sidebar-footer {
-    background-color: #1e3d59 !important;
-    border-top: 1px solid #334155 !important;
-    padding: 1rem !important;
-  }
-
-  .sidebar-menu-button {
-    color: white !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .sidebar-menu-button:hover {
-    background-color: #334155 !important;
-    color: white !important;
-  }
-
-  .sidebar-menu-button[data-active="true"] {
-    background-color: #c3073f !important;
-    color: white !important;
-    font-weight: 500 !important;
-  }
-
-  .sidebar-logout-button {
-    background-color: transparent !important;
-    border: 1px solid #475569 !important;
-    color: white !important;
-  }
-
-  .sidebar-logout-button:hover {
-    background-color: #334155 !important;
-    color: white !important;
-    border-color: #475569 !important;
-  }
-
-  /* PRAVADO BRAND COLOR CLASSES */
-  .bg-disruptor { background-color: #ff6b35 !important; color: white !important; }
-  .text-disruptor { color: #ff6b35 !important; }
-  .border-disruptor { border-color: #ff6b35 !important; }
-
-  .bg-authority { background-color: #c3073f !important; color: white !important; }
-  .text-authority { color: #c3073f !important; }
-  .border-authority { border-color: #c3073f !important; }
-
-  .bg-executive { background-color: #1e3d59 !important; color: white !important; }
-  .text-executive { color: #1e3d59 !important; }
-  .border-executive { border-color: #1e3d59 !important; }
-
-  .bg-visionary { background-color: #6f2dbd !important; color: white !important; }
-  .text-visionary { color: #6f2dbd !important; }
-  .border-visionary { border-color: #6f2dbd !important; }
-
-  /* ======== NUCLEAR YELLOW ELIMINATION ======== */
-  /* MAXIMUM PRIORITY OVERRIDES WITH !important */
-  
-  /* Force override ALL yellow background classes */
-  .bg-yellow-50, [class*="bg-yellow-50"], .bg-yellow-100, [class*="bg-yellow-100"],
-  .bg-yellow-200, [class*="bg-yellow-200"], .bg-yellow-300, [class*="bg-yellow-300"],
-  .bg-yellow-400, [class*="bg-yellow-400"], .bg-yellow-500, [class*="bg-yellow-500"],
-  .bg-yellow-600, [class*="bg-yellow-600"], .bg-yellow-700, [class*="bg-yellow-700"],
-  .bg-yellow-800, [class*="bg-yellow-800"], .bg-yellow-900, [class*="bg-yellow-900"] {
-    background-color: #ff6b35 !important;
-    color: white !important;
-  }
-
-  /* Force override ALL amber background classes */
-  .bg-amber-50, [class*="bg-amber-50"], .bg-amber-100, [class*="bg-amber-100"],
-  .bg-amber-200, [class*="bg-amber-200"], .bg-amber-300, [class*="bg-amber-300"],
-  .bg-amber-400, [class*="bg-amber-400"], .bg-amber-500, [class*="bg-amber-500"],
-  .bg-amber-600, [class*="bg-amber-600"], .bg-amber-700, [class*="bg-amber-700"],
-  .bg-amber-800, [class*="bg-amber-800"], .bg-amber-900, [class*="bg-amber-900"] {
-    background-color: #ff6b35 !important;
-    color: white !important;
-  }
-
-  /* Force override ALL yellow text classes */
-  .text-yellow-50, [class*="text-yellow-50"], .text-yellow-100, [class*="text-yellow-100"],
-  .text-yellow-200, [class*="text-yellow-200"], .text-yellow-300, [class*="text-yellow-300"],
-  .text-yellow-400, [class*="text-yellow-400"], .text-yellow-500, [class*="text-yellow-500"],
-  .text-yellow-600, [class*="text-yellow-600"], .text-yellow-700, [class*="text-yellow-700"],
-  .text-yellow-800, [class*="text-yellow-800"], .text-yellow-900, [class*="text-yellow-900"] {
-    color: #ff6b35 !important;
-  }
-
-  /* Force override ALL amber text classes */
-  .text-amber-50, [class*="text-amber-50"], .text-amber-100, [class*="text-amber-100"],
-  .text-amber-200, [class*="text-amber-200"], .text-amber-300, [class*="text-amber-300"],
-  .text-amber-400, [class*="text-amber-400"], .text-amber-500, [class*="text-amber-500"],
-  .text-amber-600, [class*="text-amber-600"], .text-amber-700, [class*="text-amber-700"],
-  .text-amber-800, [class*="text-amber-800"], .text-amber-900, [class*="text-amber-900"] {
-    color: #ff6b35 !important;
-  }
-
-  /* Warning classes to Disruptor Orange */
-  .bg-warning, [class*="bg-warning"] { background-color: #ff6b35 !important; color: white !important; }
-  .text-warning, [class*="text-warning"] { color: #ff6b35 !important; }
-  .border-warning, [class*="border-warning"] { border-color: #ff6b35 !important; }
-
-  /* Tabs component with Authority Crimson */
-  [data-state="active"][data-orientation="horizontal"],
-  [data-state="active"],
-  .TabsTrigger[data-state="active"],
-  [role="tab"][data-state="active"],
-  [role="tab"][aria-selected="true"] {
-    background-color: #c3073f !important;
-    color: white !important;
-    border-color: #c3073f !important;
-  }
-
-  [data-radix-collection-item][data-state="active"] {
-    background-color: #c3073f !important;
-    color: white !important;
-  }
-
-  .tab-active,
-  .tab[aria-selected="true"],
-  button[role="tab"][data-state="active"],
-  button[role="tab"][aria-selected="true"] {
-    background-color: #c3073f !important;
-    color: white !important;
-  }
-
-  /* FORCE OVERRIDE ANY COMPUTED YELLOW STYLES */
-  *[style*="yellow"], *[class*="yellow"], *[style*="amber"], *[class*="amber"] {
-    background-color: #ff6b35 !important;
-    color: white !important;
-    border-color: #ff6b35 !important;
-  }
-
-  /* ULTIMATE NUCLEAR OPTION - Override any remaining yellow elements */
-  *[style*="background-color"][style*="yellow"],
-  *[style*="color"][style*="yellow"],
-  *[class*="bg-yellow"],
-  *[class*="text-yellow"],
-  *[class*="border-yellow"],
-  *[style*="background-color"][style*="amber"],
-  *[style*="color"][style*="amber"],
-  *[class*="bg-amber"],
-  *[class*="text-amber"],
-  *[class*="border-amber"] {
-    background-color: #ff6b35 !important;
-    color: white !important;
-    border-color: #ff6b35 !important;
-  }
-
-  /* FORCE OVERRIDE CARDS THAT ARE YELLOW */
-  .card.bg-yellow-400,
-  .card[class*="bg-yellow"],
-  .card[class*="bg-amber"],
-  [class*="Card"][class*="bg-yellow"],
-  [class*="Card"][class*="bg-amber"] {
-    background-color: #ff6b35 !important;
-    color: white !important;
-  }
-
-  /* FORCE DASHBOARD METRIC CARDS TO USE PRAVADO COLORS */
-  .grid .card:nth-child(1) {
-    background-color: #c3073f !important;
-    color: white !important;
-  }
-
-  .grid .card:nth-child(2) {
-    background-color: #ff6b35 !important;
-    color: white !important;
-  }
-
-  .grid .card:nth-child(3) {
-    background-color: #1e3d59 !important;
-    color: white !important;
-  }
-
-  .grid .card:nth-child(4) {
-    background-color: #6f2dbd !important;
-    color: white !important;
   }
 }

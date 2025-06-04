@@ -40,17 +40,17 @@ const InteractiveDashboard = () => {
   return (
     <div className="space-y-6">
       {/* Controls */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-2 border-executive">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-lg font-semibold text-slate-800">Interactive Dashboard Controls</CardTitle>
-              <CardDescription className="text-slate-600">
+              <CardTitle className="text-lg font-semibold text-executive">Interactive Dashboard Controls</CardTitle>
+              <CardDescription className="text-gray-600">
                 Customize your view with advanced filtering and comparison options
               </CardDescription>
             </div>
             <div className="flex items-center space-x-2">
-              <Badge variant={isRealTime ? "default" : "secondary"} style={{ backgroundColor: '#10b981', color: 'white' }}>
+              <Badge variant={isRealTime ? "default" : "secondary"} className={isRealTime ? "bg-neon-success text-white" : ""}>
                 <Zap className="h-3 w-3 mr-1" />
                 {isRealTime ? 'Live' : 'Static'}
               </Badge>
@@ -58,6 +58,7 @@ const InteractiveDashboard = () => {
                 variant="outline"
                 size="sm"
                 onClick={() => setIsRealTime(!isRealTime)}
+                className="border-executive text-executive hover:bg-executive/10"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Toggle Real-time
@@ -68,7 +69,7 @@ const InteractiveDashboard = () => {
         <CardContent>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4 text-slate-600" />
+              <Calendar className="h-4 w-4 text-executive" />
               <Select value={dateRange} onValueChange={setDateRange}>
                 <SelectTrigger className="w-48">
                   <SelectValue />
@@ -85,7 +86,7 @@ const InteractiveDashboard = () => {
             </div>
             
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4 text-slate-600" />
+              <Filter className="h-4 w-4 text-executive" />
               <Select value={comparisonMode} onValueChange={setComparisonMode}>
                 <SelectTrigger className="w-48">
                   <SelectValue />
@@ -103,10 +104,10 @@ const InteractiveDashboard = () => {
       </Card>
 
       {/* Real-time Performance */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-l-4 border-l-disruptor">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-slate-800">Real-time Performance</CardTitle>
-          <CardDescription className="text-slate-600">
+          <CardTitle className="text-lg font-semibold text-executive">Real-time Performance</CardTitle>
+          <CardDescription className="text-gray-600">
             Live updates every 30 seconds
           </CardDescription>
         </CardHeader>
@@ -128,10 +129,10 @@ const InteractiveDashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Comparison Analysis */}
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-authority">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">Comparison Analysis</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-lg font-semibold text-executive">Comparison Analysis</CardTitle>
+            <CardDescription className="text-gray-600">
               Current vs Previous Period ({comparisonMode.toUpperCase()})
             </CardDescription>
           </CardHeader>
@@ -150,10 +151,10 @@ const InteractiveDashboard = () => {
         </Card>
 
         {/* Drill-down Analysis */}
-        <Card className="border border-slate-200 bg-white">
+        <Card className="bg-white border-l-4 border-l-visionary">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-slate-800">Source Performance</CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardTitle className="text-lg font-semibold text-executive">Source Performance</CardTitle>
+            <CardDescription className="text-gray-600">
               Click to drill down into detailed metrics
             </CardDescription>
           </CardHeader>
@@ -183,10 +184,10 @@ const InteractiveDashboard = () => {
       </div>
 
       {/* Growth Metrics */}
-      <Card className="border border-slate-200 bg-white">
+      <Card className="bg-white border-2 border-executive">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-slate-800">Growth Trends</CardTitle>
-          <CardDescription className="text-slate-600">
+          <CardTitle className="text-lg font-semibold text-executive">Growth Trends</CardTitle>
+          <CardDescription className="text-gray-600">
             Period-over-period growth analysis
           </CardDescription>
         </CardHeader>
