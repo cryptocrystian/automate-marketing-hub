@@ -1,15 +1,10 @@
 
-import { useAuth } from '@/context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const Index = () => {
-  const { user } = useAuth();
-
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  return <Navigate to="/login" replace />;
+  // Since this component is now wrapped in Layout and ProtectedRoute,
+  // we know the user is authenticated, so redirect to dashboard
+  return <Navigate to="/dashboard" replace />;
 };
 
 export default Index;

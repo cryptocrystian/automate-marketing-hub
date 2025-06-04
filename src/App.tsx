@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AutomateStrategy from "./pages/AutomateStrategy";
@@ -23,6 +24,7 @@ import PRMedia from "./pages/PRMedia";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 import SEODashboard from "./pages/SEODashboard";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +41,9 @@ const App = () => (
               path="/"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Layout>
+                    <Index />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -47,7 +51,9 @@ const App = () => (
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -55,7 +61,9 @@ const App = () => (
               path="/automate"
               element={
                 <ProtectedRoute>
-                  <AutomateStrategy />
+                  <Layout>
+                    <AutomateStrategy />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -63,7 +71,9 @@ const App = () => (
               path="/automate/assess-audit"
               element={
                 <ProtectedRoute>
-                  <AssessAudit />
+                  <Layout>
+                    <AssessAudit />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -71,7 +81,9 @@ const App = () => (
               path="/automate/understand-audience"
               element={
                 <ProtectedRoute>
-                  <UnderstandAudience />
+                  <Layout>
+                    <UnderstandAudience />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -79,7 +91,9 @@ const App = () => (
               path="/automate/target-strategy"
               element={
                 <ProtectedRoute>
-                  <TargetStrategy />
+                  <Layout>
+                    <TargetStrategy />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -87,7 +101,9 @@ const App = () => (
               path="/automate/optimize-systems"
               element={
                 <ProtectedRoute>
-                  <OptimizeSystems />
+                  <Layout>
+                    <OptimizeSystems />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -95,7 +111,9 @@ const App = () => (
               path="/automate/measure-monitor"
               element={
                 <ProtectedRoute>
-                  <MeasureMonitor />
+                  <Layout>
+                    <MeasureMonitor />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -103,7 +121,9 @@ const App = () => (
               path="/automate/accelerate-growth"
               element={
                 <ProtectedRoute>
-                  <AccelerateGrowth />
+                  <Layout>
+                    <AccelerateGrowth />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -111,7 +131,9 @@ const App = () => (
               path="/automate/transform-evolve"
               element={
                 <ProtectedRoute>
-                  <TransformEvolve />
+                  <Layout>
+                    <TransformEvolve />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -119,7 +141,9 @@ const App = () => (
               path="/automate/execute-excellence"
               element={
                 <ProtectedRoute>
-                  <ExecuteExcellence />
+                  <Layout>
+                    <ExecuteExcellence />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -127,7 +151,9 @@ const App = () => (
               path="/admin"
               element={
                 <ProtectedRoute requireRole="workspace_admin">
-                  <AdminPanel />
+                  <Layout>
+                    <AdminPanel />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -135,7 +161,9 @@ const App = () => (
               path="/content"
               element={
                 <ProtectedRoute>
-                  <ContentManagement />
+                  <Layout>
+                    <ContentManagement />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -143,7 +171,9 @@ const App = () => (
               path="/pr-media"
               element={
                 <ProtectedRoute>
-                  <PRMedia />
+                  <Layout>
+                    <PRMedia />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -151,7 +181,9 @@ const App = () => (
               path="/seo"
               element={
                 <ProtectedRoute>
-                  <SEODashboard />
+                  <Layout>
+                    <SEODashboard />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
@@ -159,7 +191,9 @@ const App = () => (
               path="/analytics"
               element={
                 <ProtectedRoute>
-                  <Analytics />
+                  <Layout>
+                    <Analytics />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
