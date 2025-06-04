@@ -85,7 +85,7 @@ const SEODashboard = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <Badge className="bg-purple-100 text-purple-800 border-purple-300">
+            <Badge className="bg-white border-purple-300 text-purple-800">
               <Brain className="w-3 h-3 mr-1" />
               AI-Enhanced
             </Badge>
@@ -96,10 +96,10 @@ const SEODashboard = () => {
           </div>
         </div>
 
-        {/* SEO Stats Overview */}
+        {/* SEO Stats Overview - ALL WHITE BACKGROUNDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {seoStats.map((stat, index) => (
-            <Card key={index} className="border border-slate-200 bg-white">
+            <Card key={index} className="bg-white border border-slate-200">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-slate-700">
                   {stat.title}
@@ -116,7 +116,7 @@ const SEODashboard = () => {
           ))}
         </div>
 
-        {/* Enhanced SEO Intelligence Tabs */}
+        {/* Enhanced SEO Intelligence Tabs - WHITE BACKGROUND */}
         <Tabs defaultValue="keyword-research" className="space-y-6">
           <TabsList className="grid w-full grid-cols-6 bg-white border border-slate-200">
             <TabsTrigger value="keyword-research" className="flex items-center gap-2">
@@ -170,33 +170,33 @@ const SEODashboard = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Cross-Pillar Integration Summary */}
-        <Card className="mt-8 border-purple-200 bg-purple-50">
+        {/* Cross-Pillar Integration Summary - WHITE BACKGROUND WITH EXECUTIVE DEEP ACCENTS */}
+        <Card className="mt-8 bg-white border-l-4 border-l-executive">
           <CardHeader>
-            <CardTitle className="text-purple-800 flex items-center">
+            <CardTitle className="text-executive flex items-center">
               <Target className="w-5 h-5 mr-2" />
               Cross-Pillar SEO Integration
             </CardTitle>
-            <CardDescription className="text-purple-600">
+            <CardDescription className="text-slate-600">
               SEO performance enhanced by Content and PR pillar integration
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600 mb-1">+45%</div>
-                <div className="text-sm text-purple-700">Content Amplification</div>
-                <div className="text-xs text-purple-600">from PR integration</div>
+              <div className="text-center p-4 bg-white border border-gray-200 rounded-lg">
+                <div className="text-2xl font-bold text-executive mb-1">+45%</div>
+                <div className="text-sm text-slate-700">Content Amplification</div>
+                <div className="text-xs text-slate-600">from PR integration</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600 mb-1">156</div>
-                <div className="text-sm text-purple-700">PR Backlinks</div>
-                <div className="text-xs text-purple-600">boosting domain authority</div>
+              <div className="text-center p-4 bg-white border border-gray-200 rounded-lg">
+                <div className="text-2xl font-bold text-executive mb-1">156</div>
+                <div className="text-sm text-slate-700">PR Backlinks</div>
+                <div className="text-xs text-slate-600">boosting domain authority</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600 mb-1">94%</div>
-                <div className="text-sm text-purple-700">Cross-Pillar Synergy</div>
-                <div className="text-xs text-purple-600">optimization score</div>
+              <div className="text-center p-4 bg-white border border-gray-200 rounded-lg">
+                <div className="text-2xl font-bold text-executive mb-1">94%</div>
+                <div className="text-sm text-slate-700">Cross-Pillar Synergy</div>
+                <div className="text-xs text-slate-600">optimization score</div>
               </div>
             </div>
           </CardContent>

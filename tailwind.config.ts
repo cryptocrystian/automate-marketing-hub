@@ -83,14 +83,14 @@ const config: Config = {
         "neon-success": "#00ff88",
         "pristine-white": "#f8f9fa",
         
-        // ELIMINATE YELLOW COMPLETELY
+        // NUCLEAR YELLOW ELIMINATION - FORCED OVERRIDE
         yellow: {
           50: "#f9fafb",
           100: "#f3f4f6",
           200: "#e5e7eb",
           300: "#d1d5db",
-          400: "#9ca3af",
-          500: "#6b7280",
+          400: "#ff6b35", // Disruptor Orange replacement
+          500: "#c3073f", // Authority Crimson replacement
           600: "#4b5563",
           700: "#374151",
           800: "#1f2937",
@@ -101,8 +101,8 @@ const config: Config = {
           100: "#f3f4f6",
           200: "#e5e7eb",
           300: "#d1d5db",
-          400: "#9ca3af",
-          500: "#6b7280",
+          400: "#ff6b35", // Disruptor Orange replacement
+          500: "#c3073f", // Authority Crimson replacement
           600: "#4b5563",
           700: "#374151",
           800: "#1f2937",
