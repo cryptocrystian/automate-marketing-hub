@@ -26,13 +26,37 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 const Dashboard = () => {
   const { 
-    quickStats, 
-    isLoading,
-    recentActivity,
-    performanceData,
-    upcomingEvents,
-    aiInsights
+    metrics, 
+    isLoading
   } = useDashboardData();
+
+  // Mock data for UI components that aren't yet connected to real data
+  const recentActivity = [
+    { icon: TrendingUp, title: "Campaign launched successfully", time: "2 hours ago" },
+    { icon: FileText, title: "New content piece published", time: "4 hours ago" },
+    { icon: Bot, title: "AI citation detected", time: "6 hours ago" },
+    { icon: Megaphone, title: "Press release distributed", time: "1 day ago" }
+  ];
+
+  const performanceData = [
+    { date: 'Jan 1', value: 65 },
+    { date: 'Jan 8', value: 78 },
+    { date: 'Jan 15', value: 82 },
+    { date: 'Jan 22', value: 89 },
+    { date: 'Jan 29', value: 95 }
+  ];
+
+  const upcomingEvents = [
+    { title: "Q1 Campaign Review", date: "Tomorrow, 2:00 PM", priority: "high" },
+    { title: "Content Calendar Planning", date: "Friday, 10:00 AM", priority: "medium" },
+    { title: "SEO Audit Report", date: "Next Monday", priority: "low" }
+  ];
+
+  const aiInsights = [
+    { title: "Content Performance Spike", description: "Your recent blog posts are performing 34% better than average", confidence: 92 },
+    { title: "SEO Opportunity", description: "3 new keyword opportunities identified in your niche", confidence: 87 },
+    { title: "Media Mention Alert", description: "Brand mentions increased 28% this week", confidence: 95 }
+  ];
 
   if (isLoading) {
     return (
@@ -86,7 +110,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.activeCampaigns}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.activeCampaigns || 0}</div>
             <div className="text-xs text-gray-600 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3 text-green-500" />
               +12% from last month
@@ -103,7 +127,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.contentPieces}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.contentPieces || 0}</div>
             <div className="text-xs text-gray-600 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3 text-green-500" />
               +8% this week
@@ -120,7 +144,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.seoKeywords}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.seoKeywords || 0}</div>
             <div className="text-xs text-gray-600 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3 text-green-500" />
               Ranking improved
@@ -137,7 +161,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.teamMembers}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.teamMembers || 1}</div>
             <div className="text-xs text-gray-600">Active contributors</div>
           </CardContent>
         </Card>
@@ -151,7 +175,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.aiCitations}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.aiCitations || 0}</div>
             <div className="text-xs text-gray-600 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3 text-green-500" />
               +15% mentions
@@ -168,7 +192,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.podcastSyndications}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.podcastSyndications || 0}</div>
             <div className="text-xs text-gray-600">Episodes distributed</div>
           </CardContent>
         </Card>
@@ -182,7 +206,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.pressReleases}</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.pressReleases || 0}</div>
             <div className="text-xs text-gray-600">Published this month</div>
           </CardContent>
         </Card>
@@ -196,7 +220,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{quickStats.engagementRate}%</div>
+            <div className="text-2xl font-bold text-gray-900">{metrics?.engagementRate || 0}%</div>
             <div className="text-xs text-gray-600 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3 text-green-500" />
               Above industry avg
@@ -306,7 +330,7 @@ const Dashboard = () => {
                     variant="outline" 
                     className={`
                       ${event.priority === 'high' ? 'border-red-200 text-red-700' : ''}
-                      ${event.priority === 'medium' ? 'border-yellow-200 text-yellow-700' : ''}
+                      ${event.priority === 'medium' ? 'border-blue-200 text-blue-700' : ''}
                       ${event.priority === 'low' ? 'border-green-200 text-green-700' : ''}
                     `}
                   >
