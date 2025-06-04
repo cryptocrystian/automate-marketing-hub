@@ -46,13 +46,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-64 justify-start text-slate-500"
+                  className="w-64 justify-start text-slate-500 bg-white border-gray-300 hover:border-authority hover:bg-gray-50"
                   onClick={() => setIsSearchOpen(true)}
-                  style={{ backgroundColor: '#ff6b35', color: 'white', borderColor: '#ff6b35' }}
                 >
                   <Search className="mr-2 h-4 w-4" />
                   Search anything...
-                  <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-white/20 px-1.5 font-mono text-[10px] font-medium text-white opacity-100">
+                  <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-gray-300 bg-gray-100 px-1.5 font-mono text-[10px] font-medium text-gray-600 opacity-100">
                     <span className="text-xs">⌘</span>K
                   </kbd>
                 </Button>
@@ -65,8 +64,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     variant="outline"
                     size="sm"
                     onClick={installPWA}
-                    className="hidden sm:flex"
-                    style={{ backgroundColor: '#c3073f', color: 'white', borderColor: '#c3073f' }}
+                    className="hidden sm:flex bg-authority text-white border-authority hover:bg-authority/90"
                   >
                     <Download className="mr-2 h-4 w-4" />
                     Install App

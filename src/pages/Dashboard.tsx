@@ -1,444 +1,352 @@
 
-import Layout from '@/components/Layout';
-import { useAuth } from '@/context/AuthContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
+import React from 'react';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { 
-  BarChart3, 
-  Target, 
   TrendingUp, 
-  Users,
+  FileText, 
+  Search, 
+  Users, 
   Calendar,
-  FileText,
   Megaphone,
-  Settings,
-  ChevronRight,
-  Activity,
-  RefreshCw,
-  Zap,
-  Building,
-  Crown,
-  Search,
-  Brain,
+  BarChart3,
+  Bot,
   Mic,
-  FileImage
+  Target,
+  Brain,
+  Zap,
+  Star,
+  ArrowUpRight,
+  Play,
+  Eye
 } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const Dashboard = () => {
-  const { userProfile, tenant } = useAuth();
   const { 
-    isLoading, 
-    metrics, 
-    automateSteps, 
-    updateStepProgress, 
-    calculateOverallProgress,
-    getCurrentStep,
-    refreshData 
+    quickStats, 
+    isLoading,
+    recentActivity,
+    performanceData,
+    upcomingEvents,
+    aiInsights
   } = useDashboardData();
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed': return 'bg-green-500';
-      case 'in_progress': return 'bg-blue-500';
-      default: return 'bg-gray-300';
-    }
-  };
-
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'completed': return <Badge className="bg-green-100 text-green-800">Completed</Badge>;
-      case 'in_progress': return <Badge className="bg-blue-100 text-blue-800">In Progress</Badge>;
-      default: return <Badge variant="secondary">Not Started</Badge>;
-    }
-  };
-
-  const handleStepClick = async (stepIndex: number) => {
-    const currentStep = automateSteps[stepIndex];
-    if (!currentStep) return;
-
-    const newProgress = currentStep.completion_percentage >= 100 ? 0 : 
-                       Math.min(currentStep.completion_percentage + 25, 100);
-    
-    await updateStepProgress(stepIndex, newProgress);
-  };
 
   if (isLoading) {
     return (
-      <Layout>
-        <div className="space-y-6">
-          {/* Loading Header */}
-          <div className="bg-pravado-gradient rounded-xl p-8 text-white">
-            <Skeleton className="h-8 w-64 mb-2 bg-white/20" />
-            <Skeleton className="h-4 w-48 mb-4 bg-white/20" />
-            <div className="flex items-center space-x-4">
-              <Skeleton className="h-4 w-32 bg-white/20" />
-              <Skeleton className="h-4 w-40 bg-white/20" />
-            </div>
-          </div>
-
-          {/* Loading Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <Card key={i} className="bg-white">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <Skeleton className="h-4 w-24" />
-                  <Skeleton className="h-4 w-4" />
-                </CardHeader>
-                <CardContent>
-                  <Skeleton className="h-8 w-16 mb-1" />
-                  <Skeleton className="h-3 w-20" />
-                </CardContent>
-              </Card>
+      <div className="space-y-6">
+        <div className="animate-pulse">
+          <div className="h-32 bg-gray-200 rounded-xl mb-6"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="h-32 bg-gray-200 rounded-lg"></div>
             ))}
           </div>
-
-          <Card className="lg:col-span-2 bg-white">
-            <CardHeader>
-              <Skeleton className="h-6 w-48" />
-              <Skeleton className="h-4 w-64" />
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="flex items-center space-x-4 p-3 rounded-lg border">
-                    <Skeleton className="w-10 h-10 rounded-full" />
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <Skeleton className="h-4 w-32" />
-                        <Skeleton className="h-5 w-20" />
-                      </div>
-                      <Skeleton className="h-2 w-full mb-1" />
-                      <Skeleton className="h-3 w-24" />
-                    </div>
-                    <Skeleton className="w-8 h-8" />
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
         </div>
-      </Layout>
+      </div>
     );
   }
 
-  const overallProgress = calculateOverallProgress();
-  const currentStep = getCurrentStep();
-
   return (
-    <Layout>
-      <div className="space-y-6">
-        {/* Professional PRAVADO Header */}
-        <div className="bg-pravado-gradient rounded-xl p-8 text-white">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">
-                Welcome back, {userProfile?.full_name || 'User'}!
-              </h1>
-              <div className="flex items-center space-x-4 text-blue-100 mb-4">
-                <div className="flex items-center">
-                  <Building className="w-5 h-5 mr-2" />
-                  <span>{tenant?.name || 'Your Workspace'}</span>
-                </div>
-                <div className="flex items-center">
-                  {userProfile?.role === 'workspace_admin' || userProfile?.role === 'client_admin' ? (
-                    <Crown className="w-5 h-5 mr-2" />
-                  ) : (
-                    <Users className="w-5 h-5 mr-2" />
-                  )}
-                  <span className="capitalize">
-                    {userProfile?.role?.replace('_', ' ') || 'Member'}
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <Activity className="w-5 h-5 mr-2" />
-                  <span className="text-sm">Platform Status: Live & Connected</span>
-                </div>
-                <div className="flex items-center">
-                  <Target className="w-5 h-5 mr-2" />
-                  <span className="text-sm">AUTOMATE Progress: {overallProgress}%</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex space-x-2">
-              <Badge className="bg-green-100 text-green-800 border-green-200">
-                <Zap className="w-3 h-3 mr-1" />
-                Live Data
+    <div className="space-y-6">
+      {/* Hero Section */}
+      <div className="bg-pravado-gradient rounded-xl p-8 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold mb-2">Welcome back, Christian Dibrell!</h1>
+            <p className="text-xl text-blue-100 mb-4">Your PRAVADO marketing ecosystem is performing excellently</p>
+            <div className="flex items-center space-x-4">
+              <Badge className="bg-white/20 text-white hover:bg-white/30">
+                <Zap className="w-4 h-4 mr-1" />
+                AI-Powered
               </Badge>
-              <Button 
-                variant="outline" 
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                onClick={refreshData}
-              >
-                <RefreshCw className="w-4 h-4 mr-2" />
-                Refresh
-              </Button>
+              <Badge className="bg-white/20 text-white hover:bg-white/30">
+                <Star className="w-4 h-4 mr-1" />
+                Premium Account
+              </Badge>
             </div>
           </div>
+          <div className="text-right">
+            <div className="text-3xl font-bold">94.7%</div>
+            <div className="text-blue-100">System Performance</div>
+          </div>
         </div>
+      </div>
 
-        {/* Professional White Dashboard Cards with Colored Borders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="bg-white border-l-4 border-l-authority hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Active Campaigns</CardTitle>
-              <Megaphone className="h-4 w-4 text-authority" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.activeCampaigns}</div>
-              <p className="text-sm text-gray-600">PR campaigns running</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Content Pieces</CardTitle>
-              <FileText className="h-4 w-4 text-disruptor" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.contentPieces}</div>
-              <p className="text-sm text-gray-600">Total content created</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">SEO Keywords</CardTitle>
-              <Search className="h-4 w-4 text-executive" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.seoKeywords}</div>
-              <p className="text-sm text-gray-600">Keywords tracked</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Team Members</CardTitle>
-              <Users className="h-4 w-4 text-visionary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.teamMembers}</div>
-              <p className="text-sm text-gray-600">In your workspace</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-authority hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">AI Citations</CardTitle>
-              <Brain className="h-4 w-4 text-authority" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.aiCitations}</div>
-              <p className="text-sm text-gray-600">Platform mentions</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Podcast Syndications</CardTitle>
-              <Mic className="h-4 w-4 text-disruptor" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.podcastSyndications}</div>
-              <p className="text-sm text-gray-600">Episodes syndicated</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Press Releases</CardTitle>
-              <FileImage className="h-4 w-4 text-executive" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.pressReleases}</div>
-              <p className="text-sm text-gray-600">Media distributed</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-executive">Engagement Rate</CardTitle>
-              <TrendingUp className="h-4 w-4 text-visionary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{metrics.engagementRate}%</div>
-              <p className="text-sm text-gray-600">Average across content</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* AUTOMATE Framework Progress */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="lg:col-span-2 bg-white border-2 border-executive">
-            <CardHeader>
-              <CardTitle className="flex items-center text-executive">
-                <Target className="w-5 h-5 mr-2" />
-                AUTOMATE Framework Progress
-                <Badge className="ml-2 bg-green-100 text-green-800">Real-Time Data</Badge>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Your progress through the 8-step AUTOMATE methodology • {overallProgress}% complete
-                {currentStep < automateSteps.length && (
-                  <span className="ml-2">• Currently on step {currentStep + 1}</span>
-                )}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {automateSteps.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-600">Loading AUTOMATE framework...</p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {automateSteps.map((step, index) => (
-                    <div 
-                      key={index} 
-                      className={`flex items-center space-x-4 p-4 rounded-lg border hover:bg-gray-50 cursor-pointer transition-colors ${
-                        index === currentStep ? 'border-executive bg-executive/5' : 'border-gray-200'
-                      }`}
-                      onClick={() => handleStepClick(index)}
-                    >
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${getStatusColor(step.status)}`}>
-                        {step.step_code}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-medium flex items-center text-executive">
-                            {step.name}
-                            {index === currentStep && (
-                              <Badge variant="outline" className="ml-2 text-xs border-executive text-executive">Current</Badge>
-                            )}
-                          </h4>
-                          {getStatusBadge(step.status)}
-                        </div>
-                        <Progress value={step.completion_percentage} className="h-2 mb-1" />
-                        <p className="text-xs text-gray-600">
-                          {step.completion_percentage}% complete • {step.description}
-                        </p>
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-executive hover:bg-executive/10">
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
-            <CardHeader>
-              <CardTitle className="text-lg text-executive">Content Calendar</CardTitle>
-              <CardDescription className="text-gray-600">Plan and schedule your content</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-authority text-white hover:bg-authority/90">
-                <Calendar className="w-4 h-4 mr-2" />
-                View Calendar
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
-            <CardHeader>
-              <CardTitle className="text-lg text-executive">Analytics Dashboard</CardTitle>
-              <CardDescription className="text-gray-600">Monitor performance metrics</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-executive text-white hover:bg-executive/90">
-                <BarChart3 className="w-4 h-4 mr-2" />
-                View Analytics
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
-            <CardHeader>
-              <CardTitle className="text-lg text-executive">Team Settings</CardTitle>
-              <CardDescription className="text-gray-600">Manage your workspace</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-visionary text-white hover:bg-visionary/90">
-                <Settings className="w-4 h-4 mr-2" />
-                Manage Team
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Revolutionary AI Features Status */}
-        <Card className="bg-white border-2 border-visionary">
-          <CardHeader>
-            <CardTitle className="text-executive flex items-center">
-              <Brain className="w-5 h-5 mr-2" />
-              PRAVADO AI Capabilities - Live Status
+      {/* Quick Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Active Campaigns */}
+        <Card className="bg-white border-l-4 border-l-authority hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <TrendingUp className="w-4 h-4 text-authority" />
+              Active Campaigns
             </CardTitle>
-            <CardDescription className="text-gray-600">
-              Industry-first AI integrations showing real-time performance
-            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <div className="text-center">
-                <div className="text-executive font-bold">✓ {metrics.aiCitations}</div>
-                <div className="text-gray-600">AI Platform Citations</div>
-              </div>
-              <div className="text-center">
-                <div className="text-executive font-bold">✓ {metrics.seoKeywords}</div>
-                <div className="text-gray-600">SEO Keywords Tracked</div>
-              </div>
-              <div className="text-center">
-                <div className="text-executive font-bold">✓ {metrics.contentPieces}</div>
-                <div className="text-gray-600">AI-Optimized Content</div>
-              </div>
-              <div className="text-center">
-                <div className="text-executive font-bold">✓ {overallProgress}%</div>
-                <div className="text-gray-600">AUTOMATE Completion</div>
-              </div>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.activeCampaigns}</div>
+            <div className="text-xs text-gray-600 flex items-center gap-1">
+              <ArrowUpRight className="w-3 h-3 text-green-500" />
+              +12% from last month
             </div>
           </CardContent>
         </Card>
 
-        {/* Real-Time Connection Status */}
-        <Card className="border-green-200 bg-green-50">
-          <CardHeader>
-            <CardTitle className="text-green-800 flex items-center">
-              <Activity className="w-5 h-5 mr-2" />
-              Live Dashboard Status
+        {/* Content Pieces */}
+        <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <FileText className="w-4 h-4 text-disruptor" />
+              Content Pieces
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <div className="text-center">
-                <div className="text-green-600 font-bold">✓ Connected</div>
-                <div className="text-green-700">Real Database</div>
-              </div>
-              <div className="text-center">
-                <div className="text-green-600 font-bold">✓ Active</div>
-                <div className="text-green-700">Real-time Updates</div>
-              </div>
-              <div className="text-center">
-                <div className="text-green-600 font-bold">✓ Synced</div>
-                <div className="text-green-700">Live Metrics</div>
-              </div>
-              <div className="text-center">
-                <div className="text-green-600 font-bold">✓ Live</div>
-                <div className="text-green-700">Workspace: {tenant?.name || 'Loading...'}</div>
-              </div>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.contentPieces}</div>
+            <div className="text-xs text-gray-600 flex items-center gap-1">
+              <ArrowUpRight className="w-3 h-3 text-green-500" />
+              +8% this week
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* SEO Keywords */}
+        <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <Search className="w-4 h-4 text-executive" />
+              SEO Keywords
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.seoKeywords}</div>
+            <div className="text-xs text-gray-600 flex items-center gap-1">
+              <ArrowUpRight className="w-3 h-3 text-green-500" />
+              Ranking improved
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Team Members */}
+        <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <Users className="w-4 h-4 text-visionary" />
+              Team Members
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.teamMembers}</div>
+            <div className="text-xs text-gray-600">Active contributors</div>
+          </CardContent>
+        </Card>
+
+        {/* AI Citations */}
+        <Card className="bg-white border-l-4 border-l-authority hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <Bot className="w-4 h-4 text-authority" />
+              AI Citations
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.aiCitations}</div>
+            <div className="text-xs text-gray-600 flex items-center gap-1">
+              <ArrowUpRight className="w-3 h-3 text-green-500" />
+              +15% mentions
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Podcast Syndications */}
+        <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <Mic className="w-4 h-4 text-disruptor" />
+              Podcast Syndications
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.podcastSyndications}</div>
+            <div className="text-xs text-gray-600">Episodes distributed</div>
+          </CardContent>
+        </Card>
+
+        {/* Press Releases */}
+        <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <Megaphone className="w-4 h-4 text-executive" />
+              Press Releases
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.pressReleases}</div>
+            <div className="text-xs text-gray-600">Published this month</div>
+          </CardContent>
+        </Card>
+
+        {/* Engagement Rate */}
+        <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
+              <BarChart3 className="w-4 h-4 text-visionary" />
+              Engagement Rate
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-gray-900">{quickStats.engagementRate}%</div>
+            <div className="text-xs text-gray-600 flex items-center gap-1">
+              <ArrowUpRight className="w-3 h-3 text-green-500" />
+              Above industry avg
             </div>
           </CardContent>
         </Card>
       </div>
-    </Layout>
+
+      {/* Performance Charts and AI Insights */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Performance Chart */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-executive">Performance Trends</CardTitle>
+            <CardDescription>Last 30 days overview</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <AreaChart data={performanceData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                <XAxis dataKey="date" stroke="#64748B" />
+                <YAxis stroke="#64748B" />
+                <Tooltip />
+                <Area 
+                  type="monotone" 
+                  dataKey="value" 
+                  stroke="#c3073f" 
+                  fill="#c3073f" 
+                  fillOpacity={0.1}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* AI Insights */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-executive flex items-center gap-2">
+              <Brain className="w-5 h-5 text-visionary" />
+              AI Insights
+            </CardTitle>
+            <CardDescription>Powered by PRAVADO Intelligence</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {aiInsights.map((insight, index) => (
+                <div key={index} className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50">
+                  <div className="w-2 h-2 rounded-full bg-authority mt-2"></div>
+                  <div className="flex-1">
+                    <h4 className="font-medium text-gray-900">{insight.title}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{insight.description}</p>
+                    <Badge variant="secondary" className="mt-2 text-xs">
+                      {insight.confidence}% confidence
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Activity and Upcoming Events */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Activity */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-executive">Recent Activity</CardTitle>
+            <CardDescription>Latest updates across your campaigns</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {recentActivity.map((activity, index) => (
+                <div key={index} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                    <activity.icon className="w-4 h-4 text-gray-600" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                    <p className="text-xs text-gray-500">{activity.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Upcoming Events */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-executive flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-disruptor" />
+              Upcoming Events
+            </CardTitle>
+            <CardDescription>Scheduled campaigns and deadlines</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {upcomingEvents.map((event, index) => (
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg border border-gray-100">
+                  <div>
+                    <p className="font-medium text-gray-900">{event.title}</p>
+                    <p className="text-sm text-gray-600">{event.date}</p>
+                  </div>
+                  <Badge 
+                    variant="outline" 
+                    className={`
+                      ${event.priority === 'high' ? 'border-red-200 text-red-700' : ''}
+                      ${event.priority === 'medium' ? 'border-yellow-200 text-yellow-700' : ''}
+                      ${event.priority === 'low' ? 'border-green-200 text-green-700' : ''}
+                    `}
+                  >
+                    {event.priority}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Quick Actions */}
+      <Card className="bg-white">
+        <CardHeader>
+          <CardTitle className="text-executive">Quick Actions</CardTitle>
+          <CardDescription>Jump into your most used features</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Button variant="outline" className="h-20 flex-col space-y-2 border-authority text-authority hover:bg-authority hover:text-white">
+              <Target className="w-6 h-6" />
+              <span className="text-sm">New Campaign</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex-col space-y-2 border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
+              <FileText className="w-6 h-6" />
+              <span className="text-sm">Create Content</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex-col space-y-2 border-executive text-executive hover:bg-executive hover:text-white">
+              <BarChart3 className="w-6 h-6" />
+              <span className="text-sm">View Analytics</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex-col space-y-2 border-visionary text-visionary hover:bg-visionary hover:text-white">
+              <Eye className="w-6 h-6" />
+              <span className="text-sm">Monitor AI</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

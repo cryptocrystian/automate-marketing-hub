@@ -72,22 +72,22 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="sidebar-dark">
-      <SidebarHeader className="sidebar-header">
+    <Sidebar className="bg-executive border-r border-gray-200">
+      <SidebarHeader className="p-6 bg-executive">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <div className="w-5 h-5 bg-blue-600 rounded"></div>
+            <div className="w-5 h-5 bg-authority rounded"></div>
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">AUTOMATED</h1>
-            <p className="text-xs text-slate-400">Marketing Operating System</p>
+            <p className="text-xs text-gray-300">Marketing Operating System</p>
           </div>
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="sidebar-content">
+      <SidebarContent className="bg-executive">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-slate-400 font-medium mb-2">
+          <SidebarGroupLabel className="text-gray-300 font-medium mb-2 px-2">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -96,7 +96,9 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     isActive={location.pathname === item.url}
-                    className="sidebar-menu-button"
+                    className={`text-white hover:bg-authority hover:text-white transition-colors duration-200 ${
+                      location.pathname === item.url ? 'bg-authority text-white' : ''
+                    }`}
                     onClick={() => handleNavigation(item.url)}
                   >
                     <item.icon className="w-5 h-5" />
@@ -109,16 +111,16 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="sidebar-footer">
+      <SidebarFooter className="p-4 bg-executive border-t border-gray-600">
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <User className="w-5 h-5 text-slate-800" />
+            <User className="w-5 h-5 text-executive" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-white truncate">{userProfile?.full_name || 'User'}</p>
-            <p className="text-xs text-slate-400 truncate">{userProfile?.email}</p>
+            <p className="text-xs text-gray-300 truncate">{userProfile?.email}</p>
             {tenant?.name && (
-              <p className="text-xs text-slate-400 truncate">{tenant.name}</p>
+              <p className="text-xs text-gray-300 truncate">{tenant.name}</p>
             )}
           </div>
         </div>
@@ -126,7 +128,7 @@ export function AppSidebar() {
           onClick={handleLogout}
           variant="outline" 
           size="sm" 
-          className="sidebar-logout-button w-full"
+          className="w-full bg-transparent border-gray-300 text-white hover:bg-authority hover:border-authority hover:text-white transition-colors"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Logout

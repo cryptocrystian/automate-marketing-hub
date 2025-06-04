@@ -95,6 +95,61 @@
   transform: translateY(-1px);
 }
 
+/* SIDEBAR STYLING */
+.sidebar-dark {
+  background-color: var(--executive-deep);
+  border-right: 1px solid #374151;
+}
+
+.sidebar-header {
+  background-color: var(--executive-deep);
+  border-bottom: 1px solid #4b5563;
+  padding: 1.5rem;
+}
+
+.sidebar-content {
+  background-color: var(--executive-deep);
+  padding: 1rem;
+}
+
+.sidebar-footer {
+  background-color: var(--executive-deep);
+  border-top: 1px solid #4b5563;
+  padding: 1rem;
+}
+
+.sidebar-menu-button {
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-menu-button:hover {
+  background-color: var(--authority-crimson);
+  color: white;
+}
+
+.sidebar-menu-button.active {
+  background-color: var(--authority-crimson);
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar-logout-button {
+  background-color: transparent;
+  border: 1px solid #6b7280;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.sidebar-logout-button:hover {
+  background-color: var(--authority-crimson);
+  border-color: var(--authority-crimson);
+  color: white;
+}
+
 @layer base {
   :root {
     --background: 249 250 251;
