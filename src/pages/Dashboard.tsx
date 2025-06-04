@@ -287,16 +287,16 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Real AUTOMATE Framework Progress from Database */}
+        {/* Real AUTOMATE Framework Progress from Database - FORCE DISRUPTOR ORANGE */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="lg:col-span-2">
+          <Card className="lg:col-span-2" style={{ backgroundColor: '#ff6b35', color: 'white' }}>
             <CardHeader>
-              <CardTitle className="flex items-center">
+              <CardTitle className="flex items-center text-white">
                 <Target className="w-5 h-5 mr-2" />
                 AUTOMATE Framework Progress
                 <Badge className="ml-2 bg-green-100 text-green-800">Real-Time Data</Badge>
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-white opacity-80">
                 Your progress through the 8-step AUTOMATE methodology • {overallProgress}% complete
                 {currentStep < automateSteps.length && (
                   <span className="ml-2">• Currently on step {currentStep + 1}</span>
@@ -306,15 +306,15 @@ const Dashboard = () => {
             <CardContent>
               {automateSteps.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground">Loading AUTOMATE framework...</p>
+                  <p className="text-white opacity-80">Loading AUTOMATE framework...</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {automateSteps.map((step, index) => (
                     <div 
                       key={index} 
-                      className={`flex items-center space-x-4 p-3 rounded-lg border hover:bg-slate-50 cursor-pointer transition-colors ${
-                        index === currentStep ? 'border-blue-300 bg-blue-50' : ''
+                      className={`flex items-center space-x-4 p-3 rounded-lg border border-white/20 hover:bg-white/10 cursor-pointer transition-colors ${
+                        index === currentStep ? 'border-white bg-white/20' : ''
                       }`}
                       onClick={() => handleStepClick(index)}
                     >
@@ -323,20 +323,20 @@ const Dashboard = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-medium flex items-center">
+                          <h4 className="font-medium flex items-center text-white">
                             {step.name}
                             {index === currentStep && (
-                              <Badge variant="outline" className="ml-2 text-xs">Current</Badge>
+                              <Badge variant="outline" className="ml-2 text-xs bg-white text-black">Current</Badge>
                             )}
                           </h4>
                           {getStatusBadge(step.status)}
                         </div>
                         <Progress value={step.completion_percentage} className="h-2 mb-1" />
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-white opacity-80">
                           {step.completion_percentage}% complete • {step.description}
                         </p>
                       </div>
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
                         <ChevronRight className="w-4 h-4" />
                       </Button>
                     </div>
@@ -347,41 +347,41 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions - FORCE PRAVADO COLORS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card>
+          <Card style={{ backgroundColor: '#ff6b35', color: 'white' }}>
             <CardHeader>
-              <CardTitle className="text-lg">Content Calendar</CardTitle>
-              <CardDescription>Plan and schedule your content</CardDescription>
+              <CardTitle className="text-lg text-white">Content Calendar</CardTitle>
+              <CardDescription className="text-white opacity-80">Plan and schedule your content</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full bg-authority hover:bg-authority-700">
+              <Button className="w-full" style={{ backgroundColor: '#c3073f', color: 'white' }}>
                 <Calendar className="w-4 h-4 mr-2" />
                 View Calendar
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={{ backgroundColor: '#ff6b35', color: 'white' }}>
             <CardHeader>
-              <CardTitle className="text-lg">Analytics Dashboard</CardTitle>
-              <CardDescription>Monitor performance metrics</CardDescription>
+              <CardTitle className="text-lg text-white">Analytics Dashboard</CardTitle>
+              <CardDescription className="text-white opacity-80">Monitor performance metrics</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full bg-executive hover:bg-executive-700">
+              <Button className="w-full" style={{ backgroundColor: '#1e3d59', color: 'white' }}>
                 <BarChart3 className="w-4 h-4 mr-2" />
                 View Analytics
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={{ backgroundColor: '#ff6b35', color: 'white' }}>
             <CardHeader>
-              <CardTitle className="text-lg">Team Settings</CardTitle>
-              <CardDescription>Manage your workspace</CardDescription>
+              <CardTitle className="text-lg text-white">Team Settings</CardTitle>
+              <CardDescription className="text-white opacity-80">Manage your workspace</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full bg-visionary hover:bg-visionary-700">
+              <Button className="w-full" style={{ backgroundColor: '#6f2dbd', color: 'white' }}>
                 <Settings className="w-4 h-4 mr-2" />
                 Manage Team
               </Button>
@@ -389,34 +389,34 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Revolutionary AI Features Status */}
-        <Card className="border-visionary bg-gradient-to-r from-visionary/10 to-purple-50">
+        {/* Revolutionary AI Features Status - FORCE DISRUPTOR ORANGE */}
+        <Card style={{ backgroundColor: '#ff6b35', color: 'white', border: '2px solid #6f2dbd' }}>
           <CardHeader>
-            <CardTitle className="text-visionary flex items-center">
+            <CardTitle className="text-white flex items-center">
               <Brain className="w-5 h-5 mr-2" />
               PRAVADO AI Capabilities - Live Status
             </CardTitle>
-            <CardDescription className="text-visionary/80">
+            <CardDescription className="text-white opacity-80">
               Industry-first AI integrations showing real-time performance
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">
-                <div className="text-visionary font-bold">✓ {metrics.aiCitations}</div>
-                <div className="text-visionary/80">AI Platform Citations</div>
+                <div className="text-white font-bold">✓ {metrics.aiCitations}</div>
+                <div className="text-white opacity-80">AI Platform Citations</div>
               </div>
               <div className="text-center">
-                <div className="text-visionary font-bold">✓ {metrics.seoKeywords}</div>
-                <div className="text-visionary/80">SEO Keywords Tracked</div>
+                <div className="text-white font-bold">✓ {metrics.seoKeywords}</div>
+                <div className="text-white opacity-80">SEO Keywords Tracked</div>
               </div>
               <div className="text-center">
-                <div className="text-visionary font-bold">✓ {metrics.contentPieces}</div>
-                <div className="text-visionary/80">AI-Optimized Content</div>
+                <div className="text-white font-bold">✓ {metrics.contentPieces}</div>
+                <div className="text-white opacity-80">AI-Optimized Content</div>
               </div>
               <div className="text-center">
-                <div className="text-visionary font-bold">✓ {overallProgress}%</div>
-                <div className="text-visionary/80">AUTOMATE Completion</div>
+                <div className="text-white font-bold">✓ {overallProgress}%</div>
+                <div className="text-white opacity-80">AUTOMATE Completion</div>
               </div>
             </div>
           </CardContent>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -113,10 +114,10 @@ const PredictiveAnalytics = () => {
                 onClick={() => setSelectedModel(model.id)}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Brain className="h-5 w-5 text-blue-600" />
+                  <Brain className="h-5 w-5" style={{ color: '#6f2dbd' }} />
                   <Badge 
                     variant={model.status === 'Active' ? 'default' : 'secondary'}
-                    className={model.status === 'Active' ? 'bg-green-600 text-white' : ''}
+                    style={model.status === 'Active' ? { backgroundColor: '#10b981', color: 'white' } : {}}
                   >
                     {model.status}
                   </Badge>
@@ -149,9 +150,9 @@ const PredictiveAnalytics = () => {
                 <Area 
                   type="monotone" 
                   dataKey="predicted" 
-                  fill="#3B82F6" 
+                  fill="#ff6b35" 
                   fillOpacity={0.2} 
-                  stroke="#1E40AF" 
+                  stroke="#ff6b35" 
                   strokeWidth={2}
                   name="Predicted"
                 />
@@ -168,7 +169,7 @@ const PredictiveAnalytics = () => {
               <div>
                 <p className="text-sm text-slate-600">Next Month</p>
                 <p className="text-xl font-bold text-slate-800">4,800</p>
-                <p className="text-sm text-green-600">+23% growth</p>
+                <p className="text-sm" style={{ color: '#10b981' }}>+23% growth</p>
               </div>
               <div>
                 <p className="text-sm text-slate-600">Confidence</p>
@@ -178,8 +179,8 @@ const PredictiveAnalytics = () => {
               <div>
                 <p className="text-sm text-slate-600">Trend</p>
                 <div className="flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-green-600 mr-1" />
-                  <span className="text-xl font-bold text-green-600">+15%</span>
+                  <TrendingUp className="h-5 w-5 mr-1" style={{ color: '#10b981' }} />
+                  <span className="text-xl font-bold" style={{ color: '#10b981' }}>+15%</span>
                 </div>
               </div>
             </div>
@@ -250,23 +251,23 @@ const PredictiveAnalytics = () => {
               <div key={index} className="p-4 rounded-lg border border-slate-200">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="font-medium text-slate-800">{rec.title}</h4>
-                  <Badge className="bg-green-600 text-white">{rec.expectedLift}</Badge>
+                  <Badge style={{ backgroundColor: '#10b981', color: 'white' }}>{rec.expectedLift}</Badge>
                 </div>
                 <p className="text-sm text-slate-600 mb-3">{rec.description}</p>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex space-x-4">
                     <div className="flex items-center">
-                      <Target className="h-4 w-4 text-blue-600 mr-1" />
+                      <Target className="h-4 w-4 mr-1" style={{ color: '#ff6b35' }} />
                       <span className="text-sm text-slate-600">Impact: {rec.impact}</span>
                     </div>
                     <div className="flex items-center">
-                      <Zap className="h-4 w-4 text-blue-600 mr-1" />
+                      <Zap className="h-4 w-4 mr-1" style={{ color: '#ff6b35' }} />
                       <span className="text-sm text-slate-600">Effort: {rec.effort}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button size="sm" style={{ backgroundColor: '#1e3d59', color: 'white' }}>
                     Implement
                   </Button>
                   <Button variant="outline" size="sm">
@@ -300,10 +301,10 @@ const PredictiveAnalytics = () => {
             {alerts.map((alert) => (
               <div key={alert.id} className="flex items-center justify-between p-3 rounded-lg border border-slate-200">
                 <div className="flex items-center space-x-3">
-                  {alert.type === 'success' && <CheckCircle className="h-5 w-5 text-green-600" />}
-                  {alert.type === 'warning' && <AlertTriangle className="h-5 w-5 text-blue-600" />}
-                  {alert.type === 'error' && <AlertTriangle className="h-5 w-5 text-red-600" />}
-                  {alert.type === 'info' && <Bell className="h-5 w-5 text-blue-600" />}
+                  {alert.type === 'success' && <CheckCircle className="h-5 w-5" style={{ color: '#10b981' }} />}
+                  {alert.type === 'warning' && <AlertTriangle className="h-5 w-5" style={{ color: '#ff6b35' }} />}
+                  {alert.type === 'error' && <AlertTriangle className="h-5 w-5" style={{ color: '#ef4444' }} />}
+                  {alert.type === 'info' && <Bell className="h-5 w-5" style={{ color: '#1e3d59' }} />}
                   <div>
                     <p className="text-sm font-medium text-slate-800">{alert.message}</p>
                     <p className="text-xs text-slate-500">{alert.timestamp}</p>
@@ -323,12 +324,12 @@ const PredictiveAnalytics = () => {
         <Card className="border border-slate-200 bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-700">Forecast Accuracy</CardTitle>
-            <Brain className="h-4 w-4 text-blue-600" />
+            <Brain className="h-4 w-4" style={{ color: '#6f2dbd' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-slate-800">87.3%</div>
             <p className="text-xs text-slate-500 flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1 text-green-600" />
+              <TrendingUp className="h-3 w-3 mr-1" style={{ color: '#10b981' }} />
               +2.1% this month
             </p>
           </CardContent>
@@ -337,7 +338,7 @@ const PredictiveAnalytics = () => {
         <Card className="border border-slate-200 bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-700">Anomalies Detected</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-blue-600" />
+            <AlertTriangle className="h-4 w-4" style={{ color: '#ff6b35' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-slate-800">12</div>
@@ -348,7 +349,7 @@ const PredictiveAnalytics = () => {
         <Card className="border border-slate-200 bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-700">Recommendations</CardTitle>
-            <Target className="h-4 w-4 text-green-600" />
+            <Target className="h-4 w-4" style={{ color: '#10b981' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-slate-800">8</div>
@@ -359,7 +360,7 @@ const PredictiveAnalytics = () => {
         <Card className="border border-slate-200 bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-700">Model Training</CardTitle>
-            <Zap className="h-4 w-4 text-purple-600" />
+            <Zap className="h-4 w-4" style={{ color: '#6f2dbd' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-slate-800">94%</div>

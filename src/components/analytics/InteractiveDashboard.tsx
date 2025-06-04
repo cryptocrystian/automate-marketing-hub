@@ -50,7 +50,7 @@ const InteractiveDashboard = () => {
               </CardDescription>
             </div>
             <div className="flex items-center space-x-2">
-              <Badge variant={isRealTime ? "default" : "secondary"} className="bg-green-600 text-white">
+              <Badge variant={isRealTime ? "default" : "secondary"} style={{ backgroundColor: '#10b981', color: 'white' }}>
                 <Zap className="h-3 w-3 mr-1" />
                 {isRealTime ? 'Live' : 'Static'}
               </Badge>
@@ -119,8 +119,8 @@ const InteractiveDashboard = () => {
               <YAxis yAxisId="right" orientation="right" stroke="#64748B" />
               <Tooltip />
               <Area yAxisId="left" type="monotone" dataKey="visitors" fill="#3B82F6" fillOpacity={0.3} stroke="#1E40AF" />
-              <Bar yAxisId="right" dataKey="conversions" fill="#10B981" />
-              <Line yAxisId="right" type="monotone" dataKey="revenue" stroke="#EF4444" strokeWidth={2} />
+              <Bar yAxisId="right" dataKey="conversions" fill="#ff6b35" />
+              <Line yAxisId="right" type="monotone" dataKey="revenue" stroke="#c3073f" strokeWidth={2} />
             </ComposedChart>
           </ResponsiveContainer>
         </CardContent>
@@ -142,7 +142,7 @@ const InteractiveDashboard = () => {
                 <XAxis dataKey="period" stroke="#64748B" />
                 <YAxis stroke="#64748B" />
                 <Tooltip />
-                <Bar dataKey="current" fill="#1E40AF" name="Current" />
+                <Bar dataKey="current" fill="#1e3d59" name="Current" />
                 <Bar dataKey="previous" fill="#94A3B8" name="Previous" />
               </BarChart>
             </ResponsiveContainer>
@@ -166,13 +166,13 @@ const InteractiveDashboard = () => {
                     <p className="text-sm text-slate-600">{item.visits} visits • {item.conversions} conversions</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant="outline" className="text-sm">
+                    <Badge variant="outline" className="text-sm" style={{ borderColor: '#ff6b35', color: '#ff6b35' }}>
                       {item.rate}%
                     </Badge>
                     {item.rate > 12 ? (
-                      <TrendingUp className="h-4 w-4 text-green-600" />
+                      <TrendingUp className="h-4 w-4" style={{ color: '#10b981' }} />
                     ) : (
-                      <TrendingDown className="h-4 w-4 text-red-600" />
+                      <TrendingDown className="h-4 w-4" style={{ color: '#ef4444' }} />
                     )}
                   </div>
                 </div>
@@ -198,11 +198,11 @@ const InteractiveDashboard = () => {
                 <p className="text-2xl font-bold text-slate-800">{item.current.toLocaleString()}</p>
                 <div className="flex items-center justify-center mt-2">
                   {item.growth > 0 ? (
-                    <TrendingUp className="h-4 w-4 text-green-600 mr-1" />
+                    <TrendingUp className="h-4 w-4 mr-1" style={{ color: '#10b981' }} />
                   ) : (
-                    <TrendingDown className="h-4 w-4 text-red-600 mr-1" />
+                    <TrendingDown className="h-4 w-4 mr-1" style={{ color: '#ef4444' }} />
                   )}
-                  <span className={`text-sm font-medium ${item.growth > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className={`text-sm font-medium`} style={{ color: item.growth > 0 ? '#10b981' : '#ef4444' }}>
                     {item.growth > 0 ? '+' : ''}{item.growth}%
                   </span>
                 </div>
