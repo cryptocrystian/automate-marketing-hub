@@ -67,6 +67,18 @@ const Dashboard = () => {
     await updateStepProgress(stepIndex, newProgress);
   };
 
+  // PRAVADO brand colors for metrics cards
+  const metricCardStyles = [
+    { backgroundColor: '#c3073f', color: 'white' }, // Authority Crimson
+    { backgroundColor: '#ff6b35', color: 'white' }, // Disruptor Orange
+    { backgroundColor: '#1e3d59', color: 'white' }, // Executive Deep
+    { backgroundColor: '#6f2dbd', color: 'white' }, // Visionary Purple
+    { backgroundColor: '#c3073f', color: 'white' }, // Authority Crimson
+    { backgroundColor: '#ff6b35', color: 'white' }, // Disruptor Orange
+    { backgroundColor: '#1e3d59', color: 'white' }, // Executive Deep
+    { backgroundColor: '#6f2dbd', color: 'white' }, // Visionary Purple
+  ];
+
   if (isLoading) {
     return (
       <Layout>
@@ -184,93 +196,93 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Comprehensive Real-Time Metrics from Database */}
+        {/* FORCE PRAVADO COLORS - Comprehensive Real-Time Metrics from Database */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
+          <Card style={metricCardStyles[0]} className="!bg-authority !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Campaigns</CardTitle>
-              <Megaphone className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Active Campaigns</CardTitle>
+              <Megaphone className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.activeCampaigns}</div>
-              <p className="text-xs text-muted-foreground">PR campaigns running</p>
+              <div className="text-2xl font-bold text-white">{metrics.activeCampaigns}</div>
+              <p className="text-xs text-white opacity-80">PR campaigns running</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[1]} className="!bg-disruptor !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Content Pieces</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Content Pieces</CardTitle>
+              <FileText className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.contentPieces}</div>
-              <p className="text-xs text-muted-foreground">Total content created</p>
+              <div className="text-2xl font-bold text-white">{metrics.contentPieces}</div>
+              <p className="text-xs text-white opacity-80">Total content created</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[2]} className="!bg-executive !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">SEO Keywords</CardTitle>
-              <Search className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">SEO Keywords</CardTitle>
+              <Search className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.seoKeywords}</div>
-              <p className="text-xs text-muted-foreground">Keywords tracked</p>
+              <div className="text-2xl font-bold text-white">{metrics.seoKeywords}</div>
+              <p className="text-xs text-white opacity-80">Keywords tracked</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[3]} className="!bg-visionary !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Team Members</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Team Members</CardTitle>
+              <Users className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.teamMembers}</div>
-              <p className="text-xs text-muted-foreground">In your workspace</p>
+              <div className="text-2xl font-bold text-white">{metrics.teamMembers}</div>
+              <p className="text-xs text-white opacity-80">In your workspace</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[4]} className="!bg-authority !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">AI Citations</CardTitle>
-              <Brain className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">AI Citations</CardTitle>
+              <Brain className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.aiCitations}</div>
-              <p className="text-xs text-muted-foreground">Platform mentions</p>
+              <div className="text-2xl font-bold text-white">{metrics.aiCitations}</div>
+              <p className="text-xs text-white opacity-80">Platform mentions</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[5]} className="!bg-disruptor !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Podcast Syndications</CardTitle>
-              <Mic className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Podcast Syndications</CardTitle>
+              <Mic className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.podcastSyndications}</div>
-              <p className="text-xs text-muted-foreground">Episodes syndicated</p>
+              <div className="text-2xl font-bold text-white">{metrics.podcastSyndications}</div>
+              <p className="text-xs text-white opacity-80">Episodes syndicated</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[6]} className="!bg-executive !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Press Releases</CardTitle>
-              <FileImage className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Press Releases</CardTitle>
+              <FileImage className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.pressReleases}</div>
-              <p className="text-xs text-muted-foreground">Media distributed</p>
+              <div className="text-2xl font-bold text-white">{metrics.pressReleases}</div>
+              <p className="text-xs text-white opacity-80">Media distributed</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card style={metricCardStyles[7]} className="!bg-visionary !text-white border-none">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Engagement Rate</CardTitle>
+              <TrendingUp className="h-4 w-4 text-white opacity-80" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{metrics.engagementRate}%</div>
-              <p className="text-xs text-muted-foreground">Average across content</p>
+              <div className="text-2xl font-bold text-white">{metrics.engagementRate}%</div>
+              <p className="text-xs text-white opacity-80">Average across content</p>
             </CardContent>
           </Card>
         </div>
@@ -343,7 +355,7 @@ const Dashboard = () => {
               <CardDescription>Plan and schedule your content</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full">
+              <Button className="w-full bg-authority hover:bg-authority-700">
                 <Calendar className="w-4 h-4 mr-2" />
                 View Calendar
               </Button>
@@ -356,7 +368,7 @@ const Dashboard = () => {
               <CardDescription>Monitor performance metrics</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full">
+              <Button className="w-full bg-executive hover:bg-executive-700">
                 <BarChart3 className="w-4 h-4 mr-2" />
                 View Analytics
               </Button>
@@ -369,7 +381,7 @@ const Dashboard = () => {
               <CardDescription>Manage your workspace</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full">
+              <Button className="w-full bg-visionary hover:bg-visionary-700">
                 <Settings className="w-4 h-4 mr-2" />
                 Manage Team
               </Button>
@@ -378,33 +390,33 @@ const Dashboard = () => {
         </div>
 
         {/* Revolutionary AI Features Status */}
-        <Card className="border-purple-200 bg-purple-50">
+        <Card className="border-visionary bg-gradient-to-r from-visionary/10 to-purple-50">
           <CardHeader>
-            <CardTitle className="text-purple-800 flex items-center">
+            <CardTitle className="text-visionary flex items-center">
               <Brain className="w-5 h-5 mr-2" />
-              Revolutionary AI Capabilities - Live Status
+              PRAVADO AI Capabilities - Live Status
             </CardTitle>
-            <CardDescription className="text-purple-600">
+            <CardDescription className="text-visionary/80">
               Industry-first AI integrations showing real-time performance
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">
-                <div className="text-purple-600 font-bold">✓ {metrics.aiCitations}</div>
-                <div className="text-purple-700">AI Platform Citations</div>
+                <div className="text-visionary font-bold">✓ {metrics.aiCitations}</div>
+                <div className="text-visionary/80">AI Platform Citations</div>
               </div>
               <div className="text-center">
-                <div className="text-purple-600 font-bold">✓ {metrics.seoKeywords}</div>
-                <div className="text-purple-700">SEO Keywords Tracked</div>
+                <div className="text-visionary font-bold">✓ {metrics.seoKeywords}</div>
+                <div className="text-visionary/80">SEO Keywords Tracked</div>
               </div>
               <div className="text-center">
-                <div className="text-purple-600 font-bold">✓ {metrics.contentPieces}</div>
-                <div className="text-purple-700">AI-Optimized Content</div>
+                <div className="text-visionary font-bold">✓ {metrics.contentPieces}</div>
+                <div className="text-visionary/80">AI-Optimized Content</div>
               </div>
               <div className="text-center">
-                <div className="text-purple-600 font-bold">✓ {overallProgress}%</div>
-                <div className="text-purple-700">AUTOMATE Completion</div>
+                <div className="text-visionary font-bold">✓ {overallProgress}%</div>
+                <div className="text-visionary/80">AUTOMATE Completion</div>
               </div>
             </div>
           </CardContent>
