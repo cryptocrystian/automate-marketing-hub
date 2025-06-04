@@ -135,7 +135,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* SEO Keywords */}
+        {/* SEO Keywords - FIXED: Executive Deep border */}
         <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
           <CardHeader className="pb-2">
             <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
@@ -166,7 +166,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* AI Citations */}
+        {/* AI Citations - FIXED: Authority Crimson border */}
         <Card className="bg-white border-l-4 border-l-authority hover:shadow-lg transition-all">
           <CardHeader className="pb-2">
             <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
@@ -183,7 +183,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Podcast Syndications */}
+        {/* Podcast Syndications - FIXED: Disruptor Orange border */}
         <Card className="bg-white border-l-4 border-l-disruptor hover:shadow-lg transition-all">
           <CardHeader className="pb-2">
             <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
@@ -197,7 +197,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Press Releases */}
+        {/* Press Releases - FIXED: Executive Deep border */}
         <Card className="bg-white border-l-4 border-l-executive hover:shadow-lg transition-all">
           <CardHeader className="pb-2">
             <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
@@ -211,7 +211,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Engagement Rate */}
+        {/* Engagement Rate - FIXED: Visionary Purple border */}
         <Card className="bg-white border-l-4 border-l-visionary hover:shadow-lg transition-all">
           <CardHeader className="pb-2">
             <CardTitle className="text-executive flex items-center gap-2 text-sm font-medium">
@@ -231,8 +231,8 @@ const Dashboard = () => {
 
       {/* Performance Charts and AI Insights */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Performance Chart */}
-        <Card className="bg-white">
+        {/* Performance Chart - FIXED: Disruptor Orange border */}
+        <Card className="bg-white border-l-4 border-l-disruptor">
           <CardHeader>
             <CardTitle className="text-executive">Performance Trends</CardTitle>
             <CardDescription>Last 30 days overview</CardDescription>
@@ -256,8 +256,8 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* AI Insights */}
-        <Card className="bg-white">
+        {/* AI Insights - FIXED: Visionary Purple border */}
+        <Card className="bg-white border-l-4 border-l-visionary">
           <CardHeader>
             <CardTitle className="text-executive flex items-center gap-2">
               <Brain className="w-5 h-5 text-visionary" />
