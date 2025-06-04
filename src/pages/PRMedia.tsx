@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import MediaDatabase from '@/components/pr/MediaDatabase';
@@ -68,353 +69,355 @@ const PRMedia = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="flex flex-col space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">PR & Media Hub</h1>
-              <p className="text-muted-foreground">Integrated public relations and media management</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Badge variant="secondary" className="bg-white border-authority text-authority">
-                <Bot className="w-3 h-3 mr-1" />
-                AI-Powered
-              </Badge>
-              <Badge variant="secondary" className="bg-white border-disruptor text-disruptor">
-                <Radio className="w-3 h-3 mr-1" />
-                Podcast Ready
-              </Badge>
+      <div className="bg-white min-h-screen">
+        <div className="space-y-6 p-6">
+          {/* Header - PRAVADO Executive Style */}
+          <div className="flex flex-col space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-authority">PR & Media Hub</h1>
+                <p className="text-gray-600">Integrated public relations and media management</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Badge className="bg-white border-authority text-authority hover:bg-authority hover:text-white">
+                  <Bot className="w-3 h-3 mr-1" />
+                  AI-Powered
+                </Badge>
+                <Badge className="bg-white border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
+                  <Radio className="w-3 h-3 mr-1" />
+                  Podcast Ready
+                </Badge>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Sub-navigation - WHITE BACKGROUND */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-9 bg-white border border-gray-200">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
-            <TabsTrigger value="media-database">Media Database</TabsTrigger>
-            <TabsTrigger value="press-releases">Press Releases</TabsTrigger>
-            <TabsTrigger value="press-builder">Press Builder</TabsTrigger>
-            <TabsTrigger value="monitoring">Media Monitoring</TabsTrigger>
-            <TabsTrigger value="distribution">Distribution</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="reports">Reports</TabsTrigger>
-          </TabsList>
+          {/* Sub-navigation - White Background */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-9 bg-white border border-gray-200">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-authority data-[state=active]:text-white">Overview</TabsTrigger>
+              <TabsTrigger value="campaigns" className="data-[state=active]:bg-disruptor data-[state=active]:text-white">Campaigns</TabsTrigger>
+              <TabsTrigger value="media-database" className="data-[state=active]:bg-executive data-[state=active]:text-white">Media Database</TabsTrigger>
+              <TabsTrigger value="press-releases" className="data-[state=active]:bg-visionary data-[state=active]:text-white">Press Releases</TabsTrigger>
+              <TabsTrigger value="press-builder" className="data-[state=active]:bg-authority data-[state=active]:text-white">Press Builder</TabsTrigger>
+              <TabsTrigger value="monitoring" className="data-[state=active]:bg-disruptor data-[state=active]:text-white">Media Monitoring</TabsTrigger>
+              <TabsTrigger value="distribution" className="data-[state=active]:bg-executive data-[state=active]:text-white">Distribution</TabsTrigger>
+              <TabsTrigger value="analytics" className="data-[state=active]:bg-visionary data-[state=active]:text-white">Analytics</TabsTrigger>
+              <TabsTrigger value="reports" className="data-[state=active]:bg-authority data-[state=active]:text-white">Reports</TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="overview" className="space-y-6">
-            {/* Key Performance Metrics - ALL WHITE BACKGROUNDS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-              <Card className="bg-white border-l-4 border-l-authority">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Media Coverage</CardTitle>
-                  <Eye className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metrics.mediaCoverage.value}</div>
-                  <p className="text-xs text-muted-foreground">
-                    <span className="text-green-600">{metrics.mediaCoverage.change}</span> {metrics.mediaCoverage.period}
-                  </p>
-                </CardContent>
-              </Card>
+            <TabsContent value="overview" className="space-y-6">
+              {/* Key Performance Metrics - All White Backgrounds with PRAVADO Borders */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <Card className="bg-white border-l-4 border-l-authority shadow-sm">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-700">Media Coverage</CardTitle>
+                    <Eye className="h-4 w-4 text-gray-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-gray-800">{metrics.mediaCoverage.value}</div>
+                    <p className="text-xs text-gray-600">
+                      <span className="text-green-600">{metrics.mediaCoverage.change}</span> {metrics.mediaCoverage.period}
+                    </p>
+                  </CardContent>
+                </Card>
 
-              <Card className="bg-white border-l-4 border-l-disruptor">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Campaigns</CardTitle>
-                  <Target className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metrics.activeCampaigns.value}</div>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <Progress value={metrics.activeCampaigns.completion} className="flex-1 h-2" />
-                    <span className="text-xs text-muted-foreground">{metrics.activeCampaigns.completion}%</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white border-l-4 border-l-executive">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Media Relations</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metrics.mediaRelationships.value}</div>
-                  <p className="text-xs text-muted-foreground">
-                    {metrics.mediaRelationships.responseRate}% response rate • Score: {metrics.mediaRelationships.score}/10
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white border-l-4 border-l-visionary">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Press Releases</CardTitle>
-                  <FileText className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metrics.pressReleases.value}</div>
-                  <p className="text-xs text-muted-foreground">
-                    {metrics.pressReleases.pickupRate}% pickup • {metrics.pressReleases.earnedValue} earned
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white border-l-4 border-l-authority">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">AI Indexing</CardTitle>
-                  <Bot className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metrics.aiIndexing.citations}</div>
-                  <p className="text-xs text-muted-foreground">
-                    {metrics.aiIndexing.podcasts} podcast mentions • {metrics.aiIndexing.success}% success
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Main Content Grid - ALL WHITE BACKGROUNDS */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Campaign Management - WHITE WITH AUTHORITY ACCENT */}
-              <Card className="bg-white border-l-4 border-l-authority">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-authority">
-                    <Target className="w-5 h-5 mr-2" />
-                    Campaign Management
-                  </CardTitle>
-                  <CardDescription>Active campaigns and performance</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {campaigns.map((campaign) => (
-                    <div key={campaign.id} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">{campaign.name}</span>
-                        <Badge variant={campaign.status === 'active' ? 'default' : 'secondary'}>
-                          {campaign.status}
-                        </Badge>
-                      </div>
-                      <Progress value={campaign.progress} className="h-2" />
-                      <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>Reach: {campaign.reach}</span>
-                        <span>{campaign.mentions} mentions</span>
-                      </div>
+                <Card className="bg-white border-l-4 border-l-disruptor shadow-sm">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-700">Active Campaigns</CardTitle>
+                    <Target className="h-4 w-4 text-gray-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-gray-800">{metrics.activeCampaigns.value}</div>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <Progress value={metrics.activeCampaigns.completion} className="flex-1 h-2" />
+                      <span className="text-xs text-gray-600">{metrics.activeCampaigns.completion}%</span>
                     </div>
-                  ))}
-                  <Button className="w-full bg-authority hover:bg-authority/90 text-white" size="sm">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create New Campaign
-                  </Button>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              {/* Media Relationship Center - WHITE WITH DISRUPTOR ACCENT */}
-              <Card className="bg-white border-l-4 border-l-disruptor">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-disruptor">
-                    <Heart className="w-5 h-5 mr-2" />
-                    Media Relationships
-                  </CardTitle>
-                  <CardDescription>Top journalist relationships</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {mediaContacts.map((contact, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-2 bg-white border border-gray-200 rounded-lg">
-                      <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                        <Users className="w-4 h-4 text-gray-600" />
-                      </div>
-                      <div className="flex-1 space-y-1">
+                <Card className="bg-white border-l-4 border-l-executive shadow-sm">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-700">Media Relations</CardTitle>
+                    <Users className="h-4 w-4 text-gray-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-gray-800">{metrics.mediaRelationships.value}</div>
+                    <p className="text-xs text-gray-600">
+                      {metrics.mediaRelationships.responseRate}% response rate • Score: {metrics.mediaRelationships.score}/10
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white border-l-4 border-l-visionary shadow-sm">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-700">Press Releases</CardTitle>
+                    <FileText className="h-4 w-4 text-gray-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-gray-800">{metrics.pressReleases.value}</div>
+                    <p className="text-xs text-gray-600">
+                      {metrics.pressReleases.pickupRate}% pickup • {metrics.pressReleases.earnedValue} earned
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white border-l-4 border-l-authority shadow-sm">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-700">AI Indexing</CardTitle>
+                    <Bot className="h-4 w-4 text-gray-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-gray-800">{metrics.aiIndexing.citations}</div>
+                    <p className="text-xs text-gray-600">
+                      {metrics.aiIndexing.podcasts} podcast mentions • {metrics.aiIndexing.success}% success
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Main Content Grid - All White Backgrounds with PRAVADO Accents */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Campaign Management */}
+                <Card className="bg-white border-l-4 border-l-authority shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-authority">
+                      <Target className="w-5 h-5 mr-2" />
+                      Campaign Management
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">Active campaigns and performance</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {campaigns.map((campaign) => (
+                      <div key={campaign.id} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2">
                         <div className="flex items-center justify-between">
-                          <span className="font-medium text-sm">{contact.name}</span>
-                          <div className="flex items-center space-x-1">
-                            <Star className="w-3 h-3 text-disruptor fill-current" />
-                            <span className="text-xs text-muted-foreground">{contact.score}</span>
+                          <span className="font-medium text-sm text-gray-800">{campaign.name}</span>
+                          <Badge className={campaign.status === 'active' ? 'bg-authority text-white' : 'bg-gray-200 text-gray-800'}>
+                            {campaign.status}
+                          </Badge>
+                        </div>
+                        <Progress value={campaign.progress} className="h-2" />
+                        <div className="flex justify-between text-xs text-gray-600">
+                          <span>Reach: {campaign.reach}</span>
+                          <span>{campaign.mentions} mentions</span>
+                        </div>
+                      </div>
+                    ))}
+                    <Button className="w-full bg-authority hover:bg-authority/90 text-white" size="sm">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Create New Campaign
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Media Relationship Center */}
+                <Card className="bg-white border-l-4 border-l-disruptor shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-disruptor">
+                      <Heart className="w-5 h-5 mr-2" />
+                      Media Relationships
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">Top journalist relationships</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {mediaContacts.map((contact, index) => (
+                      <div key={index} className="flex items-center space-x-3 p-2 bg-white border border-gray-200 rounded-lg">
+                        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                          <Users className="w-4 h-4 text-gray-600" />
+                        </div>
+                        <div className="flex-1 space-y-1">
+                          <div className="flex items-center justify-between">
+                            <span className="font-medium text-sm text-gray-800">{contact.name}</span>
+                            <div className="flex items-center space-x-1">
+                              <Star className="w-3 h-3 text-disruptor fill-current" />
+                              <span className="text-xs text-gray-600">{contact.score}</span>
+                            </div>
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            {contact.outlet} • {contact.lastContact}
+                          </div>
+                          <Badge variant="outline" className="border-gray-300 text-gray-700">
+                            {contact.relationship}
+                          </Badge>
+                        </div>
+                      </div>
+                    ))}
+                    <Button className="w-full bg-white border border-disruptor text-disruptor hover:bg-disruptor hover:text-white" size="sm">
+                      <UserPlus className="w-4 h-4 mr-2" />
+                      Add Media Contact
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Press Release Hub */}
+                <Card className="bg-white border-l-4 border-l-executive shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-executive">
+                      <Megaphone className="w-5 h-5 mr-2" />
+                      Press Release Hub
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">Recent releases and AI performance</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {pressReleases.map((release, index) => (
+                      <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2">
+                        <h4 className="font-medium text-sm text-gray-800">{release.title}</h4>
+                        <div className="text-xs text-gray-600">{release.date}</div>
+                        <div className="grid grid-cols-3 gap-2 text-xs">
+                          <div className="text-center">
+                            <div className="font-medium text-gray-800">{release.pickup}</div>
+                            <div className="text-gray-600">Pickup</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-medium flex items-center justify-center text-gray-800">
+                              <Bot className="w-3 h-3 mr-1" />
+                              {release.aiCitations}
+                            </div>
+                            <div className="text-gray-600">AI Citations</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-medium flex items-center justify-center text-gray-800">
+                              <Radio className="w-3 h-3 mr-1" />
+                              {release.podcastMentions}
+                            </div>
+                            <div className="text-gray-600">Podcasts</div>
                           </div>
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          {contact.outlet} • {contact.lastContact}
-                        </div>
-                        <Badge variant="outline" className="border-gray-300">
-                          {contact.relationship}
-                        </Badge>
                       </div>
-                    </div>
-                  ))}
-                  <Button variant="outline" className="w-full border-disruptor text-disruptor hover:bg-disruptor hover:text-white" size="sm">
-                    <UserPlus className="w-4 h-4 mr-2" />
-                    Add Media Contact
-                  </Button>
-                </CardContent>
-              </Card>
+                    ))}
+                    <Button className="w-full bg-white border border-executive text-executive hover:bg-executive hover:text-white" size="sm">
+                      <Send className="w-4 h-4 mr-2" />
+                      Distribute Press Release
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
 
-              {/* Press Release Hub - WHITE WITH EXECUTIVE ACCENT */}
-              <Card className="bg-white border-l-4 border-l-executive">
+              {/* Quick Actions Panel - White Background */}
+              <Card className="bg-white shadow-sm">
                 <CardHeader>
-                  <CardTitle className="flex items-center text-executive">
-                    <Megaphone className="w-5 h-5 mr-2" />
-                    Press Release Hub
-                  </CardTitle>
-                  <CardDescription>Recent releases and AI performance</CardDescription>
+                  <CardTitle className="text-gray-800">Quick Actions</CardTitle>
+                  <CardDescription className="text-gray-600">Streamline your PR workflow with one-click actions</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  {pressReleases.map((release, index) => (
-                    <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2">
-                      <h4 className="font-medium text-sm">{release.title}</h4>
-                      <div className="text-xs text-muted-foreground">{release.date}</div>
-                      <div className="grid grid-cols-3 gap-2 text-xs">
-                        <div className="text-center">
-                          <div className="font-medium">{release.pickup}</div>
-                          <div className="text-muted-foreground">Pickup</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="font-medium flex items-center justify-center">
-                            <Bot className="w-3 h-3 mr-1" />
-                            {release.aiCitations}
-                          </div>
-                          <div className="text-muted-foreground">AI Citations</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="font-medium flex items-center justify-center">
-                            <Radio className="w-3 h-3 mr-1" />
-                            {release.podcastMentions}
-                          </div>
-                          <div className="text-muted-foreground">Podcasts</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  <Button variant="outline" className="w-full border-executive text-executive hover:bg-executive hover:text-white" size="sm">
-                    <Send className="w-4 h-4 mr-2" />
-                    Distribute Press Release
-                  </Button>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-authority text-authority hover:bg-authority hover:text-white">
+                      <Plus className="w-5 h-5" />
+                      <span className="text-xs">New Campaign</span>
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
+                      <Send className="w-5 h-5" />
+                      <span className="text-xs">Send Release</span>
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-executive text-executive hover:bg-executive hover:text-white">
+                      <UserPlus className="w-5 h-5" />
+                      <span className="text-xs">Add Contact</span>
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-visionary text-visionary hover:bg-visionary hover:text-white">
+                      <Calendar className="w-5 h-5" />
+                      <span className="text-xs">Schedule Outreach</span>
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-authority text-authority hover:bg-authority hover:text-white">
+                      <Bot className="w-5 h-5" />
+                      <span className="text-xs">AI Content</span>
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
+                      <Download className="w-5 h-5" />
+                      <span className="text-xs">Export Report</span>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
-            </div>
 
-            {/* Quick Actions Panel - WHITE BACKGROUND */}
-            <Card className="bg-white">
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>Streamline your PR workflow with one-click actions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-authority text-authority hover:bg-authority hover:text-white">
-                    <Plus className="w-5 h-5" />
-                    <span className="text-xs">New Campaign</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
-                    <Send className="w-5 h-5" />
-                    <span className="text-xs">Send Release</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-executive text-executive hover:bg-executive hover:text-white">
-                    <UserPlus className="w-5 h-5" />
-                    <span className="text-xs">Add Contact</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-visionary text-visionary hover:bg-visionary hover:text-white">
-                    <Calendar className="w-5 h-5" />
-                    <span className="text-xs">Schedule Outreach</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-authority text-authority hover:bg-authority hover:text-white">
-                    <Bot className="w-5 h-5" />
-                    <span className="text-xs">AI Content</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 border-disruptor text-disruptor hover:bg-disruptor hover:text-white">
-                    <Download className="w-5 h-5" />
-                    <span className="text-xs">Export Report</span>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Integration Indicators - WHITE BACKGROUND */}
-            <Card className="bg-white">
-              <CardHeader>
-                <CardTitle>Platform Integration Status</CardTitle>
-                <CardDescription>Cross-pillar connections and AUTOMATE methodology progress</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <div>
-                      <div className="font-medium text-sm">Content Pillar</div>
-                      <div className="text-xs text-muted-foreground">23 pieces amplified</div>
+              {/* Integration Indicators - White Background */}
+              <Card className="bg-white shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Platform Integration Status</CardTitle>
+                  <CardDescription className="text-gray-600">Cross-pillar connections and AUTOMATE methodology progress</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
+                      <div>
+                        <div className="font-medium text-sm text-gray-800">Content Pillar</div>
+                        <div className="text-xs text-gray-600">23 pieces amplified</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
+                      <Activity className="w-5 h-5 text-authority" />
+                      <div>
+                        <div className="font-medium text-sm text-gray-800">AUTOMATE Progress</div>
+                        <div className="text-xs text-gray-600">Step 6 of 8 active</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
+                      <TrendingUp className="w-5 h-5 text-visionary" />
+                      <div>
+                        <div className="font-medium text-sm text-gray-800">Cross-Pillar ROI</div>
+                        <div className="text-xs text-gray-600">+45% improvement</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
+                      <AlertCircle className="w-5 h-5 text-disruptor" />
+                      <div>
+                        <div className="font-medium text-sm text-gray-800">Opportunities</div>
+                        <div className="text-xs text-gray-600">3 campaigns pending</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
-                    <Activity className="w-5 h-5 text-blue-500" />
-                    <div>
-                      <div className="font-medium text-sm">AUTOMATE Progress</div>
-                      <div className="text-xs text-muted-foreground">Step 6 of 8 active</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-purple-500" />
-                    <div>
-                      <div className="font-medium text-sm">Cross-Pillar ROI</div>
-                      <div className="text-xs text-muted-foreground">+45% improvement</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white border border-gray-200 rounded-lg">
-                    <AlertCircle className="w-5 h-5 text-orange-500" />
-                    <div>
-                      <div className="font-medium text-sm">Opportunities</div>
-                      <div className="text-xs text-muted-foreground">3 campaigns pending</div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          <TabsContent value="campaigns">
-            <CampaignManagement />
-          </TabsContent>
+            <TabsContent value="campaigns">
+              <CampaignManagement />
+            </TabsContent>
 
-          <TabsContent value="media-database">
-            <MediaDatabase />
-          </TabsContent>
+            <TabsContent value="media-database">
+              <MediaDatabase />
+            </TabsContent>
 
-          <TabsContent value="press-releases">
-            <Card>
-              <CardHeader>
-                <CardTitle>Press Releases</CardTitle>
-                <CardDescription>Press release creation and distribution</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Press release management interface coming soon...</p>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            <TabsContent value="press-releases">
+              <Card className="bg-white shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Press Releases</CardTitle>
+                  <CardDescription className="text-gray-600">Press release creation and distribution</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Press release management interface coming soon...</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          <TabsContent value="press-builder">
-            <PressReleaseBuilder />
-          </TabsContent>
+            <TabsContent value="press-builder">
+              <PressReleaseBuilder />
+            </TabsContent>
 
-          <TabsContent value="monitoring">
-            <MediaMonitoring />
-          </TabsContent>
+            <TabsContent value="monitoring">
+              <MediaMonitoring />
+            </TabsContent>
 
-          <TabsContent value="distribution">
-            <DistributionHub />
-          </TabsContent>
+            <TabsContent value="distribution">
+              <DistributionHub />
+            </TabsContent>
 
-          <TabsContent value="analytics">
-            <AnalyticsReporting />
-          </TabsContent>
+            <TabsContent value="analytics">
+              <AnalyticsReporting />
+            </TabsContent>
 
-          <TabsContent value="reports">
-            <Card>
-              <CardHeader>
-                <CardTitle>Custom Reports</CardTitle>
-                <CardDescription>Advanced reporting and data export</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Custom reporting interface coming soon...</p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+            <TabsContent value="reports">
+              <Card className="bg-white shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Custom Reports</CardTitle>
+                  <CardDescription className="text-gray-600">Advanced reporting and data export</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Custom reporting interface coming soon...</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </Layout>
   );
