@@ -128,15 +128,15 @@ const AICitationMonitor = () => {
   const getPlatformColor = (platform: string) => {
     switch (platform.toLowerCase()) {
       case 'chatgpt': return 'bg-green-100 text-green-800';
-      case 'claude': return 'bg-purple-100 text-purple-800';
-      case 'perplexity': return 'bg-blue-100 text-blue-800';
+      case 'claude': return 'bg-visionary text-white';
+      case 'perplexity': return 'bg-executive text-white';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
+    if (score >= 60) return 'text-disruptor';
     return 'text-red-600';
   };
 
@@ -174,9 +174,9 @@ const AICitationMonitor = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 flex items-center">
-            <Brain className="w-6 h-6 mr-2 text-purple-600" />
-            AI Citation Intelligence
+          <h2 className="text-2xl font-bold text-executive flex items-center">
+            <Brain className="w-6 h-6 mr-2 text-visionary" />
+            PRAVADO AI Citation Intelligence
           </h2>
           <p className="text-slate-600">Real-time monitoring of AI platform citations</p>
         </div>
@@ -188,7 +188,7 @@ const AICitationMonitor = () => {
           <Button 
             onClick={startMonitoring} 
             disabled={isMonitoring}
-            className="bg-purple-600 hover:bg-purple-700 text-white"
+            className="bg-authority hover:bg-authority-700 text-white"
           >
             {isMonitoring ? (
               <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
@@ -205,10 +205,10 @@ const AICitationMonitor = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Citations</CardTitle>
-            <Brain className="h-4 w-4 text-muted-foreground" />
+            <Brain className="h-4 w-4 text-visionary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalCitations}</div>
+            <div className="text-2xl font-bold text-executive">{totalCitations}</div>
             <p className="text-xs text-muted-foreground">
               Across all AI platforms
             </p>
@@ -218,7 +218,7 @@ const AICitationMonitor = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Avg Visibility</CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
+            <Eye className="h-4 w-4 text-disruptor" />
           </CardHeader>
           <CardContent>
             <div className={`text-2xl font-bold ${getScoreColor(avgVisibilityScore)}`}>
@@ -233,10 +233,10 @@ const AICitationMonitor = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Avg CTR</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <TrendingUp className="h-4 w-4 text-authority" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-authority">
               {avgCTR.toFixed(1)}%
             </div>
             <p className="text-xs text-muted-foreground">
@@ -251,7 +251,7 @@ const AICitationMonitor = () => {
             <RefreshCw className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-sm font-bold">
+            <div className="text-sm font-bold text-executive">
               {lastUpdate ? lastUpdate.toLocaleTimeString() : 'Never'}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -265,7 +265,7 @@ const AICitationMonitor = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center">
-            <Zap className="w-5 h-5 mr-2 text-yellow-500" />
+            <Zap className="w-5 h-5 mr-2 text-disruptor" />
             Live Citation Feed
           </CardTitle>
           <CardDescription>
@@ -296,7 +296,7 @@ const AICitationMonitor = () => {
                           {new Date(citation.citation_date).toLocaleDateString()}
                         </span>
                       </div>
-                      <h4 className="font-medium text-slate-800 mb-1">
+                      <h4 className="font-medium text-executive mb-1">
                         {citation.content_title}
                       </h4>
                       <p className="text-sm text-slate-600 line-clamp-2">
@@ -308,7 +308,7 @@ const AICitationMonitor = () => {
                         <span className={`text-sm font-medium ${getScoreColor(citation.visibility_score)}`}>
                           {citation.visibility_score}
                         </span>
-                        <span className="text-sm text-blue-600">
+                        <span className="text-sm text-authority">
                           {citation.click_through_rate.toFixed(1)}%
                         </span>
                       </div>

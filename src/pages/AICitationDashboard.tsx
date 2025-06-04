@@ -13,9 +13,9 @@ const AICitationDashboard = () => {
         <div className="flex items-center space-x-4 mb-6">
           <SidebarTrigger />
           <div>
-            <h1 className="text-2xl font-bold text-slate-800 flex items-center">
-              <Brain className="w-6 h-6 mr-2 text-purple-600" />
-              AI Citation Intelligence Hub
+            <h1 className="text-2xl font-bold text-executive flex items-center">
+              <Brain className="w-6 h-6 mr-2 text-visionary" />
+              PRAVADO AI Citation Intelligence Hub
             </h1>
             <p className="text-slate-600">Revolutionary AI platform monitoring and citation tracking</p>
           </div>
